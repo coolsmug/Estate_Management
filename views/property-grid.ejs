@@ -1,0 +1,149 @@
+<%- include ("./dash_include/main_header.ejs") %>
+<%- include ("./dash_include/HEADER_GEN.ejs") %>
+
+    <!-- ======= Intro Single ======= -->
+    <section class="intro-single">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-12 col-lg-8">
+            <div class="title-single-box">
+              <h1 class="title-single">Our Amazing Properties(Housing)</h1>
+              <span class="color-text-a">Grid Properties</span>
+            </div>
+          </div>
+          <div class="col-md-12 col-lg-4">
+            <nav aria-label="breadcrumb" class="breadcrumb-box d-flex justify-content-lg-end">
+              <ol class="breadcrumb">
+                <li class="breadcrumb-item">
+                  <a href="/homing">Home</a>
+                </li>
+                <li class="breadcrumb-item active" aria-current="page">
+                  Properties Grid
+                </li>
+              </ol>
+            </nav>
+          </div>
+        </div>
+      </div>
+    </section><!-- End Intro Single-->
+
+    <!-- ======= Property Grid ======= -->
+    <section class="property-grid grid">
+      <div class="container">
+        <div class="row">
+          <div class="col-sm-12">
+            <div class="grid-option">
+              <form action="/property/1" method="get">
+                <select class="custom-select" name="filterOption" id="filterOption">
+                  <option value="All">All</option>
+                  <option value="1">New to Old</option>
+                  <option value="2">For Rent</option>
+                  <option value="3">For Sale</option>
+                  <option value="4">For Sold</option>
+                </select>
+                <button type="submit">Filter</button>
+              </form>
+            </div>
+          </div>
+          <% if (result) {%>
+            <% result.forEach((props) => {%>
+          <div class="col-md-4">
+            <div class="card-box-a card-shadow">
+              <div class="img-box-a">
+                <img src="data:Binary?<%= props.img2.contentType %>;base64,<%= props.img2.data.toString('base64') %>" alt="" class="img-a img-fluid">
+              </div>
+              <div class="card-overlay">
+                <div class="card-overlay-a-content">
+                  <div class="card-header-a">
+                    <h2 class="card-title-a">
+                      <a href="#"><%= props.area %> <%= props.name %>
+                        <br /> <%= props.location %> </a>
+                    </h2>
+                  </div>
+                  <div class="card-body-a">
+                    <div class="price-box d-flex">
+                      <span class="price-a"><%= props.status%> | $ 12.000</span>
+                    </div>
+                    <a href="/property_single?id=<%= props._id %>" class="link-a">Click here to view
+                      <span class="bi bi-chevron-right"></span>
+                    </a>
+                  </div>
+                  <div class="card-footer-a">
+                    <ul class="card-info d-flex justify-content-around">
+                      <li>
+                        <h4 class="card-info-title">Area</h4>
+                        <span><%= props.area %>
+                          <sup>2</sup>
+                        </span>
+                      </li>
+                      <li>
+                        <h4 class="card-info-title">Beds</h4>
+                        <span><%= props.bed %></span>
+                      </li>
+                      <li>
+                        <h4 class="card-info-title">Baths</h4>
+                        <span><%= props.baths %></span>
+                      </li>
+                      <li>
+                        <h4 class="card-info-title">Garages</h4>
+                        <span><%= props.garage %></span>
+                      </li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <% }) %>
+          <% } %>
+          <% if (result) {%>
+              <div class="row">
+                <div class="col-sm-12">
+                  <nav class="pagination-a">
+                    <ul class="pagination justify-content-end">
+                      <% if (current > 1) { %>
+                        <li class="page-item" tabindex="-1">
+                          <a class="page-link" href="/property/<%= parseInt(current) - 1 %>?filterOption=<%= filterOption %>">
+                            <span class="bi bi-chevron-left"></span>
+                          </a>
+                        </li>
+                      <% } %>
+                      
+                      <% for (var i = 1; i <= pages; i++) { %>
+                        <% if (current == i) { %>
+                          <li class="page-item active">
+                            <a class="page-link" href="/property/<%= i %>?filterOption=<%= filterOption %>"><%= i %></a>
+                          </li>
+                        <% } else { %>
+                          <li class="page-item">
+                            <a class="page-link" href="/property/<%= i %>?filterOption=<%= filterOption %>"><%= i %></a>
+                          </li>
+                        <% } %>
+                      <% } %>
+                      
+                      <% if (current < pages) { %>
+                        <li class="page-item next">
+                          <a class="page-link" href="/property/<%= parseInt(current) + 1 %>?filterOption=<%= filterOption %>">
+                            <span class="bi bi-chevron-right"></span>
+                          </a>
+                        </li>
+                      <% } %>
+                    </ul>
+                  </nav>
+                  
+                  
+                </div>
+              </div>
+        <% } %>
+      
+      </div>
+    </section><!-- End Property Grid Single-->
+
+  </main><!-- End #main -->
+
+  <%- include ("./dash_include/FOOTER_GEN.ejs") %>
+
+  <%- include ("./dash_include/main_footer.ejs") %>
+ 
+
+ 

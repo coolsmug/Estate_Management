@@ -1,0 +1,101 @@
+<%- include ('./dash_include/header.ejs')  %>
+<%- include ('./dash_include/dashboard_all.ejs') %>
+
+
+<div class="main-container">
+    <nav class="headering">
+        <div class="head_in">
+            <P>Admin Table</P>
+         <ol>
+            <li> 
+                <a href="">
+                    Home >
+                </a>
+            </li>
+            <li> 
+                <a href="">
+                    Update Blog
+                </a>
+            </li>
+        </ol>
+        </div>
+        <a href="/admin/blog/1" class="created">All Blog</a>
+    </nav>
+
+    <div class="table_admin">
+        
+        <div class="d-name-tag">
+            <p>Use this from to Add new Land property</p>
+        </div>
+
+        <form method="POST" class="formings" id="Blog">
+            <div class="form-group">
+                <label>Author's Name:</label>
+                <input type="hidden" name="id" value="<%= blog._id %>">
+                <input class="form-control" type="text" placeholder="e.g Apple City Land" name="fullname" value="<%= blog.fullname %>">
+            </div>
+            <div class="form-group">
+                <label>Topic:</label>
+                <input class="form-control" type="text" name="topic" value="<%= blog.topic %>">
+            </div>
+            <div class="form-group custom-select">
+                <label>Category:</label>
+                <select name="category" class="form-control">
+                    <option value="<%= blog.category %>"><%= blog.category %></option>
+                    <option value="Housing">Housing</option>
+                    <option value="Holiday">Holiday</option>
+                    <option value="Government">Government</option>
+                    <option value="Politics">Politics</option>
+                    <option value="Sport">Sport</option>
+                    <option value="Bussiness">Bussiness</option>
+                    <option value="Reality">Reality</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label>Articles:</label>
+                <textarea class="form-control" name="article" id="myTextArea"><%= blog.article %></textarea>
+            </div>
+            <div class="form-group">
+                <div class="custom-file">
+                    <input type="submit">
+                </div>
+            </div>
+        </form>
+    </div>
+    <%- include ('./messages/messages.ejs') %>
+    <div class="table_admin">
+       
+        <div class="d-name-tag">
+            <p>Use this from to Update Blog Image</p>
+        </div>
+
+        <form action="/edit-blog-image/<%= blog._id %>" method="POST" enctype="multipart/form-data" class="formings">
+            <div class="form-group">
+                <label for="img">Page Cover:</label>
+                <input type="hidden" name="id" value="<%= blog._id %>">
+                <input type="file" name="img" id="img" class="form-control-file form-control height-auto" >
+            </div>
+            <div class="form-group">
+                <label for="img">Image:</label>
+                <input type="file" name="img2" id="img2" class="form-control-file form-control height-auto" >
+            </div>
+            <div class="form-group">
+                <div class="custom-file">
+                    <input type="submit">
+                </div>
+            </div>
+        </form>
+    </div>
+
+    <div class="footering">
+        <h3>All rights reserved and Powered by: Valiantfoot Limited <i class="fas fa-copyright"></i> 2023</h3>
+    </div>
+</div>
+
+<%- include ('./dash_include/footer.ejs') %>
+
+<script src="https://cdn.jsdelivr.net/simplemde/latest/simplemde.min.js"></script>
+  <script>
+    var simplemde = new SimpleMDE({ element: document.getElementById("myTextArea") });
+  </script>
+

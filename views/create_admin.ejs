@@ -1,0 +1,99 @@
+<%- include ('./dash_include/header.ejs')  %>
+<%- include ('./dash_include/dashboard_all.ejs') %>
+
+
+<div class="main-container">
+    <nav class="headering">
+        <div class="head_in">
+            <P>Admin Form</P>
+         <ol>
+            <li> 
+                <a href="">
+                    Home >
+                </a>
+            </li>
+            <li> 
+                <a href="">
+                    Add Admin
+                </a>
+            </li>
+        </ol>
+        </div>
+        <a href="/admin/admin/1" class="created">All Admins</a>
+    </nav>
+
+    <div class="table_admin">
+        <%- include ('./messages/messages.ejs') %>
+        <div class="d-name-tag">
+            <p>Use this from to add new Admin</p>
+        </div>
+
+        <form action="/create-admins" method="POST" enctype="multipart/form-data" class="formings">
+            <div class="form-group">
+                <label>First Name:</label>
+                <input class="form-control" type="text" placeholder="" name="first_name">
+            </div>
+            <div class="form-group">
+                <label>Second Name:</label>
+                <input class="form-control" type="text" name="second_name">
+            </div>
+            <div class="form-group custom-select">
+                <label>Position:</label>
+                <select name="position" class="form-control">
+                    <option>Select Option</option>
+                    <option value="Managing Director">Managing Director</option>
+                    <option value="CEO">CEO</option>
+                    <option value="General Manager">General Manager</option>
+                    <option value="HR">HR</option>
+                    <option value="Marketer">Marketer</option>
+                    <option value="Agent">Agent</option>
+                    <option value="Staff">Staff</option>
+                    <option value="Driver">Driver</option>
+                </select>
+            </div>
+            <div class="form-group custom-select">
+                <label>Role:</label>
+                <select name="role" class="form-control">
+                    <option>Select Option</option>
+                    <option value="Super Admin">Super Admin</option>
+                    <option value="Mini Admin">Mini Admin</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label>Email:</label>
+                <input class="form-control" type="email" name="email">
+            </div>
+            <div class="form-group">
+                <label>Password</label>
+                <input class="form-control" name="password" type="password">
+                <small class="form-text text-muted">
+                    Your password must be 8-20 characters long, contain letters and numbers, and must not contain spaces, special characters, or emoji.
+                  </small>
+            </div>
+            <div class="form-group">
+                <label>Password2:</label>
+                <input class="form-control" name="password2" type="password">
+                <small class="form-text text-muted">
+                    Your password must be 8-20 characters long, contain letters and numbers, and must not contain spaces, special characters, or emoji.
+                  </small>
+            </div>
+
+            <div class="form-group">
+                <label for="img">Upload image:</label>
+                <input type="file" name="img" id="img" class="form-control-file form-control height-auto" >
+            </div>
+            <div class="form-group">
+                <div class="custom-file">
+                    <input type="submit">
+                </div>
+            </div>
+        </form>
+    </div>
+
+
+    <div class="footering">
+        <h3>All rights reserved and Powered by: Valiantfoot Limited <i class="fas fa-copyright"></i> 2023</h3>
+    </div>
+</div>
+
+<%- include ('./dash_include/footer.ejs') %>

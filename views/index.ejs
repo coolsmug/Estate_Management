@@ -1,0 +1,470 @@
+<%- include ("./dash_include/main_header.ejs") %>
+  <!-- ======= Property Search Section ======= -->
+ <%- include ('./dash_include/HEADER_GEN.ejs') %>
+
+  <!-- ======= Intro Section ======= -->
+  <div class="intro intro-carousel swiper position-relative">
+    <% if(property) {%>
+    <div class="swiper-wrapper">
+      <% property.forEach(prop => { %>
+      <div class="swiper-slide carousel-item-a intro-item bg-image" style="background-image: url(data:<%= prop.img.contentType %>;base64,<%= prop.img.data.toString('base64') %>)">
+        <div class="overlay overlay-a"></div>
+        <div class="intro-content display-table">
+          <div class="table-cell">
+            <div class="container">
+              <div class="row">
+                <div class="col-lg-8">
+                  <div class="intro-body">
+                    <p class="intro-title-top"><%= prop.name %>
+                      <br> <%= prop.property_id %>
+                    </p>
+                    <h1 class="intro-title mb-4 ">
+                      <span class="color-b"><%= prop.area %></span>. <%= prop.period %>
+                      <br> <%= prop.location %>
+                    </h1>
+                    <p class="intro-subtitle intro-price">
+                      <a href="#"><span class="price-a"><%= prop.status%> | &#8358;</span></a>
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <% }) %>
+    </div>
+    <div class="swiper-pagination"></div>
+  </div><!-- End Intro Section -->
+<% } %>
+  <main id="main">
+
+    <!-- ======= Services Section ======= -->
+    
+    <section class="section-services section-t8">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-12">
+            <div class="title-wrap d-flex justify-content-between">
+              <div class="title-box">
+                <h2 class="title-a">Our Services</h2>
+              </div>
+            </div>
+          </div>
+        </div>
+        <% if(service) {%>
+        <div class="row">
+          <% service.forEach((serv) => { %>
+          <div class="col-md-4">
+            <div class="card-box-c foo">
+              <div class="card-header-c d-flex">
+                <div class="card-box-ico">
+                  <span class="bi bi-activity"></span>
+                </div>
+                <div class="card-title-c align-self-center">
+                  <h2 class="title-c"><%= serv.heading %></h2>
+                </div>
+              </div>
+              <div class="card-body-c post-preview">
+                <p class="content-c">
+                  <%= serv.about %>
+                </p>
+                
+              </div>
+              <div class="card-footer-c">
+                <a href="/single-service?id=<%= serv._id %>" class="link-c link-icon read-more">Read more
+                  <span class="bi bi-chevron-right"></span>
+                </a>
+              </div>
+            </div>
+          </div>
+          <% }) %>
+         
+        </div>
+      </div>
+      <% } %>
+    </section><!-- End Services Section -->
+
+    <!-- ======= Latest Properties Section ======= -->
+    <section class="section-property section-t8">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-12">
+            <div class="title-wrap d-flex justify-content-between">
+              <div class="title-box">
+                <h2 class="title-a">Latest Homes</h2>
+              </div>
+              <div class="title-link">
+                <a href="/properting">All Property
+                  <span class="bi bi-chevron-right"></span>
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div id="property-carousel" class="swiper">
+          <% if(propertyal) {%>
+          <div class="swiper-wrapper">
+            <% propertyal.forEach((props) => { %>
+            <div class="carousel-item-b swiper-slide">
+              <div class="card-box-a card-shadow">
+                <div class="img-box-a">
+                  <img src="data:Binary?<%= props.img2.contentType %>;base64,<%= props.img2.data.toString('base64') %>" alt="" class="img-a img-fluid">
+                </div>
+                <div class="card-overlay">
+                  <div class="card-overlay-a-content">
+                    <div class="card-header-a">
+                      <h2 class="card-title-a">
+                        <a href="/property_single?id=<%= props._id %>"><%= props.name %>
+                          <br /><%= props.location %></a>
+                      </h2>
+                    </div>
+                    <div class="card-body-a">
+                      <div class="price-box d-flex">
+                        <span class="price-a"><%= props.status%> | &#8358; </span>
+                      </div>
+                      <a href="/property_single?id=<%= props._id %>" class="link-a">Click here to view
+                        <span class="bi bi-chevron-right"></span>
+                      </a>
+                    </div>
+                    <div class="card-footer-a">
+                      <ul class="card-info d-flex justify-content-around">
+                        <li>
+                          <h4 class="card-info-title">Area</h4>
+                          <span><%= props.area %>
+                            <sup>2</sup>
+                          </span>
+                        </li>
+                        <li>
+                          <h4 class="card-info-title">Beds</h4>
+                          <span><%= props.bed %></span>
+                        </li>
+                        <li>
+                          <h4 class="card-info-title">Baths</h4>
+                          <span><%= props.baths %></span>
+                        </li>
+                        <li>
+                          <h4 class="card-info-title">Garages</h4>
+                          <span><%= props.garage %></span>
+                        </li>
+                      </ul>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <% }) %><!-- End carousel item -->
+
+          </div>
+          <% } %>
+        </div>
+        <div class="propery-carousel-pagination carousel-pagination"></div>
+
+      </div>
+    </section><!-- End Latest Properties Section -->
+
+    <section class="section-property section-t8">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-12">
+            <div class="title-wrap d-flex justify-content-between">
+              <div class="title-box">
+                <h2 class="title-a">Latest Lands</h2>
+              </div>
+              <div class="title-link">
+                <a href="/properting">All Property
+                  <span class="bi bi-chevron-right"></span>
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+          <% if(land) {%>
+        <div id="property-carousel" class="swiper">
+          <div class="swiper-wrapper">
+            <% land.forEach((props) => { %>
+            <div class="carousel-item-b swiper-slide">
+              <div class="card-box-a card-shadow">
+                <div class="img-box-a">
+                  <img src="data:Binary?<%= props.img2.contentType %>;base64,<%= props.img2.data.toString('base64') %>" alt="" class="img-a img-fluid">
+                </div>
+                <div class="card-overlay">
+                  <div class="card-overlay-a-content">
+                    <div class="card-header-a">
+                      <h2 class="card-title-a">
+                        <a href="/land_single?id=<%= props._id %>"><%= props.name %>
+                          <br /><%= props.location %></a>
+                      </h2>
+                    </div>
+                    <div class="card-body-a">
+                      <div class="price-box d-flex">
+                        <span class="price-a"><%= props.status%> | &#8358;</span>
+                      </div>
+                      <a href="/land_single?id=<%= props._id %>" class="link-a">Click here to view
+                        <span class="bi bi-chevron-right"></span>
+                      </a>
+                    </div>
+                    <div class="card-footer-a">
+                      <ul class="card-info d-flex justify-content-around">
+                        <li>
+                          <h4 class="card-info-title">Area</h4>
+                          <span><%= props.area %>
+                            <sup>2</sup>
+                          </span>
+                        </li>
+                        <li>
+                          <h4 class="card-info-title">Period</h4>
+                          <span><%= props.period %></span>
+                        </li>
+                        <li>
+                          <h4 class="card-info-title">Land ID</h4>
+                          <span><%= props.property_id %></span>
+                        </li>
+                      </ul>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <% }) %><!-- End carousel item -->
+
+          </div>
+        </div>
+        
+        <div class="propery-carousel-pagination carousel-pagination"></div>
+
+      </div>
+      <% } %>
+    </section><!-- End Latest Properties Section -->
+
+    <!-- ======= Agents Section ======= -->
+    <!-- <section class="section-agents section-t8">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-12">
+            <div class="title-wrap d-flex justify-content-between">
+              <div class="title-box">
+                <h2 class="title-a">Best Agents</h2>
+              </div>
+              <div class="title-link">
+                <a href="/agents-grid">All Agents
+                  <span class="bi bi-chevron-right"></span>
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="row">
+        
+          <div class="col-md-4">
+            <div class="card-box-d">
+              <div class="card-img-d">
+                <img src="data:Binary?;base64," alt="" class="img-d img-fluid">
+              </div>
+              <div class="card-overlay card-overlay-hover">
+                <div class="card-header-d">
+                  <div class="card-title-d align-self-center">
+                    <h3 class="title-d">
+                      <a href="agent-single.html" class="link-two">
+                        <br></a>
+                    </h3>
+                  </div>
+                </div>
+                <div class="card-body-d">
+                  <p class="content-d color-text-a">
+                    
+                  </p>
+                  <div class="info-agents color-a">
+                    <p>
+                      <strong>Phone: </strong> 
+                    </p>
+                    <p>
+                      <strong>Email: </strong> 
+                    </p>
+                  </div>
+                </div>
+                <div class="card-footer-d">
+                  <div class="socials-footer d-flex justify-content-center">
+                    <ul class="list-inline">
+                      <li class="list-inline-item">
+                        <a href="" class="link-one">
+                          <i class="bi bi-facebook" aria-hidden="true"></i>
+                        </a>
+                      </li>
+                      <li class="list-inline-item">
+                        <a href="https://wa.me/" class="link-one">
+                          <i class="bi bi-whatsapp" aria-hidden="true"></i>
+                        </a>
+                      </li>
+                      <li class="list-inline-item">
+                        <a href="" class="link-one">
+                          <i class="bi bi-twitter" aria-hidden="true"></i>
+                        </a>
+                      </li>
+                      <li class="list-inline-item">
+                        <a href="" class="link-one">
+                          <i class="bi bi-instagram" aria-hidden="true"></i>
+                        </a>
+                      </li>
+                      <li class="list-inline-item">
+                        <a href="" class="link-one">
+                          <i class="bi bi-linkedin" aria-hidden="true"></i>
+                        </a>
+                      </li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+         
+          
+        </div>
+      </div>
+    </section>End Agents Section -->
+
+    <!-- ======= Latest News Section ======= -->
+    <section class="section-news section-t8">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-12">
+            <div class="title-wrap d-flex justify-content-between">
+              <div class="title-box">
+                <h2 class="title-a">Latest News</h2>
+              </div>
+              <div class="title-link">
+                <a href="/bloging">All News
+                  <span class="bi bi-chevron-right"></span>
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+        <% if(blog) {%>
+        <div id="news-carousel" class="swiper">
+          <div class="swiper-wrapper">
+              <% blog.forEach((blogs) => { %>
+            <div class="carousel-item-c swiper-slide">
+              <div class="card-box-b card-shadow news-box">
+                <div class="img-box-b">
+                  <img src="data:Binary?<%= blogs.img2.contentType %>;base64,<%= blogs.img2.data.toString('base64') %>" alt="" class="img-b img-fluid">
+                </div>
+                <div class="card-overlay">
+                  <div class="card-header-b">
+                    <div class="card-category-b">
+                      <a href="#" class="category-b"><%= blogs.category %></a>
+                    </div>
+                    <div class="card-title-b">
+                      <h2 class="title-2">
+                        <a href="/blog_single?id=<%= blogs._id %>"><%= blogs.topic %>
+                          <br> new</a>
+                      </h2>
+                    </div>
+                    <div class="card-date">
+                      <span class="date-b"><%= blogs.date %></span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <% }); %>
+            <!-- End carousel item -->
+
+          </div>
+        </div>
+
+        <div class="news-carousel-pagination carousel-pagination"></div>
+      </div>
+      <% } %>
+    </section><!-- End Latest News Section -->
+
+    <!-- ======= Testimonials Section ======= -->
+    <section class="section-testimonials section-t8 nav-arrow-a">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-12">
+            <div class="title-wrap d-flex justify-content-between">
+              <div class="title-box">
+                <h2 class="title-a">Testimonials</h2>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <% if(test) {%>
+        <div id="testimonial-carousel" class="swiper">
+          <div class="swiper-wrapper">
+            
+              <% test.forEach((test) => { %>
+            <div class="carousel-item-a swiper-slide">
+              <div class="testimonials-box">
+                <div class="row">
+                  <div class="col-sm-12 col-md-6">
+                    <div class="testimonial-img">
+                      <img src="data:Binary?<%= test.img.contentType %>;base64,<%= test.img.data.toString('base64') %>" alt="" class="img-fluid">
+                    </div>
+                  </div>
+                  <div class="col-sm-12 col-md-6">
+                    <div class="testimonial-ico">
+                      <i class="bi bi-chat-quote-fill"></i>
+                    </div>
+                    <div class="testimonials-content">
+                      <p class="testimonial-text">
+                      <%= test.testimony %>
+                      </p>
+                    </div>
+                    <div class="testimonial-author-box">
+                      <img src="data:Binary?<%= test.img.contentType %>;base64,<%= test.img.data.toString('base64') %>" alt="" class="testimonial-avatar">
+                      <h5 class="testimonial-author"><%= test.full_name %></h5>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <% }) %><!-- End carousel item -->
+           
+          </div>
+        </div>
+        <% } %>
+      <div class="testimonial-carousel-pagination carousel-pagination"></div>
+
+      </div>
+    </section><!-- End Testimonials Section -->
+
+  </main><!-- End #main -->
+
+ 
+
+<%- include ("./dash_include/FOOTER_GEN.ejs") %>
+<%- include ("./dash_include/main_footer.ejs")  %>
+
+<script>
+  const postPreviews = document.querySelectorAll('.post-preview');
+
+  postPreviews.forEach(postPreview => {
+    const postContent = postPreview.querySelector('p').textContent;
+    const words = postContent.split(' ');
+    const preview = words.slice(0, 35).join(' ');
+
+    postPreview.querySelector('p').textContent = preview + '...';
+
+    // const readMoreButton = postPreview.querySelector('.read-more');
+    // const fullPostContent = document.createElement('div');
+    // fullPostContent.innerHTML = postContent;
+    // fullPostContent.style.display = 'none';
+
+    // readMoreButton.addEventListener('click', () => {
+    //   if (fullPostContent.style.display === 'none') {
+    //     fullPostContent.style.display = 'block';
+    //     readMoreButton.textContent = 'Read less';
+    //   } else {
+    //     fullPostContent.style.display = 'none';
+    //     readMoreButton.textContent = 'Read more';
+    //   }
+    // });
+
+    // postPreview.appendChild(fullPostContent);
+  });
+</script>

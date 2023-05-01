@@ -1,0 +1,159 @@
+
+  <!-- ======= Property Search Section ======= -->
+  <div class="click-closed"></div>
+  <!--/ Form Search Star /-->
+  <div class="box-collapse">
+    <div class="title-box-d">
+      <h3 class="title-d">Search Property</h3>
+    </div>
+    <span class="close-box-collapse right-boxed bi bi-x"></span>
+    <div class="box-collapse-wrap form">
+      <form action="/search" method="post" class="form-a">
+        <div class="row">
+           
+            <div class="col-md-6 mb-2">
+                <div class="form-group mt-3">
+                    <label class="pb-2" for="Type">Type</label>
+                    <input type="text" class="form-control form-select form-control-a" id="Type" placeholder="either Sale, Rent" name="type"> 
+                </div>
+            </div>
+            <div class="col-md-6 mb-2">
+                <div class="form-group mt-3">
+                    <label class="pb-2" for="city">City</label>
+                    <input type="text" class="form-control form-select form-control-a" id="city" name="city">
+                </div>
+            </div>
+            <div class="col-md-6 mb-2">
+                <div class="form-group mt-3">
+                    <label class="pb-2" for="bedrooms">Bedrooms</label>
+                    <div class="form-group mt-3">
+                        <input type="text" class="form-control form-select form-control-a" id="bedrooms" name="bedrooms">
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6 mb-2">
+                <div class="form-group mt-3">
+                    <label class="pb-2" for="garages">Garages</label>
+                    <div class="form-group mt-3">
+                        <input type="text" class="form-control form-select form-control-a" id="garages" name="garages">
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6 mb-2">
+                <div class="form-group mt-3">
+                    <label class="pb-2" for="bathrooms">Bathrooms</label>
+                    <div class="form-group mt-3">
+                        <input type="text" class="form-control form-select form-control-a" id="bathrooms" name="bathrooms">
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-12 mb-2">
+                <div class="form-group">
+                    <label class="pb-2" for="collection">Collection</label>
+                    <select class="form-control form-select form-control-a" id="collection" name="collection">
+                        <option value="land">Land</option>
+                        <option value="property">Property</option>
+                    </select>
+                </div>
+            </div>
+            <div class="col-md-12">
+                <button type="submit" class="btn btn-b">Search Property</button>
+            </div>
+        </div>
+    </form>
+    
+    </div>
+  </div><!-- End Property Search Section -->>
+
+  <!-- ======= Header/Navbar ======= -->
+
+  <nav class="navbar navbar-default navbar-trans navbar-expand-lg fixed-top">
+    <div class="container">
+      <button class="navbar-toggler collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#navbarDefault" aria-controls="navbarDefault" aria-expanded="false" aria-label="Toggle navigation">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+      <a class="navbar-brand text-brand color-b nimage" href="/home"><img src="/img/Valiant_Logo-01.png" alt="" srcset="" width="150"></a>
+      
+      <div class="navbar-collapse collapse justify-content-center" id="navbarDefault">
+        <ul class="navbar-nav">
+          <li class="nav-item">
+            <a class="nav-link" href="/home">Home</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/about">About</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/property/1">Housing</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/lands/1">Lands</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/blogs/1">Blog</a>
+          </li>
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Pages</a>
+            <div class="dropdown-menu">
+              <a class="dropdown-item" href="/agents">Meet our Staffs</a>
+            </div>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/contacting">Contact</a>
+          </li>
+        </ul>
+      </div>
+
+      <button type="button" class="btn btn-b-n navbar-toggle-box navbar-toggle-box-collapse" data-bs-toggle="collapse" data-bs-target="#navbarTogglerDemo01">
+        <i class="bi bi-search"></i>
+      </button>
+
+    </div>
+  </nav><!-- End Header/Navbar -->
+
+  <style>
+    .activity::after {
+      content: '';
+      position: absolute;
+      background: #e87e0a;
+      width: 55px;
+      height: 5px;
+      bottom: 0px;
+      left: 0px;
+    }
+  </style>
+
+  <script>
+  
+   // Get all navigation links
+  //  const navLinks = document.querySelectorAll('.navbar-nav .nav-link');
+  // const currentPath = window.location.pathname;
+
+  // navLinks.forEach(link => {
+  //   const linkPath = link.getAttribute('href');
+  //   if (currentPath.endsWith(linkPath)) {
+  //     link.classList.add('activity');
+  //   }
+  // });
+
+  document.addEventListener('DOMContentLoaded', () => {
+  const navLinks = document.querySelectorAll('.navbar-nav .nav-link');
+  const currentPath = window.location.pathname;
+
+  // Add .activity class to the first link initially
+  navLinks[0].classList.add('activity');
+
+  navLinks.forEach((link) => {
+    const href = link.getAttribute('href');
+
+    if (href === currentPath) {
+      link.classList.add('activity');
+    } else {
+      link.classList.remove('activity');
+    }
+  });
+});
+    
+    
+    </script>

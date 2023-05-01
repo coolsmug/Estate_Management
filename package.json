@@ -1,0 +1,52 @@
+{
+  "name": "valiantfoot",
+  "version": "1.0.0",
+  "description": "estate management website for valiantfoot limited",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "nodemon app.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "coolsmug"
+  },
+  "keywords": [
+    "node.js",
+    "mongoDB",
+    "ejs",
+    "ajax",
+    "jquery",
+    "vanilla",
+    "javascript",
+    "real",
+    "estate"
+  ],
+  "author": "Yusuph Idris yioltec",
+  "license": "ISC",
+  "dependencies": {
+    "bcrypt": "^5.1.0",
+    "connect-ensure-login": "^0.1.1",
+    "connect-flash": "^0.1.1",
+    "cors": "^2.8.5",
+    "dotenv": "^16.0.3",
+    "ejs": "^3.1.9",
+    "express": "^4.18.2",
+    "express-session": "^1.17.3",
+    "grid": "^4.10.8",
+    "gridfs-stream": "^1.1.1",
+    "method-override": "^3.0.0",
+    "mongoose": "^7.0.3",
+    "morgan": "^1.10.0",
+    "multer": "^1.4.5-lts.1",
+    "nodemailer": "^6.9.1",
+    "nodemailer-smtp-pool": "^2.8.3",
+    "nodemon": "^2.0.21",
+    "passport": "^0.6.0",
+    "passport-local": "^1.0.0",
+    "sharp": "^0.32.0",
+    "sharp-multer": "^0.2.5",
+    "tofixed": "^1.0.0",
+    "whatsapp-api-js": "^0.8.2"
+  }
+}

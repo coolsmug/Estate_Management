@@ -1,0 +1,46 @@
+<%- include ('./dash_include/header.ejs') %>
+
+<div class="headings">
+
+    <div class="imging">
+        <img src="/img/Valiant_Logo-01.png" alt="" srcset="" width="100">
+    </div>
+  
+    <div class="flex-display">
+        <div class="svg_animal">
+            <div class="svg_main">
+                <img src="/img/one.png" alt="" srcset="" width="200">
+            </div>
+        </div>
+        <div class="div_form_for_login">
+            <%- include ('./messages/messages.ejs') %>
+           <h2>Login To Dashboard</h2>
+           
+            <div class="dove_in">
+                <div class="div-admin-P">
+                    <button class="login_main_menu"><h2><i class="icon-copy bi bi-briefcase-fill"></i></h2> <h2>Manager</h2></button>
+                    <div class="all_over_the_non"> 
+                        <form action="/admin/login" method="post">
+                            <input type="email" name="email" id="">
+                            <input type="password" name="password" id="">
+                            <div class="forget_pass"><a href="/admin/forget-password">Forget Password?</a> </div>
+                            <input type="submit" value="Sign In">
+                           
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="footeringing">
+        <p>All rights reserved and Powered by: Valiantfoot Limited <i class="fas fa-copyright"></i> 2023</p>
+    </div>
+</div>
+
+<%- include ('./dash_include/footer.ejs') %>
+
+<style>
+    .all_messagesing {
+        top: 50%;
+    }
+</style>

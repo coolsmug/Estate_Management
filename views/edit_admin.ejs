@@ -1,0 +1,103 @@
+<%- include ('./dash_include/header.ejs')  %>
+<%- include ('./dash_include/dashboard_all.ejs') %>
+
+
+<div class="main-container">
+    <nav class="headering">
+        <div class="head_in">
+            <P>Admin Table</P>
+         <ol>
+            <li> 
+                <a href="">
+                    Home >
+                </a>
+            </li>
+            <li> 
+                <a href="">
+                    Update Admin
+                </a>
+            </li>
+        </ol>
+        </div>
+        <a href="/admin/admin/1" class="created">All Admin</a>
+    </nav>
+
+    <div class="table_admin">
+       
+        <div class="d-name-tag">
+            <p>Use this from to Add new Land property</p>
+        </div>
+
+        <form method="POST" class="formings" id="Admin">
+            <div class="form-group">
+                <label>First Name:</label>
+                <input type="hidden" name="id" value="<%= admin._id %>">
+                <input class="form-control" type="text" placeholder="e.g Apple City Land" name="first_name" value="<%= admin.first_name %>">
+            </div>
+            <div class="form-group">
+                <label>Second Name:</label>
+                <input class="form-control" type="text" name="second_name" value="<%= admin.second_name %>">
+            </div>
+            <div class="form-group custom-select">
+                <label>Position:</label>
+                <select name="position" class="form-control">
+                    <option value="<%= admin.position %>"><%= admin.position %></option>
+                    <option value="Managing Director">Managing Director</option>
+                    <option value="CEO">CEO</option>
+                    <option value="General Manager">General Manager</option>
+                    <option value="HR">HR</option>
+                    <option value="Marketer">Marketer</option>
+                    <option value="Agent">Agent</option>
+                    <option value="Staff">Staff</option>
+                    <option value="Driver">Driver</option>  
+                </select>
+            </div>
+            <div class="form-group custom-select">
+                <label>Role:</label>
+                <select name="role" class="form-control">
+                    <option value="<%= admin.role %>"><%= admin.role %></option>
+                    <option value="Super Admin">Super Admin</option>
+                    <option value="Mini Admin">Mini Admin</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label>Email:</label>
+                <input class="form-control" type="email" name="email" value="<%= admin.email %>">
+            </div>
+            <div class="form-group">
+                <div class="custom-file">
+                    <input type="submit">
+                </div>
+            </div>
+        </form>
+    </div>
+
+    <%- include ('./messages/messages.ejs') %>
+
+
+    <div class="table_admin">
+      
+        <div class="d-name-tag">
+            <p>Use this from to Update Admin Image</p>
+        </div>
+
+        <form action="/edit-admin-image/<%= admin._id %>" method="POST" enctype="multipart/form-data" class="formings">
+            <div class="form-group">
+                <label for="img">Page Cover:</label>
+                <input type="hidden" id="id" name="id" value="<%= admin._id %>">
+                <input type="file" name="img" id="img" class="form-control-file form-control height-auto" >
+            </div>
+            <div class="form-group">
+                <div class="custom-file">
+                    <input type="submit">
+                </div>
+            </div>
+        </form>
+    </div>
+
+    <div class="footering">
+        <h3>All rights reserved and Powered by: Valiantfoot Limited <i class="fas fa-copyright"></i> 2023</h3>
+    </div>
+</div>
+
+<%- include ('./dash_include/footer.ejs') %>

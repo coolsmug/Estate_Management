@@ -1,0 +1,142 @@
+<%- include ('./dash_include/header.ejs')  %>
+<%- include ('./dash_include/dashboard_all.ejs') %>
+
+
+<div class="main-container">
+    <nav class="headering">
+        <div class="head_in">
+            <P>Staff Form</P>
+         <ol>
+            <li> 
+                <a href="">
+                    Home >
+                </a>
+            </li>
+            <li> 
+                <a href="">
+                    Update Staff
+                </a>
+            </li>
+        </ol>
+        </div>
+        <a href="/admin/staff/1" class="created">All Staffs</a>
+    </nav>
+
+    <div class="table_admin">
+       
+        <div class="d-name-tag">
+            <p>Use this from to Update new Staff</p>
+        </div>
+
+        <form method="POST"  class="formings" id="Staff">
+            <div class="form-group">
+                <label>First Name:</label>
+                <input type="hidden" id="id" name="id" value="<%= staff._id %>">
+                <input class="form-control" value="<%= staff.first_name %>" type="text" placeholder="" name="first_name">
+            </div>
+            <div class="form-group">
+                <label>Second Name:</label>
+                <input class="form-control" value="<%= staff.second_name %>" type="text" name="second_name">
+            </div>
+            <div class="form-group custom-select">
+                <label>Position:</label>
+                <select name="position" class="form-control">
+                    <option value="<%= staff.position %>"><%= staff.position %></option>
+                    <option value="Managing Director">Managing Director</option>
+                    <option value="CEO">CEO</option>
+                    <option value="General Manager">General Manager</option>
+                    <option value="HR">HR</option>
+                    <option value="Marketer">Marketer</option>
+                    <option value="Agent">Agent</option>
+                    <option value="Staff">Staff</option>
+                    <option value="Driver">Driver</option>
+                </select>
+            </div>
+            <div class="form-group custom-select">
+                <label>Performance:</label>
+                <select name="performance" class="form-control">
+                    <option value="<%= staff.performance%>"><%= staff.performance%></option>
+                    <option value="Mid Level">Mid Level</option>
+                    <option value="Best">Best</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label>Email:</label>
+                <input class="form-control" value="<%= staff.email%>" type="email" name="email">
+            </div>
+            <div class="form-group">
+                <label>Mobile Number:</label>
+                <input class="form-control" type="text" value="<%= staff.phone%>" name="phone">
+            </div>
+            <div class="form-group">
+                <label>WhatsApp Number:</label>
+                <input class="form-control" type="text" value="<%= staff.whatsapp%>" name="whatsapp">
+            </div>
+            <div class="form-group">
+                <label>Facebook:</label>
+                <input class="form-control" type="text" value="<%= staff.facebook%>" name="facebook">
+            </div>
+            <div class="form-group">
+                <label>Instagram:</label>
+                <input class="form-control" type="text" value="<%= staff.instagram%>" name="instagram">
+            </div>
+            <div class="form-group">
+                <label>Twitter:</label>
+                <input class="form-control" type="text" value="<%= staff.twitter%>" name="twitter">
+            </div>
+            <div class="form-group">
+                <label>Linkedin:</label>
+                <input class="form-control" type="text" value="<%= staff.linkedin%>" name="linkedin">
+            </div>
+            <div class="form-group">
+                <label>About:</label>
+                <textarea class="form-control" name="about" id="myInput"><%= staff.about%></textarea>
+            </div>
+            <div class="form-group">
+                <div class="custom-file">
+                    <input type="submit">
+                </div>
+            </div>
+        </form>
+    </div>
+    <%- include ('./messages/messages.ejs') %>
+    <div class="table_admin">
+
+        <div class="d-name-tag">
+            <p>Use this from to Update new Staff's Image</p>
+        </div>
+
+        <form action="/edit-staff-image/<%= staff._id %>" method="POST" enctype="multipart/form-data" class="formings">
+            <div class="form-group">
+                <input type="hidden" id="id" name="id" value="<%= staff._id %>">
+                <label for="img">Upload image:</label>
+                <input type="file" name="img" id="img" class="form-control-file form-control height-auto" >
+            </div>
+            <div class="form-group">
+                <div class="">
+                    <input type="submit">
+                </div>
+            </div>
+        </form>
+    </div>
+
+
+
+    <div class="footering">
+        <h3>All rights reserved and Powered by: Valiantfoot Limited <i class="fas fa-copyright"></i> 2023</h3>
+    </div>
+</div>
+
+<%- include ('./dash_include/footer.ejs') %>
+<script>
+    const MAX_LENGTH = 100;
+
+const myInput = document.getElementById('myInput');
+
+myInput.addEventListener('input', (event) => {
+  const value = event.target.value;
+  if (value.length > MAX_LENGTH) {
+    event.target.value = value.slice(0, MAX_LENGTH);
+  }
+});
+</script>

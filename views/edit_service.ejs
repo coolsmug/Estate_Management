@@ -1,0 +1,117 @@
+<%- include ('./dash_include/header.ejs')  %>
+<%- include ('./dash_include/dashboard_all.ejs') %>
+
+<div class="main-container">
+    <nav class="headering">
+        <div class="head_in">
+            <P>Our Services</P>
+         <ol>
+            <li> 
+                <a href="">
+                    Home >
+                </a>
+            </li>
+            <li> 
+                <a href="">
+                    Service
+                </a>
+            </li>
+        </ol>
+        </div>
+        <a href="/admin/staff/1" class="created">Dashboard</a>
+    </nav>
+    <div class="table_admin">
+        <div class="d-name-tag">
+            <p>Service</p>
+        </div>
+
+        <div class="wrap_all_profile">
+            <div class="staffprofile">
+               
+                <div class="div_detail">
+                    <div class="first">
+                        <div class="email">
+                            <p>Heading:</p>
+                        </div>
+                        <div class="email">
+                            <%= service.heading %>
+                        </div>
+                    </div>
+                    <div class="first">
+                        <div class="email">
+                            <p>About:</p>
+                        </div>
+                        <div class="email">
+                            <%= service.about %>
+                        </div>
+                    </div>
+        
+                </div>
+            
+            </div>
+    
+            <div class="about_amenitie">
+                <div class="table_admin">
+                  
+                    <div class="d-name-tag">
+                        <p>Use this from to create Company Services</p>
+                    </div>
+            
+                    <form  method="POST" id="Service" class="formings">
+                        
+                        <div class="form-group">
+                            <label>Service Title:</label>
+                            <input type="hidden" name="id" value="<%= service._id %>">
+                            <input class="form-control" value="<%= service.heading %>" type="text" name="heading">
+                        </div>
+                       
+                        <div class="form-group">
+                            <label>Your Service:</label>
+                            <textarea class="form-control" name="about" ><%= service.about %></textarea>
+                        </div>
+                        <div class="form-group">
+                            <div class="custom-file">
+                                <input type="submit">
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <%- include ('./messages/messages.ejs') %>
+                <div class="table_admin">
+                  
+                    <div class="d-name-tag">
+                        <p>Use this from to create Company Services</p>
+                    </div>
+            
+                    <form action="/edit-service-image/<%= service._id %>" method="POST" enctype="multipart/form-data" class="formings">
+                        
+                        <div class="form-group">
+                            <label for="img">Service image Cover:</label>
+                            <input type="hidden" name="img" value="<%= service._id %>">
+                            <input type="file" name="img" id="img" class="form-control-file form-control height-auto" >
+                        </div>
+                        <div class="form-group">
+                            <div class="custom-file">
+                                <input type="submit">
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+        
+    </div>
+    <div class="footering">
+        <h3>All rights reserved and Powered by: Valiantfoot Limited <i class="fas fa-copyright"></i> 2023</h3>
+    </div>
+</div>
+
+<%- include ('./dash_include/footer.ejs') %>
+<style>
+    .table_admin {
+        margin-bottom: 20px;
+    }
+  </style>
+
+  
+

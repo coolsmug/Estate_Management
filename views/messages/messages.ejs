@@ -1,0 +1,64 @@
+<% if(typeof errors!= 'undefined') { %>
+
+    <% errors.every(function(error){ %>
+
+<div class="all_messagesing">
+    <p class="error"><%= error.msg %></p>
+    <button type="button" class="pressIt">
+        <p>OK</p>
+    </button>
+</div>
+
+<% }) %> 
+<% } %> 
+
+
+<% if (success_msg != '') { %>
+<div class="all_messagesing">
+    <div class="d-fas"><i class="fas fa-check-circle"></i></div>
+    <p class="fine"><%=success_msg%></p>
+    <button type="button" class="pressIt">
+        <p>OK</p>
+    </button>
+</div>
+
+<% } %> 
+
+<% if(error_msg != '') { %>
+
+<div class="all_messagesing">
+    <div class="d-fas"><i class="fas fa-times-circle"></i></div>
+    <p class="fine">
+        <%= error_msg %>
+    </p>
+    <button type="button" class="pressIt">
+        <p>OK</p>
+    </button>
+</div>
+
+<% } %>
+
+<% if(error != '') {%> 
+    <div class="all_messagesing">
+        <p class="fine">
+            <%= error %> 
+        </p>
+        <button type="button" class="pressIt">
+            <p>OK</p>
+        </button>
+    </div>
+
+<% } %>
+
+<script>
+let allMessages = document.querySelector(".all_messagesing");
+let pressItout = document.querySelector(".pressIt");
+
+
+    pressItout.addEventListener('click', () => {
+  allMessages.classList.toggle('clossAllalertBor');
+ 
+});
+
+
+</script>

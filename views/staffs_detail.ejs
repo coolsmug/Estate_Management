@@ -1,0 +1,178 @@
+<%- include ('./dash_include/header.ejs')  %>
+<%- include ('./dash_include/dashboard_all.ejs') %>
+
+<div class="main-container">
+    <nav class="headering">
+        <div class="head_in">
+            <P>Profile</P>
+         <ol>
+            <li> 
+                <a href="">
+                    Home >
+                </a>
+            </li>
+            <li> 
+                <a href="">
+                    Staff 
+                </a>
+            </li>
+        </ol>
+        </div>
+        <a href="/admin/staff/1" class="created">All Staff</a>
+    </nav>
+    <div class="table_admin">
+        <div class="d-name-tag">
+            <p>Staff</p>
+        </div>
+
+        <div class="wrap_all_profile">
+            <div class="staffprofile">
+                <div class="image_profile">
+                    <div class="img_staff_one">
+                        <img src="data:Binary?<%= staff.img.contentType %>;base64,<%= staff.img.data.toString('base64')%>" alt="" srcset="">
+                    </div>
+                    <% let fullname = staff.first_name +" " + staff.second_name %>
+                    <p><%= fullname %></p>
+                    <p><%= staff.position %></p>
+                </div>
+                <div class="div_detail">
+                    <div class="first">
+                        <div class="email">
+                            <p>Email:</p>
+                       
+                            <p><%= staff.email %></p>
+                        </div>
+                    </div>
+                    <div class="first">
+                        <div class="email">
+                            <p>Status:</p>
+                      
+                            <p><%= staff.status %></p>
+                        </div>
+                    </div>
+                    <div class="first">
+                        <div class="email">
+                           <p>Current Performance:</p> 
+                       
+                            <p><%= staff.performance %></p>
+                        </div>
+                    </div>
+                    <div class="first">
+                        <div class="email">
+                           <p> Mobile:</p>
+                       
+                            <p><%= staff.phone %></p>
+                        </div>
+                    </div>
+                    <div class="first">
+                        <div class="email">
+                            <p>Facebook:</p>
+                        
+                            <p><%= staff.facebook %></p>
+                        </div>
+                    </div>
+                    <div class="first">
+                        <div class="email">
+                            <p>Instagram:</p>
+                       
+                            <p><%= staff.instagram %></p>
+                        </div>
+                    </div>
+                    <div class="first">
+                        <div class="email">
+                            <p>Twitter:</p>
+                       
+                            <p><%= staff.twitter %></p>
+                        </div>
+                    </div>
+                    <div class="first">
+                        <div class="email">
+                           <p>WhatsApp:</p>
+                       
+                            <p><%= staff.whatsapp %></p>
+                        </div>
+                    </div>
+                    <div class="first">
+                        <div class="email">
+                           <p> Linkedin:</p>
+                    
+                            <p><%= staff.linkedin %></p>
+                        </div>
+                    </div>
+                    <div class="first">
+                        <div class="email">
+                           <p> House Assigned:</p>
+                       
+                            <ol>
+                                <% if(staff.propid) { %>
+                                    <% staff.propid.forEach((prop) => { %> 
+                                      <li><%= prop %> <a href="/admin/delete-propid/<%= staff._id %>?prop=<%= prop %>"><i class="fas fa-trash-alt"></i></a></li>
+                                    <% }) %>
+                                  <% } %>
+                            </ol>
+                        </div>
+                    </div>
+                    <div class="first">
+                        <div class="email">
+                           <p> Land Assigned:</p>
+                       
+                            <ol>
+                                <% if(staff.landid) {%>
+                                   <% staff.landid.forEach((prop) => { %> 
+                                        <li><%= prop %> <a href="/admin/delete-landid/<%= staff._id %>?land=<%= prop %>"><i class="fas fa-trash-alt"></i></a></li>
+                                    <% }) %>
+                                    <% } %>
+                            </ol>
+                        </div>
+                    </div>
+                    <div class="first"></div>
+                </div>
+                <div class="change">
+                    <form action="/admin/assign-house/<%= staff._id %>" method="POST">
+                        <input type="hidden" name="_id" value="<%= staff._id %>">
+                        <% if(prop)  {%>
+                        <select name="filterOption" id="filterOption">
+                            <% prop.forEach((prop) => {%>
+                            <option value="<%= prop.name %>"><%= prop.name %></option>
+                            <% }) %>
+                        </select>
+                        <% } %>
+                        <input type="submit" value="Assign">
+                    </form>
+                
+                
+                    <form action="/admin/assign-land/<%= staff._id %>" method="POST">
+                        <input type="hidden" name="_id" value="<%= staff._id %>">
+                        <% if(land)  {%>
+                            <select name="filterOptions" id="filterOption">
+                                <% land.forEach((land) => {%>
+                                    <option value="<%= land.name %>"><%= land.name %></option>
+                                <% }) %>
+                            </select>
+                            <% } %>
+                        <input type="submit" value="Assign">
+                    </form>
+                </div>
+            </div>
+    
+            <div class="about_amenitie">
+                <div class="about_first">
+                    <P class="first_child">About:</P>
+                    <p><%= staff.about %></p>
+                </div>
+               
+    
+            </div>
+        </div>
+        
+    </div>
+    <div class="footering">
+        <h3>All rights reserved and Powered by: Valiantfoot Limited <i class="fas fa-copyright"></i> 2023</h3>
+    </div>
+</div>
+
+<%- include ('./dash_include/footer.ejs') %>
+
+
+  
+

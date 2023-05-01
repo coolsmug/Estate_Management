@@ -1,0 +1,107 @@
+<%- include ("./dash_include/main_header.ejs")  %>
+<%- include ("./dash_include/HEADER_GEN.ejs") %>
+
+  <main id="main">
+
+    <!-- ======= Intro Single ======= -->
+    <section class="intro-single">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-12 col-lg-8">
+            <div class="title-single-box">
+              <h1 class="title-single">Our Amazing Posts</h1>
+              <span class="color-text-a">Grid News</span>
+            </div>
+          </div>
+          <div class="col-md-12 col-lg-4">
+            <nav aria-label="breadcrumb" class="breadcrumb-box d-flex justify-content-lg-end">
+              <ol class="breadcrumb">
+                <li class="breadcrumb-item">
+                  <a href="/homing">Home</a>
+                </li>
+                <li class="breadcrumb-item active" aria-current="page">
+                  News Grid
+                </li>
+              </ol>
+            </nav>
+          </div>
+        </div>
+      </div>
+    </section><!-- End Intro Single-->
+
+    <!-- =======  Blog Grid ======= -->
+    <section class="news-grid grid">
+      <div class="container">
+        <div class="row">
+          <% blog.forEach((blog) => {%>
+          
+              <% let date = blog.date %>
+              <% let theDate = date.toDateString() %>
+              
+          <div class="col-md-4">
+            <div class="card-box-b card-shadow news-box">
+              <div class="img-box-b">
+                <img src="data:Binary?<%= blog.img2.contentType %>;base64,<%= blog.img2.data.toString('base64') %>" alt="" class="img-b img-fluid">
+              </div>
+              <div class="card-overlay">
+                <div class="card-header-b">
+                  <div class="card-category-b">
+                    <a href="#" class="category-b"><%= blog.category %></a>
+                  </div>
+                  <div class="card-title-b">
+                    <h2 class="title-2">
+                      <a href="/blog_single?id=<%= blog._id %>"><%= blog.topic %>
+                        <br> new</a>
+                    </h2>
+                  </div>
+                  <div class="card-date">
+                
+                    <span class="date-b"><%= theDate %></span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <% }) %>
+         
+        </div>
+        <div class="row">
+          <div class="col-sm-12">
+            <nav class="pagination-a">
+             
+              <ul class="pagination justify-content-end">
+                <% if (current > 1) { %>
+                <li class="page-item disabled">
+                  <a class="page-link"  href="/blogs/<%= parseInt(current) - 1 %>" tabindex="-1">
+                    <span class="bi bi-chevron-left"></span>
+                  </a>
+                </li>
+                <% } %>
+                <% for (var i = 1; i <= pages; i++) { %>
+                  <% if (current == i) { %>
+                <li class="page-item">
+                  <a class="page-link"href="/blogs/<%= i %>"><%= i %></a>
+                </li>
+                <% } else { %>
+                <li class="page-item active">
+                  <a class="page-link" href="/blogs/<%= i %>"><%= i %></a>
+                </li>
+                <% } %>
+                <% } %>
+                <% if (current < pages) { %>
+                <li class="page-item next">
+                  <a class="page-link" href="/blogs/<%= parseInt(current) + 1 %>">
+                    <span class="bi bi-chevron-right"></span>
+                  </a>
+                </li>
+                <% } %>
+              </ul>
+            </nav>
+          </div>
+        </div>
+      </div>
+    </section><!-- End Blog Grid-->
+
+  </main><!-- End #main -->
+<%- include ("./dash_include/FOOTER_GEN.ejs") %>
+<%- include ("./dash_include/main_footer.ejs") %>

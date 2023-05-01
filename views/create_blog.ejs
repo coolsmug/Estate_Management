@@ -1,0 +1,147 @@
+<%- include ('./dash_include/header.ejs')  %>
+<%- include ('./dash_include/dashboard_all.ejs') %>
+
+
+<div class="main-container">
+    <nav class="headering">
+        <div class="head_in">
+            <P>Admin Table</P>
+         <ol>
+            <li> 
+                <a href="">
+                    Home >
+                </a>
+            </li>
+            <li> 
+                <a href="">
+                    Add Blog
+                </a>
+            </li>
+        </ol>
+        </div>
+        <a href="/admin/blog/1" class="created">All Blogs</a>
+    </nav>
+
+    <div class="table_admin">
+        <%- include ('./messages/messages.ejs') %>
+        <div class="d-name-tag">
+            <p>Use this from to Add new House property</p>
+        </div>
+
+        <form action="/create-blog" method="POST" enctype="multipart/form-data" class="formings">
+            <div class="form-group">
+                <label>Author's Name:</label>
+                <input class="form-control" type="text" placeholder="e.g Idris Yusuph Olatunji Land" name="fullname">
+            </div>
+            <div class="form-group">
+                <label>Topic:</label>
+                <input class="form-control" value="" type="text" name="topic">
+            </div>
+            <div class="form-group custom-select">
+                <label>Category:</label>
+                <select name="category" class="form-control">
+                    <option>Select Option</option>
+                    <option value="Housing">Housing</option>
+                    <option value="Holiday">Holiday</option>
+                    <option value="Government">Government</option>
+                    <option value="Politics">Politics</option>
+                    <option value="Sport">Sport</option>
+                    <option value="Bussiness">Bussiness</option>
+                    <option value="Reality">Reality</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label>Articles:</label>
+                <textarea class="form-control" name="article" id="myTextArea"></textarea>
+            </div>
+            <div class="form-group">
+                <label for="img">Page Cover:</label>
+                <input type="file" name="img" id="img" class="form-control-file form-control height-auto" >
+            </div>
+            <div class="form-group">
+                <label for="img2">Image:</label>
+                <input type="file" name="img2" id="img2" class="form-control-file form-control height-auto" >
+            </div>
+            <div class="form-group">
+                <div class="custom-file">
+                    <input type="submit">
+                </div>
+            </div>
+        </form>
+    </div>
+
+    <div class="footering">
+        <h3>All rights reserved and Powered by: Valiantfoot Limited <i class="fas fa-copyright"></i> 2023</h3>
+    </div>
+</div>
+
+<%- include ('./dash_include/footer.ejs') %>
+
+<!-- <div class="form-group">
+    <div class="row">
+        <div class="col-md-6 col-sm-12">
+            <label class="weight-600">Custom Checkbox</label>
+            <div class="custom-control custom-checkbox mb-5">
+                <input type="checkbox" class="custom-control-input" id="customCheck1-1">
+                <label class="custom-control-label" for="customCheck1-1">Check this custom checkbox</label>
+            </div>
+            <div class="custom-control custom-checkbox mb-5">
+                <input type="checkbox" class="custom-control-input" id="customCheck2-1">
+                <label class="custom-control-label" for="customCheck2-1">Check this custom checkbox</label>
+            </div>
+            <div class="custom-control custom-checkbox mb-5">
+                <input type="checkbox" class="custom-control-input" id="customCheck3-1">
+                <label class="custom-control-label" for="customCheck3-1">Check this custom checkbox</label>
+            </div>
+            <div class="custom-control custom-checkbox mb-5">
+                <input type="checkbox" class="custom-control-input" id="customCheck4-1">
+                <label class="custom-control-label" for="customCheck4-1">Check this custom checkbox</label>
+            </div>
+        </div>
+        <div class="col-md-6 col-sm-12">
+            <label class="weight-600">Custom Radio</label>
+            <div class="custom-control custom-radio mb-5">
+                <input type="radio" id="customRadio4" name="customRadio" class="custom-control-input">
+                <label class="custom-control-label" for="customRadio4">Toggle this custom radio</label>
+            </div>
+            <div class="custom-control custom-radio mb-5">
+                <input type="radio" id="customRadio5" name="customRadio" class="custom-control-input">
+                <label class="custom-control-label" for="customRadio5">Or toggle this other custom radio</label>
+            </div>
+            <div class="custom-control custom-radio mb-5">
+                <input type="radio" id="customRadio6" name="customRadio" class="custom-control-input">
+                <label class="custom-control-label" for="customRadio6">Or toggle this other custom radio</label>
+            </div>
+        </div>
+    </div>
+
+     <div class="form-group">
+                <label>Telephone</label>
+                <input class="form-control" value="" placeholder="1-(111)-111-1111" type="tel">
+            </div>
+            <div class="form-group">
+                <label>Password</label>
+                <input class="form-control" value="" type="password">
+                <small class="form-text text-muted">
+                    Your password must be 8-20 characters long, contain letters and numbers, and must not contain spaces, special characters, or emoji.
+                  </small>
+            </div>
+            <div class="form-group">
+                <label>Readonly input</label>
+                <input class="form-control" type="text" placeholder="Readonly input here…" readonly="">
+            </div>
+            <div class="form-group">
+                <label>Disabled input</label>
+                <input type="text" class="form-control" placeholder="Disabled input" disabled="">
+            </div>
+            <div class="form-group">
+                <label>input plaintext</label>
+                <input type="text" readonly="" class="form-control-plaintext" value="email@example.com">
+            </div>
+</div> -->
+
+<script src="https://cdn.jsdelivr.net/simplemde/latest/simplemde.min.js"></script>
+  <script>
+    var simplemde = new SimpleMDE({ element: document.getElementById("myTextArea") });
+  </script>
+

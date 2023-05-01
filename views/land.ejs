@@ -1,0 +1,132 @@
+
+<%- include ('./dash_include/header.ejs') %>
+<%- include ('./dash_include/dashboard_all.ejs') %>
+
+
+<div class="main-container">
+    <nav class="headering">
+        <div class="head_in">
+            <P>Admin Table</P>
+         <ol>
+            <li> 
+                <a href="">
+                    Home >
+                </a>
+            </li>
+            <li> 
+                <a href="">
+                    Land List
+                </a>
+            </li>
+        </ol>
+        </div>
+        <a href="/admin/create-land" class="created">Add Land</a>
+    </nav>
+    <div class="table_admin">
+        <div class="d-name-tag">
+            <p>Properties Table Lists</p>
+        </div>
+        <table >
+            <thead>
+                <tr>
+                    <th>S/N</th>
+                    <th> ID</th>
+                    <th>Name</th>
+                    <th>Location</th>
+                    <th>Status</th>
+                    <th>Area</th>
+                    <th>Period</th>
+                    <th class="actionone">Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                <% let count = 1; %>
+                <% land.forEach(function(land){ %>
+                    <tr>
+                        <td class="numberings"><%= count %></td>
+                        <td><%= land.property_id %></td>
+                        <td><%= land.name %></td>
+                        <td><%= land.location %></td>
+                        <td><%= land.status%></td>
+                        <td><%= land.area %></td>
+                        <td><%= land.period %></td>
+                        <td class="option_buttonone">
+                            <div class="hidden">
+                                <button class="delete"><a href="/admin/delete-land/<%= land._id %>"  class="delete_land" data-id="<%= land._id %>"> <i class="fas fa-trash"></i></a></button>
+                                <button class="view"><a href="http:/admin/view-detail-land?id=<%= land._id %>"><i class="fas fa-eye"></i></a></button>
+                                <button class="edit"><a href="/admin/edit-land?id=<%= land._id %>"><i class="fas fa-user-edit"></i></a></button>
+                            </div>
+                        </td>
+                    </tr>
+                    <% count++ %>
+                <% }) %>
+
+            </tbody>
+        </table>
+        
+        <ul class="paginationa">
+            <% if (current > 1) { %>
+              <li><a href="/admin/land/<%= parseInt(current) - 1 %>">&laquo;</a></li>
+            <% } %>
+          
+            <% for (var i = 1; i <= pages; i++) { %>
+              <% if (current == i) { %>
+                <li class="active"><a href="/admin/land/<%= i %>"><%= i %></a></li>
+              <% } else { %>
+                <li><a href="/admin/land/<%= i %>"><%= i %></a></li>
+              <% } %>
+            <% } %>
+          
+            <% if (current < pages) { %>
+              <li><a href="/admin/land/<%= parseInt(current) + 1 %>">&raquo;</a></li>
+            <% } %>
+        </ul>
+
+        <!-- <% if (current > 0) { %>
+            <ul class="paginationa text-center">
+                <% if (current == 1) { %>
+                    <li class="disabled"><a>&laquo</a></li>
+                <% } else { %>
+                    <li><a href="/admin/housing/1">&laquo</a></li>
+                <% } %>
+                <% var i = (Number(current) > 5 ? Number(current) - 4 : 1) %>
+                <% if (i !== 1) { %>
+                    <li class="disabled"><a>...</a></li>
+                <% } %>
+                <% for (; i <= (Number(current) + 4) && i <= pages; i++) { %>
+                    <% if (i == current) { %>
+                        <li class="active"><a><%= i %></a></li>
+                    <% } else { %>
+                        <li><a href="/admin/housing/<%= i %>"><%= i %></a></li>
+                    <% } %>
+                    <% if (i == Number(current) + 4 && i < pages) { %>
+                        <li class="disabled"><a>...</a></li>
+                    <% } %>
+                <% } %>
+                <% if (current == pages) { %>
+                    <li class="disabled"><a>&raquo</a></li>
+                <% } else { %>
+                    <li><a href="/admin/housing/<%= pages %>">&raquo</a></li>
+                <% } %>
+            </ul>
+        <% } %>
+              -->
+       
+    </div>
+    <div class="footering">
+        <h3>All rights reserved and Powered by: Valiantfoot Limited <i class="fas fa-copyright"></i> 2023</h3>
+    </div>
+</div>
+
+<%- include ('./dash_include/footer.ejs') %>
+
+<script>
+
+    const hide = document.querySelector('.hidden');
+
+    hide.forEach(function(hid) {
+        hid.style.position = "absolute";
+    });
+    
+</script>
+  

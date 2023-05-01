@@ -1,0 +1,62 @@
+<%- include ('./dash_include/header.ejs')  %>
+<%- include ('./dash_include/dashboard_all.ejs') %>
+
+
+<div class="main-container">
+    <nav class="headering">
+        <div class="head_in">
+            <P>Admin</P>
+         <ol>
+            <li> 
+                <a href="">
+                    Home >
+                </a>
+            </li>
+            <li> 
+                    <%= contact.name %>
+            </li>
+        </ol>
+        </div>
+    </nav>
+
+    <div class="table_admin">
+        <%- include ('./messages/messages.ejs') %>
+        <div class="d-name-tag">
+            <p>Reply to <%= contact.name %> Message</p>
+        </div>
+
+        <form action="/send-single-email?id=<%=contact._id %>" method="POST" enctype="multipart/form-data" class="formings">
+            <div class="form-group">
+                <label>Email:</label>
+                <input class="form-control" value="<%= contact.email %>" type="email" name="email">
+            </div>
+            <div class="form-group">
+                <label>Subject:</label>
+                <input class="form-control" value="" type="text" name="subject">
+            </div>
+          
+            <div class="form-group">
+                <label>message:</label>
+                <textarea class="form-control" name="message" ></textarea>
+            </div>
+            <div class="form-group">
+               
+                <label for="img">Attachment:</label>
+                <input type="file" name="attachment" id="img" class="form-control-file form-control height-auto" >
+            </div>
+            
+            <div class="form-group">
+                <div class="">
+                    <input type="submit" value="SEND">
+                </div>
+            </div>
+        </form>
+    </div>
+
+    <div class="footering">
+        <h3>All rights reserved and Powered by: YiOLTech <i class="fas fa-copyright"></i> 2023</h3>
+    </div>
+</div>
+
+<%- include ('./dash_include/footer.ejs') %>
+

@@ -1,0 +1,70 @@
+
+<%- include ('./dash_include/header.ejs') %>
+<%- include ('./dash_include/dashboard_all.ejs') %>
+
+
+<div class="main-container">
+    <nav class="headering">
+        <div class="head_in">
+            <P><i class="icon-copy bi bi-inboxes-fill"></i> Inbox</P>
+         <ol>
+            <li> 
+                <a href="/admin/dashboard">
+                    Home >
+                </a>
+            </li>
+            <li> 
+               
+                   <%= contact.name %>
+                
+            </li>
+        </ol>
+        </div>
+        <a href="/admin/replying?id=<%= contact._id %>" class="created">Reply</a>
+    </nav>
+    <div class="inbox">
+        <div class="first_layer">
+            <div class="user_name">
+                <p class="headering">Name:</p>
+                <p><%= contact.name %></p>
+            </div>
+            <div class="user_name">
+                <p class="headering">Email:</p>
+                <p><%= contact.email %></p>
+            </div>
+            <div class="user_name">
+                <p class="headering">Subject:</p>
+                <p><%= contact.subject %></p>
+            </div>
+        </div>
+        <div class="second_layer">
+            <p><%= contact.message %></p>
+        </div> 
+    </div>
+    <div class="footering">
+        <h3>All rights reserved and Powered by: Valiantfoot Limited <i class="fas fa-copyright"></i> 2023</h3>
+    </div>
+</div>
+
+<%- include ('./dash_include/footer.ejs') %>
+
+<script>
+
+    const hide = document.querySelector('.hidden');
+
+    hide.forEach(function(hid) {
+        hid.style.position = "absolute";
+    });
+    
+</script>
+
+<style>
+    .read {
+      font-weight: 100;
+      color: var(--bs-gray-800);
+    }
+    .unread {
+      color: var(--orange2);
+      font-weight: bold;
+    }
+  </style>

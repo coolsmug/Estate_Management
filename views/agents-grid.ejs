@@ -1,0 +1,113 @@
+<%- include ("./dash_include/main_header.ejs")  %>
+<%- include ("./dash_include/HEADER_GEN.ejs")  %>
+
+ 
+
+  <main id="main">
+    <!-- =======Intro Single ======= -->
+    <section class="intro-single">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-12 col-lg-8">
+            <div class="title-single-box">
+              <h1 class="title-single">Our Amazing Staffs</h1>
+              <span class="color-text-a">Grid Properties</span>
+            </div>
+          </div>
+          <div class="col-md-12 col-lg-4">
+            <nav aria-label="breadcrumb" class="breadcrumb-box d-flex justify-content-lg-end">
+              <ol class="breadcrumb">
+                <li class="breadcrumb-item">
+                  <a href="/homing">Home</a>
+                </li>
+                <li class="breadcrumb-item active" aria-current="page">
+                  Agents Grid
+                </li>
+              </ol>
+            </nav>
+          </div>
+        </div>
+      </div>
+    </section><!-- End Intro Single-->
+
+    <!-- ======= Agents Grid ======= -->
+    <% if(staff) {%>
+    <section class="agents-grid grid">
+      <div class="container">
+        <div class="row">
+          <% staff.forEach((staff) => { %>
+          <div class="col-md-4">
+            <div class="card-box-d">
+              <div class="card-img-d">
+                <img src="data:Binary?<%= staff.img.contentType %>;base64,<%= staff.img.data.toString('base64') %>" alt="" class="img-d img-fluid">
+              </div>
+              <div class="card-overlay card-overlay-hover">
+                <div class="card-header-d">
+                  <div class="card-title-d align-self-center">
+                    <h3 class="title-d">
+                      <a href="#" class="link-two"><%= staff.first_name %>
+                        <%= staff.second_name %>
+                    </h3>
+                  </div>
+                </div>
+                <div class="card-body-d">
+                  <p class="content-d color-text-a">
+                    <%= staff.about %>
+                  </p>
+                  <div class="info-agents color-a">
+                    <p>
+                      <strong>Role: </strong> <%= staff.position %>
+                    </p>
+                    <p>
+                      <strong>Phone: </strong> <%= staff.phone %>
+                    </p>
+                    <p>
+                      <strong>Email: </strong> <%= staff.email %>
+                    </p>
+                  </div>
+                </div>
+                <div class="card-footer-d">
+                  <div class="socials-footer d-flex justify-content-center">
+                    <ul class="list-inline">
+                      <li class="list-inline-item">
+                        <a href="<%= staff.facebook %>" class="link-one">
+                          <i class="bi bi-facebook" aria-hidden="true"></i>
+                        </a>
+                      </li>
+                      <li class="list-inline-item">
+                        <a href="https://wa.me/<%= staff.whatsapp %>" class="link-one">
+                          <i class="bi bi-whatsapp" aria-hidden="true"></i>
+                        </a>
+                      </li>
+                      <li class="list-inline-item">
+                        <a href="<%= staff.twitter %>" class="link-one">
+                          <i class="bi bi-twitter" aria-hidden="true"></i>
+                        </a>
+                      </li>
+                      <li class="list-inline-item">
+                        <a href="<%= staff.instagram %>" class="link-one">
+                          <i class="bi bi-instagram" aria-hidden="true"></i>
+                        </a>
+                      </li>
+                      <li class="list-inline-item">
+                        <a href="<%= staff.linkedin %>" class="link-one">
+                          <i class="bi bi-linkedin" aria-hidden="true"></i>
+                        </a>
+                      </li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+      <% }) %>
+        </div>
+       
+    </section><!-- End Agents Grid-->
+    <% } %>
+
+  </main><!-- End #main -->
+
+ 
+<%- include ("./dash_include/FOOTER_GEN.ejs")  %>
+<%- include ('./dash_include/main_footer.ejs') %>

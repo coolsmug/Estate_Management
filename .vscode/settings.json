@@ -1,0 +1,11 @@
+{
+    "liveCoder.settings.port": 5501,
+    "liveServer.settings.fullReload": true,
+    "liveServer.settings.NoBrowser": true,
+    "liveServer.settings.proxy": {
+        "enable": true
+    },
+    "liveServer.settings.showOnStatusbar": true,
+    "liveServer.settings.useWebExt": true,
+    "liveServer.settings.ChromeDebuggingAttachment": true  
+}

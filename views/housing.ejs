@@ -1,0 +1,108 @@
+
+<%- include ('./dash_include/header.ejs')  %>
+<%- include ('./dash_include/dashboard_all.ejs') %>
+
+
+<div class="main-container">
+    <nav class="headering">
+        <div class="head_in">
+            <P>Admin Table</P>
+         <ol>
+            <li> 
+                <a href="">
+                    Home >
+                </a>
+            </li>
+            <li> 
+                <a href="">
+                    Admin List
+                </a>
+            </li>
+        </ol>
+        </div>
+        <a href="/admin/create-housing" class="created">Add Property</a>
+    </nav>
+    <div class="table_admin">
+        <div class="d-name-tag">
+            <p>Properties Table Lists</p>
+        </div>
+        <table >
+            <thead>
+                <tr>
+                    <th>S/N</th>
+                    <th>ID</th>
+                    <th>Name</th>
+                    <th>Location</th>
+                    <th>Status</th>
+                    <th>Area</th>
+                    <th>Bed</th>
+                    <th>Baths</th>
+                    <th>Garage</th>
+                    <th>Period</th>
+                    <th class="actioning">Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                <% let count = 1; %>
+                <% prop.forEach(function(prop){ %>
+                    <tr>
+                        <td class="numberings"><%= count %></td>
+                        <td><%= prop.property_id %></td>
+                        <td><%= prop.name %></td>
+                        <td><%= prop.location %></td>
+                        <td><%= prop.status%></td>
+                        <td><%= prop.area %></td>
+                        <td><%= prop.bed %></td>
+                        <td><%= prop.baths %></td>
+                        <td><%= prop.garage %></td>
+                        <td><%= prop.period %></td>
+                     
+                        <td class="option_button">
+                            <div class="hidden">
+                                <button class="delete"><a href="/admin/delete-property/<%= prop._id %>"  class="deleted_one" data-id="<%= prop._id %>"> <i class="fas fa-trash"></i></a></button>
+                                <button class="view"><a href="http:/admin/view-detail-house?id=<%= prop._id %>"><i class="fas fa-eye"></i></a></button>
+                                <button class="edit"><a href="/admin/edit-property?id=<%= prop._id %>"><i class="fas fa-user-edit"></i></a></button>
+                            </div>
+                        </td>
+                    </tr>
+                    <% count++ %>
+                <% }) %>
+              
+            </tbody>
+        </table>
+
+        <ul class="paginationa">
+            <% if (current > 1) { %>
+              <li><a href="/admin/housing/<%= parseInt(current) - 1 %>">&laquo;</a></li>
+            <% } %>
+          
+            <% for (var i = 1; i <= pages; i++) { %>
+              <% if (current == i) { %>
+                <li class="active"><a href="/admin/housing/<%= i %>"><%= i %></a></li>
+              <% } else { %>
+                <li><a href="/admin/housing/<%= i %>"><%= i %></a></li>
+              <% } %>
+            <% } %>
+          
+            <% if (current < pages) { %>
+              <li><a href="/admin/housing/<%= parseInt(current) + 1 %>">&raquo;</a></li>
+            <% } %>
+        </ul>
+
+    </div>
+    <div class="footering">
+        <h3>All rights reserved and Powered by: Valiantfoot Limited <i class="fas fa-copyright"></i> 2023</h3>
+    </div>
+</div>
+
+<%- include ('./dash_include/footer.ejs') %>
+
+<script>
+    const hide = document.querySelector('.hidden');
+
+    hide.forEach(function(hid) {
+        hid.style.position = "absolute";
+    });
+    
+</script>
+

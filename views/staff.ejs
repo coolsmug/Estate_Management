@@ -1,0 +1,109 @@
+
+<%- include ('./dash_include/header.ejs') %>
+<%- include ('./dash_include/dashboard_all.ejs') %>
+
+
+<div class="main-container">
+    <nav class="headering">
+        <div class="head_in">
+            <P>Staff Table</P>
+         <ol>
+            <li> 
+                <a href="">
+                    Home >
+                </a>
+            </li>
+            <li> 
+                <a href="">
+                    Staff List
+                </a>
+            </li>
+        </ol>
+        </div>
+        <a href="/admin/create-staff" class="created">Add Staff</a>
+    </nav>
+    <div class="table_admin">
+        <div class="d-name-tag">
+            <p>Staff Table Lists</p>
+        </div>
+        <table >
+            <thead>
+                <tr>
+                    <th><i class="bi bi-chevron-down not_nowstaff"></i> S/N</th>
+                    <th>Image</th>
+                    <th>Full Name</th>
+                    <th>Position</th>
+                    <th>Performance</th>
+                    <th>Email</th>
+                    <th>Mobile</th> 
+                    <th>Status</th>
+                    <th class="actionstaff">Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                <% let count = 1; %>
+                <% staff.forEach(function(staff){ %>
+                    <tr>
+                        <td class="numberings"><%= count %></td>
+                        <td><div class="imageadmin"><img src="data:Binary?<%= staff.img.contentType %>;base64,<%= staff.img.data.toString('base64') %>" alt="" width="50"</div></td>
+                        <td><%= staff.first_name %> <%= staff.second_name %></td>
+                        <td><%= staff.position %></td>
+                        <td><%= staff.performance %></td>
+                        <td><%= staff.email %></td>
+                        <td><a href="tel:<%= staff.phone %>"><%= staff.phone %></a></td>
+                        <td><label class="staff_swith switch">
+                            <input type="checkbox" id="mySwitch" data-user-id="<%= staff._id %> " <%= staff.status == true ? 'checked' : '' %> >
+                            <span class="slider">
+                            </span>
+                            </label>
+                        </td>
+                        <td class="option_hidden_staff">
+                            <div class="hidden">
+                                <button class="delete"><a href="/admin/delete-staff/<%= staff._id %>"  class="delete_staff" data-id="<%= staff._id %>"> <i class="fas fa-trash"></i></a></button>
+                                <button class="view"><a href="/admin/staff-detail/?id=<%= staff._id %>"><i class="fas fa-eye"></i></a></button>
+                                <button class="edit"><a href="/admin/edit-staff?id=<%= staff._id %>"><i class="fas fa-user-edit"></i></a></button>
+                            </div>
+                        </td>
+                    </tr>
+                    <% count++ %>
+                <% }) %>
+
+            </tbody>
+        </table>
+        
+        <ul class="paginationa">
+            <% if (current > 1) { %>
+              <li><a href="/admin/staff/<%= parseInt(current) - 1 %>">&laquo;</a></li>
+            <% } %>
+          
+            <% for (var i = 1; i <= pages; i++) { %>
+              <% if (current == i) { %>
+                <li class="active"><a href="/admin/staff/<%= i %>"><%= i %></a></li>
+              <% } else { %>
+                <li><a href="/admin/staff/<%= i %>"><%= i %></a></li>
+              <% } %>
+            <% } %>
+          
+            <% if (current < pages) { %>
+              <li><a href="/admin/staff/<%= parseInt(current) + 1 %>">&raquo;</a></li>
+            <% } %>
+        </ul>
+       
+    </div>
+    <div class="footering">
+        <h3>All rights reserved and Powered by: Valiantfoot Limited <i class="fas fa-copyright"></i> 2023</h3>
+    </div>
+</div>
+
+<%- include ('./dash_include/footer.ejs') %>
+
+<script>
+
+    const hide = document.querySelector('.hidden');
+
+    hide.forEach(function(hid) {
+        hid.style.position = "absolute";
+    });
+    
+</script>
+  

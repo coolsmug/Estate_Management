@@ -1,0 +1,219 @@
+<%- include ('./dash_include/header.ejs')  %>
+<%- include ('./dash_include/dashboard_all.ejs') %>
+
+<div class="main-container">
+    <nav class="headering">
+        <div class="head_in">
+            <P>About Valiantfoot</P>
+         <ol>
+            <li> 
+                <a href="">
+                    Home >
+                </a>
+            </li>
+            <li> 
+                <a href="">
+                    Comapany Information
+                </a>
+            </li>
+        </ol>
+        </div>
+        <a href="/admin/staff/1" class="created">Dashboard</a>
+    </nav>
+    <div class="table_admin">
+        <div class="d-name-tag">
+            <p>Company Information</p>
+        </div>
+
+        <div class="wrap_all_profile">
+            <div class="staffprofile">
+               
+                <div class="div_detail">
+                    <div class="first">
+                        <div class="email">
+                            <p>Company Name:</p>
+                        </div>
+                        <div class="email">
+                            <%= service.company_name %>
+                        </div>
+                    </div>
+                    <div class="first">
+                        <div class="email">
+                            <p>Address:</p>
+                        </div>
+                        <div class="email">
+                            <%= service.address %>
+                        </div>
+                    </div>
+                    <div class="first">
+                        <div class="email">
+                            <p>State:</p>
+                        </div>
+                        <div class="email">
+                            <%= service.state %>
+                        </div>
+                    </div>
+                    <div class="first">
+                        <div class="email">
+                            <p>Mobile:</p>
+                        </div>
+                        <div class="email">
+                            <%= service.mobile %>,
+                            <%= service.mobile2 %>,
+                            <%= service.mobile3 %>
+                        </div>
+                    </div>
+                     <div class="first">
+                        <div class="email">
+                            <p>Land Phone:</p>
+                        </div>
+                        <div class="email">
+                            <%= service.phone %>
+                        </div>
+                    </div>
+                    <div class="first">
+                        <div class="email">
+                            <p>Email:</p>
+                        </div>
+                        <div class="email">
+                            <%= service.email %>
+                        </div>
+                    </div>
+                   
+                    <div class="first">
+                        <div class="email">
+                            <p>Heading:</p>
+                        </div>
+                        <div class="email">
+                            <%= service.heading %>
+                        </div>
+                    </div>
+                    <div class="first">
+                        <div class="email">
+                            <p>About:</p>
+                        </div>
+                        <div class="email">
+                            <%= service.about %>
+                        </div>
+                    </div>
+        
+                </div>
+            
+            </div>
+    
+            <div class="about_amenitie">
+                <div class="table_admin">
+                  
+                    <div class="d-name-tag">
+                        <p>Use this from to create Company Services</p>
+                    </div>
+            
+                    <form method="POST" class="formings" id="About">
+                        <div class="form-group">
+                            <input type="hidden" name="id" value="<%= service._id %>">
+                            <label>Company's Name:</label>
+                            <input class="form-control" type="text" placeholder="e.g Idris Valiantfooot" name="company_name" value="<%= service.company_name %>">
+                        </div>
+                        <div class="form-group">
+                            <label>Address:</label>
+                            <input class="form-control" value="<%= service.address %>" type="text" name="address">
+                        </div>
+                        <div class="form-group">
+                            <label>Mobile:</label>
+                            <input class="form-control" value="<%= service.mobile %>" type="text" name="mobile">
+                        </div>
+                        <div class="form-group">
+                            <label>Mobile 2:</label>
+                            <input class="form-control" value="<%= service.mobile2 %>" type="text" name="mobile2">
+                        </div>
+                        <div class="form-group">
+                            <label>Mobile 3:</label>
+                            <input class="form-control" value="<%= service.mobile3 %>" type="text" name="mobile3">
+                        </div>
+                        <div class="form-group">
+                            <label>Land Phone:</label>
+                            <input class="form-control" value="<%= service.phone %>" type="text" name="phone">
+                        </div>
+                        <div class="form-group">
+                            <label>WhatsApp Number:</label>
+                            <input class="form-control" type="text" value="<%= service.whatsapp%>" name="whatsapp">
+                        </div>
+                        <div class="form-group">
+                            <label>Facebook:</label>
+                            <input class="form-control" type="text" value="<%= service.facebook%>" name="facebook">
+                        </div>
+                        <div class="form-group">
+                            <label>Instagram:</label>
+                            <input class="form-control" type="text" value="<%= service.instagram%>" name="instagram">
+                        </div>
+                        <div class="form-group">
+                            <label>Twitter:</label>
+                            <input class="form-control" type="text" value="<%= service.twitter%>" name="twitter">
+                        </div>
+                        <div class="form-group">
+                            <label>Linkedin:</label>
+                            <input class="form-control" type="text" value="<%= service.linkedin%>" name="linkedin">
+                        </div>
+                        <div class="form-group">
+                            <label>Email:</label>
+                            <input class="form-control" value="<%= service.email %>" type="text" name="email">
+                        </div>
+                        <div class="form-group">
+                            <label>State:</label>
+                            <input class="form-control" value="<%= service.state %>" type="text" name="state">
+                        </div>
+                        <div class="form-group">
+                            <label>About Title:</label>
+                            <input class="form-control" value="<%= service.heading %>" type="text" name="heading">
+                        </div>
+                       
+                        <div class="form-group">
+                            <label>About:</label>
+                            <textarea class="form-control" name="about" ><%= service.about %></textarea>
+                        </div>
+                        <div class="form-group">
+                            <div class="custom-file">
+                                <input type="submit">
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <%- include ('./messages/messages.ejs') %>
+                <div class="table_admin">
+                  
+                    <div class="d-name-tag">
+                        <p>Use this from to create Company Services</p>
+                    </div>
+            
+                    <form action="/edit-info-image/<%= service._id %>" method="POST" enctype="multipart/form-data" class="formings">
+                        
+                        <div class="form-group">
+                            <label for="img">About image Cover:</label>
+                            <input type="hidden" name="img" value="<%= service._id %>">
+                            <input type="file" name="img" id="img" class="form-control-file form-control height-auto" >
+                        </div>
+                        <div class="form-group">
+                            <div class="custom-file">
+                                <input type="submit">
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+        
+    </div>
+    <div class="footering">
+        <h3>All rights reserved and Powered by: Valiantfoot Limited <i class="fas fa-copyright"></i> 2023</h3>
+    </div>
+</div>
+
+<%- include ('./dash_include/footer.ejs') %>
+
+
+  <style>
+    .table_admin {
+        margin-bottom: 20px;
+    }
+  </style>
+

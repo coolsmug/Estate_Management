@@ -1,0 +1,304 @@
+<%- include ('./dash_include/header.ejs')  %>
+    
+    <div class="all_dash">
+        <div class="fixed">
+            <div class="logo-search-url">
+                <div class="div-logo"><img src="/img/Valiant_Logo-01.png" alt="" width="100"></div>
+                <div class="menu-bar"><i class="fas fa-bars menbar2"></i><i class="fas fa-bars menbar"></i></div>
+                <div class="hiddeen"> <i class="fas fa-search hide-search"></i></div>
+                <div class="search-cover">
+                    <div class="search">
+                        <form action="">
+                                <i class="fas fa-search" search-icon"></i>
+                            <input
+                            type="text"
+                            class="form-control search-input"
+                            placeholder="Search Here"/>
+                            <button type="submit" class="button_submit"> 
+                                <i class="fas fa-search" search-icon"></i>
+                            </button>
+                        </form>
+                    </div>
+                </div>
+                
+            </div>
+            <div class="profile-group">
+                <div class="profile_image">
+                    <img src="data:Binary?<%= user.img.contentType %>;base64,<%= user.img.data.toString('base64') %>" alt="" width="100">
+                </div>
+                <div class="profile_name">
+                 
+                        <p class="hide_profile"><%= user.first_name %> <%= user.second_name %> <i class="bi bi-chevron-up"></i></p>
+                 
+                    <div class="logout_space">
+                        
+                            <ul>
+                                <li> <form action="/admin/logout" method="POST" class="logoutss">
+                                    <input type="submit" value="Log Out" class="bi bi-outlet">
+                                </form></li>
+                                <li><a href="">Profile</a></li>
+                            </ul>
+                       
+                    </div>
+                </div>
+            </div>   
+        
+        </div>
+
+        <div class="opaque"></div>
+           
+        <div class="sidebar">
+            <div class="div-logo"><img src="/img/Valiant_Logo-01.png" alt="" width="100"> <i class="fas fa-times close"></i></div>
+            <ul class="ul">
+                <li class="dashboard"><a href="/admin/dashboard"><i class="bi bi-building-dash" style="font-size: 1.5em; color: #007bff;"></i> Dashboard</a></li>
+                <div class="parent-lists">
+                    <li class="list_one"><i class="bi bi-house" style="font-size: 1.5em; color: #007bff;"></i> </i>Properties</li>
+                    <div class="child-list">
+                        <li><a href="/admin/housing/1"><i class="fas fa-minus"></i><span>Housing</span></a></li>
+                        <li><a href="/admin/land/1"><i class="fas fa-minus"></i><span>Land Properties</span></a></li>
+                    </div>
+                </div>
+                <div class="parent-lists">
+                    <li class="list_one"> <i class="bi bi-people" style="font-size: 1.5em; color: #007bff;"></i> Manage Staffs</li>
+                    <div class="child-list">
+                        <li><a href="/admin/admin/1"><i class="fas fa-minus"></i><span>Admin</span></a></li>
+                        <li><a href="/admin/staff/1"><i class="fas fa-minus"></i><span>Staffs</span></a></li>
+                    </div>
+                </div>
+                <div class="parent-lists">
+                    <li class="list_one"><i class="bi bi-newspaper" style="font-size: 1.5em; color: #007bff;"></i> Messages & News</li>
+                    <div class="child-list">
+                        <li><a href="/admin/blog/1"><i class="fas fa-minus"></i><span>Blogs</span></a></li>
+                        <li><a href="/admin/contact/1"><i class="fas fa-minus"></i><span>Contacts</span></a></li>
+                        <li><a href="/admin/email_subscriber"><i class="fas fa-minus"></i><span>Email Subscribers</span></a></li>
+                    </div>
+                </div>
+             
+                <div class="parent-lists">
+                    <li class="list_one"><i class="bi bi-info" style="font-size: 1.5em; color: #007bff;"></i> Company Details</li>
+                    <div class="child-list">
+                        <li><a href="/admin/creating-service"><i class="fas fa-minus"></i><span>Create Services</span></a></li>
+                        <li><a href="/admin/creating-info"><i class="fas fa-minus"></i><span>Create Info</span></a></li>
+                    </div>
+                </div>
+                <li class="dashboard"><a href="/admin/change-password"><i class="bi bi-pass-fill" style="font-size: 2em; color: #007bff;"></i> Change Password</a></li>
+                
+                
+            </ul>
+        </div>
+       
+    </div>
+
+    
+<div class="main-container">
+    <h2 class="company-over">Company Overview</h2>
+    <div class="not_hearing">
+       <div class="one">
+            <div class="inner-view">
+                <p><%= house %></p>
+                <p class="secon">House</p>
+            </div>
+            <div class="i-class">
+               <i class="bi bi-building" style="font-size: 2em; color: #33f1e5;"></i>
+            </div>
+       </div>
+       <div class="one">
+            <div class="inner-view">
+                <p><%= land %></p>
+                <p class="secon">Land</p>
+            </div>
+            <div class="i-class">
+                <i class="bi bi-square" style="font-size: 2em; color: #be9b85;"></i>
+            </div>
+       </div>
+       <div class="one">
+            <div class="inner-view">
+                <p><%= staff %></p>
+                <p class="secon">Staffs</p>
+            </div>
+            <div class="i-class">
+                <i class="bi bi-people" style="font-size: 2em; color: #e4f8f1;"></i>
+            </div>
+       </div>
+       <div class="one">
+            <div class="inner-view">
+                <p><%= contact %></p>
+                <p class="secon">Contacts</p>
+            </div>
+            <div class="i-class">
+                <i class="bi bi-telephone" style="font-size: 2em; color: #ff8fd2;"></i>
+            </div>
+       </div>
+    </div>
+    <div class="above_it_all">
+       <div class="div-information">
+            <h2>Company Information</h2>
+                <% if(about) {%>
+            <div class="all_information">
+                <a href="/admin/edit-info?id=<%= about._id %>">
+                    <div class="img">
+                        <img src="/img/Valiant-01.png" alt="" srcset="" width="100">
+                    </div>
+                    <div class="companyname">
+                        <p class="naming">Comapany Name:</p>
+                        <p><%= about.company_name %></p>
+                    </div>
+                    <div class="companyname address">
+                        <p class="naming">Address:</p>
+                        <p><%= about.address %></p>
+                    </div>
+                    <div class="companyname address">
+                        <p class="naming">Email:</p>
+                        <p><%= about.email %></p>
+                    </div>
+                    <div class="companyname mobile">
+                        <p class="naming">Mobile:</p>
+                        <p><%= about.mobile %></p>
+                        <p><%= about.mobile2 %></p>
+                        <p><%= about.mobile3 %></p>
+                    </div>
+                </a>
+            </div>
+            <% } %>
+        </div>
+
+        <div class="div-subcriber">
+            <h2>Sold Out</h2>
+            <div class="inside-soldOut">
+                <div class="one">
+                    <div class="inner-view">
+                        <p><%= houses %></p>
+                        <p class="secon">House</p>
+                    </div>
+                    <div class="i-class">
+                        <i class="bi bi-building" style="font-size: 2em; color: #f13333;"></i>
+                    </div>
+                </div>
+                <div class="one">
+                    <div class="inner-view">
+                        <p><%= lands %></p>
+                        <p class="secon">Land</p>
+                    </div>
+                    <div class="i-class">
+                        <i class="bi bi-square" style="font-size: 2em; color: #f13333;"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="above_it_all_two">
+        <div class="ge_to_us">
+         <h2>Subscribers</h2>
+         <table class="table_for_subscriber">
+            <thead>
+                <tr>
+                    <th>S/N</th>
+                    <th>Email <i class="bi bi-mailbox" style="font-size: 2em; color: #007bff;"></i></th>
+                </tr>
+            </thead>
+            <tbody>
+                <% let count = 1; %>
+                <% subscriber.forEach(function(land){ %>
+                    <tr>
+                        <td><%= count %></td>
+                        <td><%= land.email %></td>
+                    </tr>
+                    <% count++ %>
+                <% }) %>
+
+            </tbody>
+         </table>
+        </div>
+        <div class="adminsing">
+            <h2>Admin Details <i class="bi bi-bag-fill" style="font-size: 2em; color: #007bff;"></i></h2>
+            <div class="all_informationing">
+                <a href="/admin/edit-info?id=<%= user._id %>">
+                    
+                    <div class="companyname">
+                        <p class="naming">Name:</p>
+                        <% let fullname = user.first_name + " " + user.second_name %>
+                        <p><%= fullname %></p>
+                    </div>
+                    <div class="companyname address">
+                        <p class="naming">Position:</p>
+                        <p><%= user.position %></p>
+                    </div>
+                    <div class="companyname address">
+                        <p class="naming">Email:</p>
+                        <p><%= user.email %></p>
+                    </div>
+                    <div class="companyname mobile">
+                        <p class="naming">Role:</p>
+                        <p><%= user.role %></p>
+                        
+                    </div>
+                </a>
+            </div>
+        </div>
+        
+    </div>
+    <div class="our-service">
+        <h2>Our Service</h2>
+        <div class="all_information">
+            <% let counts = 1 %>
+            <% service.forEach((about) => {%>
+            
+              
+                <div class="companyname address">
+                    <%= counts %>.
+                    <p class="naming">Heading:</p>
+                    <p><%= about.heading %></p>
+                </div>
+                <div class="companyname content mobile post-preview">
+                    <span class="naming">Contents:</span>
+                    <p><%= about.about %></p>
+                    <button class="read-more">Read more</button>
+                    <a href="/admin/edit-service?id=<%= about._id %>">Edit</a>
+                </div>
+                <% counts++ %>
+            <% })  %>
+        </div>
+       
+        
+    </div>
+     
+    <div class="footering">
+        <h3>All rights reserved and Powered by: Valiantfoot Limited <i class="fas fa-copyright"></i> 2023</h3>
+    </div>
+</div>
+
+    <div id="preloader"> <img src="/img/Valiant_Logo-01.png" width="100" class="preloadering"> </div>
+
+<%- include ('./dash_include/footer.ejs') %>
+
+<script>
+    const postPreviews = document.querySelectorAll('.post-preview');
+  
+    postPreviews.forEach(postPreview => {
+      const postContent = postPreview.querySelector('p').textContent;
+      const words = postContent.split(' ');
+      const preview = words.slice(0, 10).join(' ');
+  
+      postPreview.querySelector('p').textContent = preview + '...';
+  
+      const readMoreButton = postPreview.querySelector('.read-more');
+      const fullPostContent = document.createElement('div');
+      fullPostContent.innerHTML = postContent;
+      fullPostContent.style.display = 'none';
+  
+      readMoreButton.addEventListener('click', () => {
+        if (fullPostContent.style.display === 'none') {
+          fullPostContent.style.display = 'block';
+          readMoreButton.textContent = 'Read less';
+        } else {
+          fullPostContent.style.display = 'none';
+          readMoreButton.textContent = 'Read more';
+        }
+      });
+  
+      postPreview.appendChild(fullPostContent);
+    });
+    
+   
+  </script>
+

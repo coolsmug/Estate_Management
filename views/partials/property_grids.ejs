@@ -1,0 +1,78 @@
+
+
+<% if (result) {%>
+    <% result.forEach((props) => {%>
+  <div class="col-md-4" id="property-grid-container" >
+    <div class="card-box-a card-shadow" >
+      <div class="img-box-a">
+        <img src="data:Binary?<%= props.img2.contentType %>;base64,<%= props.img2.data.toString('base64') %>" alt="" class="img-a img-fluid">
+      </div>
+      <div class="card-overlay">
+        <div class="card-overlay-a-content">
+          <div class="card-header-a">
+            <h2 class="card-title-a">
+              <a href="#"><%= props.area %> <%= props.name %>
+                <br /> <%= props.location %> </a>
+            </h2>
+          </div>
+          <div class="card-body-a">
+            <div class="price-box d-flex">
+              <span class="price-a"><%= props.status%> | $ 12.000</span>
+            </div>
+            <a href="property-single.html" class="link-a">Click here to view
+              <span class="bi bi-chevron-right"></span>
+            </a>
+          </div>
+          <div class="card-footer-a">
+            <ul class="card-info d-flex justify-content-around">
+              <li>
+                <h4 class="card-info-title">Area</h4>
+                <span><%= props.area %>
+                  <sup>2</sup>
+                </span>
+              </li>
+              <li>
+                <h4 class="card-info-title">Beds</h4>
+                <span><%= props.bed %></span>
+              </li>
+              <li>
+                <h4 class="card-info-title">Baths</h4>
+                <span><%= props.baths %></span>
+              </li>
+              <li>
+                <h4 class="card-info-title">Garages</h4>
+                <span><%= props.garage %></span>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <% }) %>
+  <% } %>
+  
+<div class="row">
+  <div class="col-sm-12">
+    <nav class="pagination-a">
+
+      <ul class="pagination justify-content-end">
+        <% if (current > 1) { %>
+          <li class="page-item" tabindex="-1"><a class="page-link" href="/property?filterOption=/<%= parseInt(current) - 1 %>"> <span class="bi bi-chevron-left"></span></a></li>
+        <% } %>
+      
+        <% for (var i = 1; i <= pages; i++) { %>
+          <% if (current == i) { %>
+            <li class="page-item active"><a class="page-link" href="/property?filterOption=/<%= i %>"><%= i %></a></li>
+          <% } else { %>
+            <li class="page-item"><a class="page-link" href="/property?filterOption=/<%= i %>"><%= i %></a></li>
+          <% } %>
+        <% } %>
+      
+        <% if (current < pages) { %>
+          <li class="page-item next"><a class="page-link" href="/property?filterOption=/<%= parseInt(current) + 1 %>"> <span class="bi bi-chevron-right"></span></a></li>
+        <% } %>
+    </ul>
+    </nav>
+  </div>
+</div>
