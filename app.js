@@ -24,17 +24,24 @@ const About = require('./services/models/about');
 const Service = require('./services/models/services');
 const Subscriber = require('./services/models/subscriber');
 const Testimony = require('./services/models/testimoniy');
+const crypto = require('crypto');
 // const transporter = require('./services/config/nodemailer');
 const nodemailer = require('nodemailer')
 const smtpPool = require('nodemailer-smtp-pool');
 
-
+const sessionSecret = crypto.randomBytes(20).toString('hex');
+const MongoDBStore = require('connect-mongodb-session')(session);
 
 const PORT = process.env.PORT || 5000;
-const SECRET = process.env.SESSION_SECRET;
 const connectDB = require('./services/database/connection');
 const PASSWORD_EMAIL = process.env.PASSWORD_EMAIL;
+const URI = process.env.MONGODB_URI ;
 connectDB();
+
+const store = new MongoDBStore({
+  uri: URI,
+  collection: 'mySessions'
+});
 
 const app = express();
 app.use(morgan('tiny'));
@@ -48,9 +55,10 @@ app.use(flash());
 
 app.use(
     session( {
-        secret: SECRET,
+        secret: sessionSecret,
         resave: false,
         saveUninitialized: true,
+        store: store,
         cookies: { maxAge: 60 * 60 * 1000 } // 1 hour
     } )
 );
