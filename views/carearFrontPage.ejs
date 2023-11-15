@@ -1,0 +1,198 @@
+<%- include ("./dash_include/main_header.ejs") %>
+<%- include ("./dash_include/HEADER_GEN.ejs") %>
+
+  <main id="main">
+
+    <!-- ======= Intro Single ======= -->
+    <section class="intro-single">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-12 col-lg-8">
+            <div class="title-single-box">
+              <h1 class="title-single">Careers</h1>
+              <p class="color-text-a big">Ready to join us?</p>
+              <span class="span">This way!</span>
+              <span><button><a href="#apply">Apply</a></button></span>
+            </div>
+          </div>
+         
+          <div class="col-md-12 col-lg-4">
+            <nav aria-label="breadcrumb" class="breadcrumb-box d-flex justify-content-lg-end">
+              <ol class="breadcrumb">
+                <li class="breadcrumb-item">
+                  <a href="/home">Home</a>
+                </li>
+                <li class="breadcrumb-item active" aria-current="page">
+                  Careers
+                </li>
+              </ol>
+            </nav>
+          </div>
+        </div>
+      </div>
+    </section><!-- End Intro Single-->
+
+    <!-- ======= Contact Single ======= -->
+    <section class="contact">
+      <div class="container">
+        <div class="row">
+         
+          <div class="col-sm-12 position-relative">
+            <div class="about-img-box">
+             
+              <img src="/img/career.jpg" alt="" class="img-fluid">
+            </div>
+          </div>
+          <div class="col-sm-12 section-t8">
+            <h2 style="color: rgb(252, 131, 50);">Welcome to Valiantfoot Careers</h2>
+            <p class="career_p">
+                At Valiantfoot, we believe in building not just structures, but careers.
+              Join us as we transform the real estate landscape with innovation,
+               dedication, and a commitment to excellence. We are on a mission to 
+               redefine the future of living and working 
+              spaces, and we invite you to be a part of this exciting journey.
+            </p>
+
+            <h2 class="second_h">Why Valiantfoot?</h2>
+            <ol>
+              <li style="font-weight: bold; color: royalblue;">Innovation and Vision:</li>
+                <p>At Valiantfoot, we don't just follow trends; we set them. We embrace <br>
+                  cutting-edge technology and design thinking to create spaces that inspire and elevate.<br>
+                   Join us to be a part of a team that is constantly pushing the boundaries of what's possible in real<br>
+                    estate.</p>
+              <li style="font-weight: bold; color: royalblue;">Culture of Excellence: </li>
+              <p>
+                Our commitment to excellence extends beyond our projects to our<br> 
+                people. Valiantfoot is a place where your ideas are valued, your contributions are <br>
+                recognized, and your growth is nurtured. We foster a culture that encourages collaboration,<br>
+                 creativity, and continuous learning.
+              </p>
+              <li style="font-weight: bold; color: royalblue;">Impactful Projects: </li>
+              <p>
+                Be a part of projects that leave a lasting impact on communities. <br>
+                From residential developments to commercial spaces, every Valiantfoot project is an opportunity <br>
+                to contribute to the creation of vibrant, sustainable, and forward-thinking environments.
+              </p>
+            </ol>
+          </div>
+        </div>
+      </div>
+    </section><!-- End Contact Single-->
+
+    <section class="contact">
+      <div class="container">
+        <div class="row">
+         
+          <div class="col-sm-12 position-relative">
+            <div class="about-img-box">
+             
+              <img src="/img/career.jpg" alt="" class="img-fluid">
+            </div>
+          </div>
+          <div class="col-sm-12 section-t8">
+            <h1 style="color: rgb(252, 131, 50);"  id="apply">Current Openings:</h1>
+            <p>
+              Explore the exciting career opportunities at Valiantfoot. We are currently hiring for the<br> 
+              following positions:
+            </p>
+          </div>
+        </div>
+        <% if(career) { %>
+        <ol>
+
+        
+            <% career.forEach( (job) => { %>
+              <li style="font-weight: bold;color: rgb(65, 198, 12);"> <%= job.jobName %>:</li>
+                <ul>
+                  <% job.jobDescription.forEach((job) => { %> 
+                  
+                      <li><%= job %>.</li>
+                  
+                  <% }) %>
+                </ul>  
+              <% }) %>
+           
+
+        </ol>
+        <% } else { %>
+          <p>The company is not recruiting at this moment, Check back later. <br>
+             You can also look out on our Social media for any vacancy Advert</p>
+         
+        <% } %>
+
+        <div class="row">
+          <h2>How to Apply:</h2>
+          <p class="mail">
+            To apply for any of the positions listed above, please send your resume and cover letter to<br> 
+           <a href="mailto:valiantfoot@gmail.com ">valiantfoot@gmail.com</a>. Be sure to include the position title in the subject line.
+          </p>
+  
+          <p>
+            Valiantfoot is an equal opportunity employer. We celebrate diversity and are committed to<br>
+             creating an inclusive environment for all employees.
+          </p>
+  
+          <p>
+            Join us at Valiantfoot, where your career takes flight, and your contributions make a lasting <br>
+            impact. Together, let's build a future we can be proud of.
+          </p>
+        </div>
+
+      </div>
+     
+    </section><!-- End Contact Single-->
+
+    <style>
+      .span {
+        margin-right: 10px;
+        font-size: 40px;
+      }
+      .big {
+        font-size: 40px;
+      }
+      span button {
+        border: none;
+        outline:  none;
+        border-radius: 20px;
+        background: none;
+        padding: 10px;
+        width: 150px;
+        outline: 1px solid rgb(252, 131, 50);
+        transition: .2s all;
+      }
+      ol , ul {
+        line-height: 40px;
+      }
+      span button:hover {
+        background-color: rgb(252, 131, 50);
+        font: #fff;
+      }
+
+      span button:hover a {
+        color: #fff;
+      }
+
+      .career_p {
+        text-indent: 2%;
+      }
+
+      .career_p::first-letter{
+        font-weight: bold;
+        font-size: 30px;
+        color: rgb(252, 131, 50) ;
+      }
+      .mail a {
+        color: royalblue;
+      }
+    </style>
+
+  </main><!-- End #main -->
+  
+  <%- include ("./dash_include/FOOTER_GEN.ejs") %>
+ <%- include ("./dash_include/main_footer.ejs") %>
+
+<style>
+  .all_messagesing {
+    top: 50%;
+  }
+</style>

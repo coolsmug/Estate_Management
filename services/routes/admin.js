@@ -20,6 +20,7 @@ const bcrypt = require('bcrypt');
 const Recovery = require('../models/recovery.js');
 const nodemailer = require('nodemailer');
 const smtpPool = require('nodemailer-smtp-pool');
+const CareerCreation = require('../models/newJob')
 
 const PASSWORD_EMAIL = process.env.PASSWORD_EMAIL;
 const ensureAuthenticated = function(req, res, next) {
@@ -51,7 +52,7 @@ router.post("/login", forwardAuthenticated, (req, res, next) => {
             return next(err);
           }
         
-          req.flash('success_msg', 'You are welcome'+ req.user.first_name);
+          req.flash('success_msg', 'You are welcome'+ ' ' + req.user.first_name);
           res.redirect("/admin/dashboard");
           
         })
@@ -85,8 +86,18 @@ router.post('/logout',  ensureAuthenticated, (req, res, next) => {
 })
 
 router.get('/login', async (req, res) => {
-  res.render('login');
+  await res.render('login');
 });
+
+router.get('/create-contact-image',  ensureAuthenticated,  async(req, res) => {
+  try {
+    await res.render('create_contact_image', {
+      user: req.user,
+    })
+  } catch (error) {
+    console.log(error)
+  }
+})
 
 router.get("/dashboard", ensureAuthenticated,  async(req, res) => {
   res.setHeader('Cache-Control', 'private, no-cache, no-store, must-revalidate');
@@ -287,6 +298,7 @@ router.get('/view-detail-house', ensureAuthenticated, async(req, res) => {
         bed: req.body.bed,
         baths: req.body.baths,
         garage: req.body.garage,
+        price: req.body.price,
         amenities: req.body.amenities.split(",").map(function (amenity) {
           return amenity.trim();
         }),
@@ -395,6 +407,7 @@ router.post("/edit-land/:id", async (req, res) => {
         location: req.body.location,
         status: req.body.status,
         area: req.body.area,
+        price: req.body.price,
         amenities: req.body.amenities.split(",").map(function (amenity) {
           return amenity.trim();
         }),
@@ -1129,6 +1142,7 @@ router.get("/contact/:page", ensureAuthenticated, async(req, res, next) => {
 
     await Contact
                   .find()
+                  .sort({ createdAt : -1})
                   .skip((perPage * page) - perPage)
                   .limit(perPage)
                   .then((contact) => {
@@ -1363,7 +1377,7 @@ router.post('/password-new', async (req, res) => {
         for (let i = 0; i < 6; i++) {
           voucherCode += characters.charAt(Math.floor(Math.random() * characters.length));
         }
-        const code = await new Recovery({ recovery: "Valiantfoot-"+voucherCode }).save();
+        const code = await new Recovery({ recovery: "onetimepass-"+voucherCode }).save();
         const html = `
           <html>
             <head>
@@ -1493,6 +1507,158 @@ router.post('/password-reset', async(req, res) => {
     }).catch((err) => {
       console.log(err)
     });
+  }
+});
+
+router.get('/career-builder', ensureAuthenticated, async(req, res) => {
+  try {
+    await res.render("careerAdmin", { user: req.user })
+  } catch (error) {
+    console.log(error)
+  }
+});
+
+router.post('/create-job', async(req, res) => {
+  try {
+    const {jobName, jobDescription } = req.body
+
+    const errors = []
+    if(!jobName || !jobDescription) {
+      errors.push({ msg: "Please fill in all fields." });
+    }
+    if(errors.length > 0) {
+      res.render('', {
+        errors: errors,
+        jobName: jobName,
+        jobDescription: jobDescription,
+        
+      });
+    } else {
+      const JobName =  {
+        jobName: jobName,
+        jobDescription: jobDescription.split('.').map(jobDescription => jobDescription.trim()),
+      };
+
+      CareerCreation.create(JobName)
+                      .then((data) => {
+                        req.flash("success_msg", "Job Registered !");
+                        res.redirect('/admin/career-builder');
+                      }).catch((err) => {
+                        console.log(err)
+                      })
+    }
+  } catch (error) {
+    console.log(error);
+  }
+}  )
+
+
+router.get('/alljobs/:page', ensureAuthenticated, async(req, res) => {
+  try {
+    var perPage = 10;
+    var page = req.params.page || 1;
+    
+await CareerCreation
+                    .find()
+                    .skip((perPage * page) - perPage)
+                    .limit(perPage)
+                    .then((career) => {
+                      CareerCreation
+                                  .count()
+                                  .then((count) => {
+                                    res.render('allJob', {
+                                      career: career,
+                                      current: page,
+                                      user: req.user,
+                                      pages: Math.ceil(count / perPage)
+                                    });
+                                  }).catch((err) => {
+                                    console.log(err)
+                                    next(err)
+                                  })
+                    });
+
+   
+  } catch (error) {
+    console.log(error);
+  }
+})
+
+router.delete("/delete-career/:id", async(req, res) => {
+  const id = req.params.id;
+    await CareerCreation.findByIdAndDelete(id)
+    .then((data) => {
+      if (!data) {
+        res
+          .status(404)
+          .send({ message: `Cannot Delete with id ${id}. May be id is wrong` });
+      } else {
+        res.send({
+          message: "Data was deleted successfully!",
+        });
+      }
+    })
+    .catch((err) => {
+      res.status(500).send({
+        message: "Could not delete Data with id=" + id + "with err:" + err,
+      });
+    });
+   
+});
+
+
+router.get('/edit-career', ensureAuthenticated, async(req, res) => {
+  if (req.query.id) {
+      try {
+          const id = req.query.id;
+          await CareerCreation.findById(id)
+                  .then((career) => {
+                     
+                          res
+                          .render(
+                              "edit-jobs", 
+                              {
+                                  career: career,
+                                  user: req.user,
+                                  
+                              }
+                              )
+                     
+                      
+                  }).catch((err) => {
+                      res
+                      .json(err)
+                  })
+      } catch (error) {
+          console.log(error)
+      }
+  }
+});
+
+
+router.post("/edit-career/:id", async (req, res) => {
+  const id = req.params.id;
+  const {jobName, jobDescription} = req.body;
+  
+  try {
+    await CareerCreation.updateOne({ _id: id}, {$set: {jobName: jobName, jobDescription: jobDescription.split('.').map(jobDescription => jobDescription.trim()), }})
+    res.redirect(`/admin/edit-career?id=${id}`);
+  } catch (error) {
+    console.error(error);
+    res.status(500).send("Server error");
+  }
+});
+
+router.patch('/career-status/:id', async (req, res) => {
+  const id = req.params.id;
+  const { status } = req.body;
+
+  try {
+    const switchDoc = await CareerCreation.findByIdAndUpdate(id, { status }, { new: false });
+    if (!switchDoc) return res.status(404).send('switch not found');
+    res.send(switchDoc);
+  } catch (err) {
+    res.status(500).send(err.message);
   }
 });
 

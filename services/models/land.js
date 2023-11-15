@@ -23,6 +23,11 @@ const landSchema = new Schema ({
         required: true,
          trim: true
     },
+    price : {
+        type: String,
+        required: true,
+         trim: true
+    },
     period : {
         type: String,
         required: true,

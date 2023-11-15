@@ -47,7 +47,10 @@ const AboutSchema = new Schema ({
         data: Buffer,
         contentType: String,
     },
-    
+    img2:{
+        data: Buffer,
+        contentType: String,
+    },
     heading: {
         type: String,
         required: true,
@@ -57,7 +60,7 @@ const AboutSchema = new Schema ({
     about: {
         type: String,
         required: true,
-        trim: true
+       
     },
     linkedin: {
         type: String,
@@ -79,6 +82,10 @@ const AboutSchema = new Schema ({
     whatsapp: {
         type: String,
         trim: true
+    },
+    createdAt: {
+        type: Date,
+        default: Date.now // Set default value to the current date and time when the document is created
     },
 
   },

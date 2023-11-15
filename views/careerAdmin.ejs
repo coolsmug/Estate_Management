@@ -1,0 +1,55 @@
+<%- include ('./dash_include/header.ejs')  %>
+<%- include ('./dash_include/dashboard_all.ejs') %>
+
+
+<div class="main-container">
+    <%- include ('./messages/messages.ejs') %>
+    <nav class="headering">
+        <div class="head_in">
+            <P>Admin Table</P>
+         <ol>
+            <li> 
+                <a href="">
+                    Home >
+                </a>
+            </li>
+            <li> 
+                <a href="">
+                   Create Career
+                </a>
+            </li>
+        </ol>
+        </div>
+        <a href="/admin/alljobs/1" class="created">All Jobs</a>
+    </nav>
+
+    <div class="table_admin">
+        <div class="d-name-tag">
+            <p>Use this from to Add New Job Career</p>
+        </div>
+
+        <form action="/admin/create-job" method="POST" class="formings">
+            <div class="form-group">
+                <label>Job Name:</label>
+                <input class="form-control" type="text" placeholder="e.g Apple City Estate" name="jobName">
+            </div>      
+            <div class="form-group">
+                <label>Job Descriptions:</label>
+                <textarea class="form-control" name="jobDescription"></textarea>
+            </div>
+           
+            <div class="form-group">
+                <div class="custom-file">
+                    <input type="submit">
+                </div>
+            </div>
+        </form>
+    </div>
+
+    <div class="footering">
+        <h3>All rights reserved and Powered by: Valiantfoot Limited <i class="fas fa-copyright"></i> 2023</h3>
+    </div>
+</div>
+
+<%- include ('./dash_include/footer.ejs') %>
+

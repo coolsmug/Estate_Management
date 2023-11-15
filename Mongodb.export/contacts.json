@@ -1,0 +1,161 @@
+[{
+  "_id": {
+    "$oid": "6441534bf1b7efadce2e25a3"
+  },
+  "name": "Idris Ayodele Fatah",
+  "email": "idrisfhatai@gmail.com",
+  "subject": "Can i get a plot of land around Garki",
+  "message": "I will be glad if i can get a plot of land for lease around Area 10, Garki.",
+  "isRead": true,
+  "createdAt": {
+    "$date": "2023-04-20T14:59:23.716Z"
+  },
+  "updatedAt": {
+    "$date": "2023-04-26T11:52:14.072Z"
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "6441549ff1b7efadce2e25a9"
+  },
+  "name": "Idris Maryam Idowu",
+  "email": "helloyusuph@gmail.com",
+  "subject": "How can i have access to inspect your properties",
+  "message": "I wish to inspect your properties in Lugbe, our company need some land for the development of the new site.",
+  "isRead": true,
+  "createdAt": {
+    "$date": "2023-04-20T15:05:03.196Z"
+  },
+  "updatedAt": {
+    "$date": "2023-04-27T20:52:21.245Z"
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "644154d7f1b7efadce2e25ac"
+  },
+  "name": "Idris Yusuph",
+  "email": "coolsmug@gmail.com",
+  "subject": "how much to get a land",
+  "message": "how can i get a land from your company.",
+  "isRead": true,
+  "createdAt": {
+    "$date": "2023-04-20T15:05:59.890Z"
+  },
+  "updatedAt": {
+    "$date": "2023-04-29T08:53:25.006Z"
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "644910ef870c771f411e284e"
+  },
+  "name": "Zulykha Alatise",
+  "email": "alatsuliat@gmail.com",
+  "subject": "Hello i need a land along Ganmo",
+  "message": "I will glad if i can get a plot of land for lease.",
+  "isRead": true,
+  "createdAt": {
+    "$date": "2023-04-26T11:54:23.281Z"
+  },
+  "updatedAt": {
+    "$date": "2023-04-27T20:21:30.648Z"
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "644adb44b640e455333c4ffc"
+  },
+  "name": "Olatunji Bola",
+  "email": "Somad@gmail.com",
+  "subject": "Wishing",
+  "message": "How can have access to your property",
+  "isRead": true,
+  "createdAt": {
+    "$date": "2023-04-27T20:29:56.626Z"
+  },
+  "updatedAt": {
+    "$date": "2023-04-30T18:10:24.940Z"
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "644adf00b727070567e2618e"
+  },
+  "name": "Lawal Mubaraq",
+  "email": "lawal@gmail.com",
+  "subject": "love your property",
+  "message": "I love to have it",
+  "isRead": false,
+  "createdAt": {
+    "$date": "2023-04-27T20:45:52.621Z"
+  },
+  "updatedAt": {
+    "$date": "2023-04-27T20:45:52.621Z"
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "644ae5521b8958b657afa097"
+  },
+  "name": "Lukuman Onagun",
+  "email": "lukong@gmail.com",
+  "subject": "Hello",
+  "message": "Hello",
+  "isRead": false,
+  "createdAt": {
+    "$date": "2023-04-27T21:12:50.193Z"
+  },
+  "updatedAt": {
+    "$date": "2023-04-27T21:12:50.193Z"
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "644ae6106dd19ac4c487f9d3"
+  },
+  "name": "Lukman Onagun",
+  "email": "lukong@gmail.com",
+  "subject": "hello",
+  "message": "hello",
+  "isRead": false,
+  "createdAt": {
+    "$date": "2023-04-27T21:16:01.009Z"
+  },
+  "updatedAt": {
+    "$date": "2023-04-27T21:16:01.009Z"
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "644ae67607078bcc7b481677"
+  },
+  "name": "Godfrey Onye",
+  "email": "onye@gmail.com",
+  "subject": "Hello",
+  "message": "hello",
+  "isRead": false,
+  "createdAt": {
+    "$date": "2023-04-27T21:17:42.301Z"
+  },
+  "updatedAt": {
+    "$date": "2023-04-27T21:17:42.301Z"
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "644eb055c6cebe2ff8a4ce6c"
+  },
+  "name": "Idris Yusuph",
+  "email": "helloyusuph@gmail.com",
+  "subject": "Hello",
+  "message": "Hello",
+  "isRead": true,
+  "createdAt": {
+    "$date": "2023-04-30T18:15:49.441Z"
+  },
+  "updatedAt": {
+    "$date": "2023-04-30T18:16:12.776Z"
+  },
+  "__v": 0
+}]

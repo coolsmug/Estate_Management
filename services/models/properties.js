@@ -18,6 +18,11 @@ const propertySchema = new Schema ({
         required: true,
         trim: true
     },
+    price : {
+      type: String,
+      required: true,
+       trim: true
+  },
     status : {
         type: String,
         required: true,

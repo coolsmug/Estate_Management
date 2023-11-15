@@ -10,6 +10,9 @@ const Service = require('../models/services');
 const Contact = require('../models/contact');
 const Subscribers = require('../models/subscriber');
 const Testimony = require('../models/testimoniy');
+const ImageContact = require('../models/contact.image');
+const CareerCreation = require('../models/newJob');
+
 
 
 // rendering and serving of data
@@ -47,7 +50,7 @@ router.get("/single-service", async(req, res) => {
 })
 
 
-router.get('/home', async (req, res) => {
+router.get('/', async (req, res) => {
     try {
         const blog = await Blog.find().sort({ createdAt: -1 }).limit(4);
         const property = await Property.find({status: {$in: ["Rent", "Sale"]}}).sort({ createdAt: -1 }).limit(3);
@@ -163,9 +166,27 @@ router.get("/blog_single", async(req, res) => {
     await res.render("blog-single")
 })
 
-router.get("/contact", async(req, res) => {
-    await res.render("contact")
-})
+// contact_image
+router.get("/contact", async (req, res) => {
+  try {
+      const contact = await ImageContact.find().sort({ createdAt: -1 }).limit(1).exec();
+
+      if (contact && contact.length > 0) {
+          res.render("contact", {
+              contact: contact[0], // Access the first element of the contact array
+          });
+      } else {
+          // If no contact found, pass an empty object to the view
+          res.render("contact", {
+              contact: {}, // You might want to pass an empty object or handle it differently
+          });
+      }
+  } catch (error) {
+      res.status(500).json({ error: "Technical error" });
+  }
+});
+
+
 
 
 // Route for filtering properties with pagination
@@ -364,7 +385,7 @@ router.post('/search', async (req, res) => {
     const newContact = { name, email, subject, message };
     Contact.create(newContact)
       .then((contact) => {
-          console.log(contact);
+         
           req.flash("success_msg", "Message sent");
           // add new subscriber
           const newSubscriber = { email };
@@ -374,7 +395,7 @@ router.post('/search', async (req, res) => {
               console.log('Subscriber not found, creating new subscriber');
               Subscribers.create(newSubscriber)
                 .then((subscriber) => {
-                    console.log(subscriber);
+                   
                     req.flash("success_msg", "Message sent");
                   
                 })
@@ -405,11 +426,37 @@ router.get('/feedback', async (req, res) => {
 })
 
 
+//----------------------CAREARS-----------------------------------//
+
+router.get('/career', async(req, res) => {
+  try {
+
+    const career =  await CareerCreation.find({ status : true }).exec();
+
+    res.render('carearFrontPage', {
+      career,
+    });
+  } catch (error) {
+    console.log(error);
+  }
+})
+
+
+
+
+
+
+
+
+
+
+
+//----------------------CAREARS-----------------------------------//
 
 // redirecting routes
 
 router.get('/homing', async (req, res) => {
-    await res.redirect('/home')
+    await res.redirect('/')
 });
 
 router.get('/abouting', async (req, res) => {
@@ -417,32 +464,21 @@ router.get('/abouting', async (req, res) => {
 });
 
 router.get('/properting', async (req, res) => {
-    await res.redirect('/property')
+    await res.redirect('/property/1')
 });
 
 router.get('/bloging', async (req, res) => {
-    await res.redirect('/blogs')
+    await res.redirect('/blogs/1')
 });
 
-router.get('/contacting', async (req, res) => {
-    await res.redirect('/contact')
+router.get("/contact", async(req, res) => {
+  await res.redirect('/contact')
+})
+
+router.get('/landing', async (req, res) => {
+    await res.redirect('/lands/1')
 });
 
-router.get('/property-single', async (req, res) => {
-    await res.redirect('/property_single')
-});
-
-router.get('/blog-single', async (req, res) => {
-    await res.redirect('/blog_single')
-});
-
-router.get('/agents-grid', async (req, res) => {
-    await res.redirect('/agents')
-});
-
-router.get('/agent-single', async (req, res) => {
-    await res.redirect('/agent_single')
-});
 
 
 module.exports = router;

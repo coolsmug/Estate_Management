@@ -54,7 +54,7 @@
                 <div class="table_admin">
                   
                     <div class="d-name-tag">
-                        <p>Use this from to create Company Services</p>
+                        <p>Use this from to Edit Company Services</p>
                     </div>
             
                     <form  method="POST" id="Service" class="formings">
@@ -80,7 +80,7 @@
                 <div class="table_admin">
                   
                     <div class="d-name-tag">
-                        <p>Use this from to create Company Services</p>
+                        <p>Use this from to create Company Services Image</p>
                     </div>
             
                     <form action="/edit-service-image/<%= service._id %>" method="POST" enctype="multipart/form-data" class="formings">
@@ -89,6 +89,10 @@
                             <label for="img">Service image Cover:</label>
                             <input type="hidden" name="img" value="<%= service._id %>">
                             <input type="file" name="img" id="img" class="form-control-file form-control height-auto" >
+                        </div>
+                        <div class="form-group">
+                            <label for="img2">Sider image:</label>
+                            <input type="file" name="img2" id="img2" class="form-control-file form-control height-auto" >
                         </div>
                         <div class="form-group">
                             <div class="custom-file">

@@ -23,7 +23,7 @@
                       <br> <%= prop.location %>
                     </h1>
                     <p class="intro-subtitle intro-price">
-                      <a href="#"><span class="price-a"><%= prop.status%> | &#8358;</span></a>
+                      <a href="/property_single?id=<%= prop._id %>"><span class="price-a"><%= prop.status%> | &#8358;<%= prop.price %></span></a>
                     </p>
                   </div>
                 </div>
@@ -122,7 +122,7 @@
                     </div>
                     <div class="card-body-a">
                       <div class="price-box d-flex">
-                        <span class="price-a"><%= props.status%> | &#8358; </span>
+                        <span class="price-a"><%= props.status%> | &#8358; <%= props.price %></span>
                       </div>
                       <a href="/property_single?id=<%= props._id %>" class="link-a">Click here to view
                         <span class="bi bi-chevron-right"></span>
@@ -199,7 +199,7 @@
                     </div>
                     <div class="card-body-a">
                       <div class="price-box d-flex">
-                        <span class="price-a"><%= props.status%> | &#8358;</span>
+                        <span class="price-a"><%= props.status%> | &#8358; <%= props.price %></span>
                       </div>
                       <a href="/land_single?id=<%= props._id %>" class="link-a">Click here to view
                         <span class="bi bi-chevron-right"></span>

@@ -384,6 +384,54 @@ $("#About").submit(function (param) {
   });
 });
 
+$("#Admin").submit(function (param) {
+  param.preventDefault();
+
+  let unindexed_arraysss = $(this).serializeArray();
+  let data = {}
+
+  $.map(unindexed_arraysss, function (n, i) {
+    data[ n[ "name" ]] = n[ "value" ]
+  }); 
+  console.log(data);
+
+  var requests = {
+    "url" : `/admin/edit-admin/${data.id}`,
+    "method" : "POST",
+    "data" : data,
+  };
+
+    $.ajax(requests).done(function(responses) {
+    alert(" Data Updated Successfully!")
+    location.reload()
+    console.log("Data Updated Successfully!")
+  });
+});
+
+$("#career").submit(function (param) {
+  param.preventDefault();
+
+  let unindexed_arraysss = $(this).serializeArray();
+  let data = {}
+
+  $.map(unindexed_arraysss, function (n, i) {
+    data[ n[ "name" ]] = n[ "value" ]
+  }); 
+  console.log(data);
+
+  var requests = {
+    "url" : `/admin/edit-career/${data.id}`,
+    "method" : "POST",
+    "data" : data,
+  };
+
+    $.ajax(requests).done(function(responses) {
+    alert(" Data Updated Successfully!")
+    location.reload()
+    console.log("Data Updated Successfully!")
+  });
+});
+
 //deleting
 $(function() {
   $('a.delete_contact').click(function(e) {
@@ -518,6 +566,28 @@ $(function() {
   });
 });
 
+$(function() {
+  $('a.delete_career').click(function(e) {
+    e.preventDefault(); // Prevent the default behavior of the anchor tag
+    var url = $(this).attr('href'); // Get the URL to send the DELETE request to
+    var id = $(this).data('id'); // Get the ID of the resource to be deleted from a data-* attribute
+    if (confirm('Are you sure you want to delete this job?')) {
+      $.ajax({
+        url: url,
+        type: 'DELETE',
+        data: { id: id },
+        success: function(result) {
+          alert('Job deleted successfully!');
+          location.reload(); // Reload the page to reflect the updated state
+        },
+        error: function(xhr, status, error) {
+          alert('Error deleting Data: ' + error);
+        }
+      });
+    }
+  });
+});
+
 //Switch Button
 
 $(document).ready(function() {
@@ -547,6 +617,26 @@ $(document).ready(function() {
 
     $.ajax({
       url: `/admin/staff-status/${switchId}`,
+      type: 'PATCH',
+      data: { status: updatedStatus },
+      success: function(data) {
+        alert('Status changed successfully')
+        location.reload()
+      },
+      error: function(error) {
+        console.error(error);
+      }
+    });
+  });
+});
+
+$(document).ready(function() {
+  $('.career_swith').click(function() {
+    const switchId = $(this).find('input').data('user-id');
+    const updatedStatus = $(this).find('input').is(':checked');
+
+    $.ajax({
+      url: `/admin/career-status/${switchId}`,
       type: 'PATCH',
       data: { status: updatedStatus },
       success: function(data) {

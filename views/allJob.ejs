@@ -1,0 +1,99 @@
+
+<%- include ('./dash_include/header.ejs') %>
+<%- include ('./dash_include/dashboard_all.ejs') %>
+
+
+<div class="main-container">
+    <nav class="headering">
+        <div class="head_in">
+            <P>career Table</P>
+         <ol>
+            <li> 
+                <a href="">
+                    Home >
+                </a>
+            </li>
+            <li> 
+                <a href="">
+                    Career List
+                </a>
+            </li>
+        </ol>
+        </div>
+        <a href="/admin/career-builder" class="created">Add Career</a>
+    </nav>
+    <div class="table_admin">
+        <div class="d-name-tag">
+            <p>Career Table Lists</p>
+        </div>
+        <table >
+            <thead>
+                <tr>
+                    <th><i class="bi bi-chevron-down not_nowstaff"></i> S/N</th>
+                    <th>Job Name</th>               
+                    <th>Status</th>
+                    <th class="actionstaff">Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                <% let count = 1; %>
+                <% career.forEach(function(career){ %>
+                    <tr>
+                        <td class="numberings"><%= count %></td>
+                       
+                        <td><%= career.jobName %></td>
+                        <td><label class="career_swith switch">
+                            <input type="checkbox" id="mySwitch" data-user-id="<%= career._id %> " <%= career.status == true ? 'checked' : '' %> >
+                            <span class="slider">
+                            </span>
+                            </label>
+                        </td>
+                        <td class="option_hidden_career">
+                            <div class="hidden">
+                                <button class="delete"><a href="/admin/delete-career/<%= career._id %>"  class="delete_career" data-id="<%= career._id %>"> <i class="fas fa-trash"></i></a></button>
+                                <button class="edit"><a href="/admin/edit-career?id=<%= career._id %>"><i class="fas fa-user-edit"></i></a></button>
+                            </div>
+                        </td>
+                    </tr>
+                    <% count++ %>
+                <% }) %>
+
+            </tbody>
+        </table>
+        
+        <ul class="paginationa">
+            <% if (current > 1) { %>
+              <li><a href="/admin/career/<%= parseInt(current) - 1 %>">&laquo;</a></li>
+            <% } %>
+          
+            <% for (var i = 1; i <= pages; i++) { %>
+              <% if (current == i) { %>
+                <li class="active"><a href="/admin/career/<%= i %>"><%= i %></a></li>
+              <% } else { %>
+                <li><a href="/admin/career/<%= i %>"><%= i %></a></li>
+              <% } %>
+            <% } %>
+          
+            <% if (current < pages) { %>
+              <li><a href="/admin/career/<%= parseInt(current) + 1 %>">&raquo;</a></li>
+            <% } %>
+        </ul>
+       
+    </div>
+    <div class="footering">
+        <h3>All rights reserved and Powered by: Valiantfoot Limited <i class="fas fa-copyright"></i> 2023</h3>
+    </div>
+</div>
+
+<%- include ('./dash_include/footer.ejs') %>
+
+<script>
+
+    const hide = document.querySelector('.hidden');
+
+    hide.forEach(function(hid) {
+        hid.style.position = "absolute";
+    });
+    
+</script>
+  

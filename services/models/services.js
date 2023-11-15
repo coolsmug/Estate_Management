@@ -6,7 +6,10 @@ const ServiceSchema = ({
         data: Buffer,
         contentType: String,
     },
-
+    img2:{
+        data: Buffer,
+        contentType: String,
+    },
     heading: {
         type: String,
         required: true,

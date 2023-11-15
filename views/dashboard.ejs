@@ -1,6 +1,7 @@
 <%- include ('./dash_include/header.ejs')  %>
     
     <div class="all_dash">
+      
         <div class="fixed">
             <div class="logo-search-url">
                 <div class="div-logo"><img src="/img/Valiant_Logo-01.png" alt="" width="100"></div>
@@ -61,7 +62,7 @@
                 <div class="parent-lists">
                     <li class="list_one"> <i class="bi bi-people" style="font-size: 1.5em; color: #007bff;"></i> Manage Staffs</li>
                     <div class="child-list">
-                        <li><a href="/admin/admin/1"><i class="fas fa-minus"></i><span>Admin</span></a></li>
+                        <li><a href="/admin/admin/1"><i class="fas fa-minus"></i><span>Admin</span></a></li>      
                         <li><a href="/admin/staff/1"><i class="fas fa-minus"></i><span>Staffs</span></a></li>
                     </div>
                 </div>
@@ -69,8 +70,8 @@
                     <li class="list_one"><i class="bi bi-newspaper" style="font-size: 1.5em; color: #007bff;"></i> Messages & News</li>
                     <div class="child-list">
                         <li><a href="/admin/blog/1"><i class="fas fa-minus"></i><span>Blogs</span></a></li>
-                        <li><a href="/admin/contact/1"><i class="fas fa-minus"></i><span>Contacts</span></a></li>
-                        <li><a href="/admin/email_subscriber"><i class="fas fa-minus"></i><span>Email Subscribers</span></a></li>
+                        <li><a href="/admin/contact/1"><i class="fas fa-minus"></i><span>Messages</span></a></li>
+                        <li><a href="/admin/email_subscriber"><i class="fas fa-minus"></i><span>Email the Subscribers</span></a></li>
                     </div>
                 </div>
              
@@ -79,6 +80,14 @@
                     <div class="child-list">
                         <li><a href="/admin/creating-service"><i class="fas fa-minus"></i><span>Create Services</span></a></li>
                         <li><a href="/admin/creating-info"><i class="fas fa-minus"></i><span>Create Info</span></a></li>
+                        <li><a href="/admin/create-contact-image"><i class="fas fa-minus"></i><span>Contact Page Image</span></a></li>
+                    </div>
+                </div>
+                <div class="parent-lists">
+                    <li class="list_one"><i class="bi bi-person-workspace" style="font-size: 1.5em; color: #007bff;"></i> Careers </li>
+                    <div class="child-list">
+                        <li><a href="/admin/career-builder"><i class="fas fa-minus"></i><span>Create Job</span></a></li>
+                        <li><a href="/admin/alljobs/1"><i class="fas fa-minus"></i><span>All Jobs</span></a></li>
                     </div>
                 </div>
                 <li class="dashboard"><a href="/admin/change-password"><i class="bi bi-pass-fill" style="font-size: 2em; color: #007bff;"></i> Change Password</a></li>
@@ -93,6 +102,7 @@
 <div class="main-container">
     <h2 class="company-over">Company Overview</h2>
     <div class="not_hearing">
+        <%- include ('./messages/messages.ejs') %>
        <div class="one">
             <div class="inner-view">
                 <p><%= house %></p>
