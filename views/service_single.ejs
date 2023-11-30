@@ -2,15 +2,17 @@
 <%- include ('./dash_include/HEADER_GEN.ejs') %>
 
   <main id="main">
-<% if(service) {%>
+
     <!-- ======= Intro Single ======= -->
     <section class="intro-single">
       <div class="container">
         <div class="row">
           <div class="col-md-12 col-lg-8">
+            <% if(service) {%>
             <div class="title-single-box">
               <h1 class="title-single"><%= service.heading %></h1>
             </div>
+            <% } %>
           </div>
           <div class="col-md-12 col-lg-4">
             <nav aria-label="breadcrumb" class="breadcrumb-box d-flex justify-content-lg-end">
@@ -33,9 +35,11 @@
       <div class="container">
         <div class="row">
           <div class="col-sm-12 position-relative">
+            <% if(service) {%>
             <div class="about-img-box">
               <img src="data:Binary?<%= service.img.contentType %>;base64,<%= service.img.data.toString('base64') %>" alt="" class="img-fluid">
             </div>
+            <% } %>
             <div class="sinse-box">
               <h3 class="sinse-title">Valiantfoot Limited
                 <span></span>
@@ -46,9 +50,11 @@
           </div>
           <div class="col-md-12 section-t8 position-relative">
             <div class="row">
+              <% if(service) {%>
               <div class="col-md-6 col-lg-5">
                 <img src="data:Binary?<%= service.img2.contentType %>;base64,<%= service.img2.data.toString('base64') %>" alt="" class="img-fluid">
               </div>
+              <% } %>
               <div class="col-lg-2  d-none d-lg-block position-relative">
                 <div class="title-vertical d-flex justify-content-start">
                   <span>Valiantfoot Exclusive Property</span>
@@ -61,17 +67,18 @@
                     <br> nous
                   </h3>
                 </div>
+                <% if(service) {%>
                 <p class="color-text-a post-intro">
                  <%= service.about %>
                 </p>
-               
+               <% } %>
               </div>
             </div>
           </div>
         </div>
       </div>
     </section>
-<% } %>
+
     <!-- =======Team Section ======= -->
    
 

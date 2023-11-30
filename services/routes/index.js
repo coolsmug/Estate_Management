@@ -12,17 +12,19 @@ const Subscribers = require('../models/subscriber');
 const Testimony = require('../models/testimoniy');
 const ImageContact = require('../models/contact.image');
 const CareerCreation = require('../models/newJob');
+const Vision = require('../models/vision');
+const Mission = require('../models/mission');
 
 
 
 // rendering and serving of data
 router.get("/about", async(req, res) => {
     try {
-        const about = await About.find().sort({createdAt: -1}).limit(1).exec();
+        const aboutsss = await About.find().select("about company_name heading img img2" ).sort({createdAt: -1}).limit(1).exec();
         const staff = await Staff.find({ position: { $in: ["Managing Director", "General Manager"]}}).sort({ name: -1 }).limit(3);
 
 res.render("about", {
-        about: about[0],
+        aboutsss: aboutsss[0],
         staff
     })
     } catch (error) {
@@ -35,12 +37,14 @@ router.get("/single-service", async(req, res) => {
     try {
         if (req.query){
 
-            const service = await Service.findById(id).exec();
+            const service = await Service.findById(id)
             const  about= await Staff.find().sort({ createdAt: -1 }).limit(1);
     
     res.render("service_single", {
+
+            service: service,
             about: about[0],
-            service,
+           
         })
         }
        
@@ -50,28 +54,58 @@ router.get("/single-service", async(req, res) => {
 })
 
 
+
 router.get('/', async (req, res) => {
     try {
         const blog = await Blog.find().sort({ createdAt: -1 }).limit(4);
-        const property = await Property.find({status: {$in: ["Rent", "Sale"]}}).sort({ createdAt: -1 }).limit(3);
-        const propertyal = await Property.find().sort({ createdAt: -1 }).limit(4);
-        const service = await Service.find().sort({ createdAt: -1 }).limit(4);
-        const land = await Land.find().sort({ createdAt: -1 }).limit(4);
-        const test = await Testimony.find({}).sort({ createdAt : -1}).exec();
-    
+        
+        const property = await Property.find({ status: { $in: ["Rent", "Sale"] } })
+            .select("name property_id area period status location _id img img2")
+            .sort({ createdAt: -1 })
+            .limit(3);
+        
+        const propertyAll = await Property.find()
+            .select("name area period location bed garage baths area img img2")
+            .sort({ createdAt: -1 })
+            .limit(4);
+        
+        const service = await Service.find()
+            .select("heading about")
+            .sort({ createdAt: -1 })
+            .limit(4);
+        
+        const land = await Land.find()
+            .select("name area period location img image property_id _id period")
+            .sort({ createdAt: -1 })
+            .limit(4);
+        
+        const testimony = await Testimony.find().sort({ createdAt: -1 }).exec();
+
+        const vision = await Vision.find().sort({ createdAt: -1 }).limit(1);
+
+        const mission = await Mission.find().sort({ createdAt: -1 }).limit(1);
+
+        
+
+
         res.render('index', {
-        blog,
-        property,
-        propertyal,
-        land,
-        service,
-        test,
+            blog,
+            property,
+            propertyAll, // Use a more descriptive variable name for clarity
+            land,
+            service,
+            testimony,
+            mission: mission[0],
+            vision: vision[0], // Use a more descriptive variable name for clarity
         });
     } catch (err) {
         console.error(err);
         res.status(500).send('Internal server error');
     }
 });
+
+module.exports = router;
+
 
 // Agent
 router.get("/agent_single", async(req, res) => {
@@ -444,14 +478,10 @@ router.get('/career', async(req, res) => {
 
 
 
+//------------------------------End -----------------------------------//
 
 
 
-
-
-
-
-//----------------------CAREARS-----------------------------------//
 
 // redirecting routes
 

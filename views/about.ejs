@@ -6,12 +6,13 @@
     <!-- ======= Intro Single ======= -->
     <section class="intro-single">
       <div class="container">
+        <% if (aboutsss) {%>
         <div class="row">
           <div class="col-md-12 col-lg-8">
             
             <div class="title-single-box">
               
-              <h1 class="title-single"><%= about.heading %></h1>
+              <h1 class="title-single"><%= aboutsss.heading %></h1>
             </div>
           </div>
           <div class="col-md-12 col-lg-4">
@@ -31,19 +32,22 @@
     </section><!-- End Intro Single-->
 
     <!-- ======= About Section ======= -->
+
+   
     <section class="section-about">
       <div class="container">
         <div class="row">
+        
           <div class="col-sm-12 position-relative">
             <div class="about-img-box">
-              <% if (about.img) {%>
-              <img src="data:Binary?<%= about.img.contentType %>;base64,<%= about.img.data.toString('base64') %>" alt="" class="img-fluid">
+              <% if (aboutsss.img) {%>
+              <img src="data:Binary?<%= aboutsss.img.contentType %>;base64,<%= aboutsss.img.data.toString('base64') %>" alt="" class="img-fluid">
               <% } else { %>
                 <p>No About information available.</p>
                 <% } %>
             </div>
             <div class="sinse-box">
-              <h3 class="sinse-title"><%= about.company_name %>
+              <h3 class="sinse-title"><%= aboutsss.company_name %>
                 <span></span>
                 <br> Since 2017
               </h3>
@@ -53,8 +57,8 @@
           <div class="col-md-12 section-t8 position-relative">
             <div class="row">
               <div class="col-md-6 col-lg-5">
-                <% if (about.img) {%>
-                  <img src="data:Binary?<%= about.img2.contentType %>;base64,<%= about.img2.data.toString('base64') %>" alt="" class="img-fluid">
+                <% if (aboutsss.img) {%>
+                  <img src="data:Binary?<%= aboutsss.img2.contentType %>;base64,<%= aboutsss.img2.data.toString('base64') %>" alt="" class="img-fluid">
                   <% } else { %>
                     <p>No About information available.</p>
                     <% } %>
@@ -72,15 +76,19 @@
                   </h3>
                 </div>
                 <p class="color-text-a post-intro">
-                 <%= about.about %>
+                 <%= aboutsss.about %>
                 </p>
                
               </div>
             </div>
           </div>
         </div>
+        <% } else {%>
+          <p>About the Company is not Available</p>
+          <% } %>
       </div>
     </section>
+    
 
     <!-- =======Team Section ======= -->
     <section class="section-agents section-t8">
@@ -94,6 +102,7 @@
             </div>
           </div>
         </div>
+        <% if (staff && Array.isArray(staff) && staff.length > 0) {%>
         <div class="row">
           <% staff.forEach((staff) => { %>
           <div class="col-md-4">
@@ -163,6 +172,9 @@
           </div>
           <% }) %>
         </div>
+        <% } else {%>
+          <p>Manangement is not Available</p>
+          <% } %>
       </div>
     </section><!-- End About Section-->
 

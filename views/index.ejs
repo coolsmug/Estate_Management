@@ -83,7 +83,160 @@
         </div>
       </div>
       <% } %>
-    </section><!-- End Services Section -->
+    </section>
+    <!-- End Services Section -->
+
+
+
+    <section class="section-about">
+      <div class="container">
+        <% if(mission) {%>
+        <div class="row">
+        
+         
+          <div class="col-md-12 section-t8 position-relative">
+            <div class="row">
+
+              <div class="col-md-6 col-lg-5 section-md-t3 post-content ">
+                
+                <h1 style="font-weight: bold; color: royalblue;"><%= mission.heading %></h1>
+                <p class="color-text-a post-intro role" style="font-weight: bold; color: grey;">
+                 <%= mission.mission %>
+                </p>
+               
+              </div>
+
+              <div class="col-md-6 col-lg-5">
+              
+                  <img src="data:Binary?<%= mission.img.contentType %>;base64,<%= mission.img.data.toString('base64') %>" alt="" class="img-fluid">
+                  
+              </div>
+             
+             
+            </div>
+          </div>
+        </div>
+        <% } else {%>
+          <p>Mission the Company is not Available</p>
+          <% } %>
+      </div>
+    </section>
+    
+
+    <section class="section-about">
+      <div class="container">
+        <% if(vision) {%>
+        <div class="row">
+        
+         
+          <div class="col-md-12 section-t8 position-relative">
+            <div class="row">
+
+              <div class="col-md-6 col-lg-5 section-md-t3 post-content ">
+                
+                <h1 style="font-weight: bold; color: orange;"><%= vision.heading %></h1>
+                <p class="color-text-a post-intro role" style="font-weight: bold; color: grey;">
+                 <%= vision.vision %>
+                </p>
+               
+              </div>
+
+              <div class="col-md-6 col-lg-5">
+                <% if (vision.img) {%>
+                  <img src="data:Binary?<%= vision.img.contentType %>;base64,<%= vision.img.data.toString('base64') %>" alt="" class="img-fluid">
+                  <% } else { %>
+                    <p>No vision information available.</p>
+                    <% } %>
+              </div>
+    
+            </div>
+          </div>
+        </div>
+        <% } else {%>
+          <p>the Company Vision is not Available</p>
+          <% } %>
+      </div>
+    </section>
+    
+     
+    <section class="section-about">
+      <div class="container">
+       
+        <div class="row">
+        
+         
+          <div class="col-md-12 section-t8 position-relative">
+            <div class="row">
+
+              <div class="col-md-6 col-lg-5 section-md-t3 post-content ">
+                
+                <h1 style="font-weight: bold; color: yellowgreen;">OUR ROLE</h1>
+                <p class="color-text-a post-intro role" style="font-weight: bold; color: grey;"">
+                  Our basic role at Valiant Foot is to secure suitable Lands for everyone, irrespective of social class, income level and all else.
+                </p>
+               
+              </div>
+
+              <div class="col-md-6 col-lg-5">
+              
+                <img src="/img/business-hands-joined-together-teamwork.jpg" alt="" class="img-fluid">
+                  
+              </div>
+             
+             
+            </div>
+          </div>
+        </div>
+       
+      </div>
+    </section>
+
+     
+    <section class="section-about">
+      <div class="container">
+       
+        <div class="row">
+        
+         
+          <div class="col-md-12 section-t8 position-relative">
+            <div class="row">
+
+              <div class="col-md-6 col-lg-5 section-md-t3 post-content ">
+                
+                <h1 style="font-weight: bold; color: red;">CORE VALUES</h1>
+                
+                
+                    <p style="font-weight: bold; color: grey;">Integrity</p>
+                    <p style="font-weight: bold; color: grey;">Partnership</p>
+                    <p style="font-weight: bold; color: grey;">Quality</p>
+                    <p style="font-weight: bold; color: grey;">Promise to Customer</p>
+                 
+               
+               
+              </div>
+
+              <div class="col-md-6 col-lg-5">
+              
+                 
+                  
+              </div>
+             
+             
+            </div>
+          </div>
+        </div>
+       
+      </div>
+    </section>
+
+
+    <style>
+      section .post-intro::first-letter  {
+          font-weight: bolder;
+          color: royalblue;
+          font-size: 30px;
+      }
+  </style>
 
     <!-- ======= Latest Properties Section ======= -->
     <section class="section-property section-t8">
@@ -104,9 +257,9 @@
         </div>
 
         <div id="property-carousel" class="swiper">
-          <% if(propertyal) {%>
+          <% if( propertyAll ) {%>
           <div class="swiper-wrapper">
-            <% propertyal.forEach((props) => { %>
+            <%  propertyAll.forEach((props) => { %>
             <div class="carousel-item-b swiper-slide">
               <div class="card-box-a card-shadow">
                 <div class="img-box-a">
@@ -164,6 +317,8 @@
       </div>
     </section><!-- End Latest Properties Section -->
 
+
+   <% if (land && Array.isArray(land) && land.length > 0) { %>
     <section class="section-property section-t8">
       <div class="container">
         <div class="row">
@@ -180,28 +335,31 @@
             </div>
           </div>
         </div>
-          <% if(land) {%>
+        
         <div id="property-carousel" class="swiper">
+        
           <div class="swiper-wrapper">
-            <% land.forEach((props) => { %>
+            <% land.forEach((landing) => { %>
             <div class="carousel-item-b swiper-slide">
               <div class="card-box-a card-shadow">
                 <div class="img-box-a">
-                  <img src="data:Binary?<%= props.img2.contentType %>;base64,<%= props.img2.data.toString('base64') %>" alt="" class="img-a img-fluid">
+                 
+                    <img src="data:Binary?<%= landing.image.contentType %>;base64,<%= landing.image.data.toString('base64') %>" alt="" class="img-a img-fluid">
+                 
                 </div>
                 <div class="card-overlay">
                   <div class="card-overlay-a-content">
                     <div class="card-header-a">
                       <h2 class="card-title-a">
-                        <a href="/land_single?id=<%= props._id %>"><%= props.name %>
-                          <br /><%= props.location %></a>
+                        <a href="/land_single?id=<%= landing._id %>"><%= landing.name %>
+                          <br /><%= landing.location %></a>
                       </h2>
                     </div>
                     <div class="card-body-a">
                       <div class="price-box d-flex">
-                        <span class="price-a"><%= props.status%> | &#8358; <%= props.price %></span>
+                        <span class="price-a"><%= landing.status%> | &#8358; <%= landing.price %></span>
                       </div>
-                      <a href="/land_single?id=<%= props._id %>" class="link-a">Click here to view
+                      <a href="/land_single?id=<%= landing._id %>" class="link-a">Click here to view
                         <span class="bi bi-chevron-right"></span>
                       </a>
                     </div>
@@ -209,17 +367,17 @@
                       <ul class="card-info d-flex justify-content-around">
                         <li>
                           <h4 class="card-info-title">Area</h4>
-                          <span><%= props.area %>
+                          <span><%= landing.area %>
                             <sup>2</sup>
                           </span>
                         </li>
                         <li>
                           <h4 class="card-info-title">Period</h4>
-                          <span><%= props.period %></span>
+                          <span><%= landing.period %></span>
                         </li>
                         <li>
                           <h4 class="card-info-title">Land ID</h4>
-                          <span><%= props.property_id %></span>
+                          <span><%= landing.property_id %></span>
                         </li>
                       </ul>
                     </div>
@@ -227,16 +385,17 @@
                 </div>
               </div>
             </div>
-            <% }) %><!-- End carousel item -->
+          
 
           </div>
         </div>
-        
+        <% }) %><!-- End carousel item -->
         <div class="propery-carousel-pagination carousel-pagination"></div>
 
       </div>
-      <% } %>
-    </section><!-- End Latest Properties Section -->
+    
+    </section>
+    <% } %><!-- End Latest Properties Section -->
 
     <!-- ======= Agents Section ======= -->
     <!-- <section class="section-agents section-t8">
@@ -393,11 +552,11 @@
           </div>
         </div>
 
-        <% if(test) {%>
+        <% if(testimony) {%>
         <div id="testimonial-carousel" class="swiper">
           <div class="swiper-wrapper">
             
-              <% test.forEach((test) => { %>
+              <% testimony.forEach((test) => { %>
             <div class="carousel-item-a swiper-slide">
               <div class="testimonials-box">
                 <div class="row">

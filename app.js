@@ -27,6 +27,8 @@ const Subscriber = require('./services/models/subscriber');
 const Testimony = require('./services/models/testimoniy');
 const crypto = require('crypto');
 const ImageContact = require('./services/models/contact.image');
+const Vision = require('./services/models/vision');
+const Mission = require('./services/models/mission.js');
 // const FormBuilder = require('./services/models/formBuilderModel');
 // const FormSubmission = require('./services/models/formSubmissionModel');
 // const transporter = require('./services/config/nodemailer');
@@ -103,9 +105,7 @@ app.use('/swiper', express.static(path.resolve(__dirname, "assets/vendor/swiper"
 
 
 // app.use(express.static("."));
-app.use((error, req, res, next) => {
-    console.log("This is the rejected field ->", error.field);
-  });
+
   
   app.use( (req, res, next) =>{
   
@@ -951,6 +951,9 @@ app.post('/create-service', uploadMultipleService, async(req, res, next) => {
                       console.log(err)
                     })
                     
+                  }else {
+                  
+                   res.status(404).send({ message: "Service created with the same heading already created"})
                   }
                  
                 }
@@ -1153,12 +1156,12 @@ app.post("/edit-staff-image/:id", uploadSingleStaffImages, async(req, res, next)
 //creating LAnd property
   const uploadMultipleLand = upload.fields([
     { name: 'img', maxCount: 1 },
-    { name: 'img2', maxCount: 1 },
+    { name: 'image', maxCount: 1 },
   ]);
   
   app.post("/create-land",ensureAuthenticated, uploadMultipleLand, async (req, res) => {
     try {
-      const {property_id,name,location,status,area,amenities,description,period,price,
+      const {land_id, name, location, status, area, amenities, description, period, price,
       } = req.body;
   
       //generate property code
@@ -1189,11 +1192,11 @@ app.post("/edit-staff-image/:id", uploadSingleStaffImages, async(req, res, next)
           user: req.user,
         });
       } else {
-           Land.findOne({ property_id : property_id})
-            .then((prop) => {
-                if(!prop) {
-                    const property ={
-                        property_id: voucherCode,
+           Land.findOne({ land_id : land_id})
+            .then((prop_land) => {
+                if(!prop_land) {
+                    const lands ={
+                        land_id: voucherCode,
                         name: name,
                         location: location,
                         status: status,
@@ -1203,28 +1206,28 @@ app.post("/edit-staff-image/:id", uploadSingleStaffImages, async(req, res, next)
                         price: price,
                         period: period,
                           img: {},
-                          img2: {},
+                          image: {},
                       };
               
                       if (req.files['img']) {
-                          property.img = {
+                          lands.img = {
                             data: fs.readFileSync(
                               path.join(__dirname + "/uploads/" + req.files['img'][0].filename)
                             ),
                             contentType: req.files['img'][0].mimetype,
                           };
                         }
-                        if (req.files['img2']) {
-                          property.img2 = {
+                        if (req.files['image']) {
+                          lands.image = {
                             data: fs.readFileSync(
-                              path.join(__dirname + "/uploads/" + req.files['img2'][0].filename)
+                              path.join(__dirname + "/uploads/" + req.files['image'][0].filename)
                             ),
-                            contentType: req.files['img2'][0].mimetype,
+                            contentType: req.files['image'][0].mimetype,
                           };
                         }
                        
               
-                      Land.create(property)
+                      Land.create(lands)
                                       .then((data) => {
                                           req.flash("success_msg", "Data Registered !");
                                           res.redirect('/admin/create-land');
@@ -1233,7 +1236,7 @@ app.post("/edit-staff-image/:id", uploadSingleStaffImages, async(req, res, next)
                                       })
                         
                 }else {
-                    if (prop) {
+                    if (prop_land) {
                         const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
                         let voucherCode = '';
                         for (let i = 0; i < 4; i++) {
@@ -1241,8 +1244,8 @@ app.post("/edit-staff-image/:id", uploadSingleStaffImages, async(req, res, next)
                         }
                         const codes = voucherCode;
 
-                        const property ={
-                            property_id: voucherCode,
+                        const lands ={
+                           land_id: voucherCode,
                             name: name,
                             location: location,
                             status: status,
@@ -1252,29 +1255,27 @@ app.post("/edit-staff-image/:id", uploadSingleStaffImages, async(req, res, next)
                             price: price,
                             period: period,
                               img: {},
-                              img2: {},
-                              floor_plan: {},
-                              video: {},
+                              image: {},
                           };
                   
                           if (req.files['img']) {
-                              property.img = {
+                              lands.img = {
                                 data: fs.readFileSync(
                                   path.join(__dirname + "/uploads/" + req.files['img'][0].filename)
                                 ),
                                 contentType: req.files['img'][0].mimetype,
                               };
                             }
-                            if (req.files['img2']) {
-                              property.img2 = {
+                            if (req.files['image']) {
+                              lands.image = {
                                 data: fs.readFileSync(
-                                  path.join(__dirname + "/uploads/" + req.files['img2'][0].filename)
+                                  path.join(__dirname + "/uploads/" + req.files['image'][0].filename)
                                 ),
-                                contentType: req.files['img2'][0].mimetype,
+                                contentType: req.files['image'][0].mimetype,
                               };
                             }
                   
-                          Land.create(property)
+                          Land.create(lands)
                                           .then((data) => {
                                              
                                               req.flash("success_msg", "Data Registered !");
@@ -1295,7 +1296,7 @@ app.post("/edit-staff-image/:id", uploadSingleStaffImages, async(req, res, next)
   //updating Images
   const uploadMultipleLandImages = upload.fields([
     { name: 'img', maxCount: 1 },
-    { name: 'img2', maxCount: 1 },
+    { name: 'image', maxCount: 1 },
   ], function (err) {
     if (err) {
       console.log(err);
@@ -1312,36 +1313,36 @@ app.post("/edit-land-image/:id", uploadMultipleLandImages, async (req, res) => {
       throw new TypeError("Invalid property ID");
     }
 
-    const property = {};
+    const property_land = {};
 
     if (req.files['img']) {
-        property.img = {
+        property_land.img = {
           data: fs.readFileSync(
             path.join(__dirname + "/uploads/" + req.files['img'][0].filename)
           ),
           contentType: req.files['img'][0].mimetype,
         };
       }
-      if (req.files['img2']) {
-        property.img2 = {
+      if (req.files['image']) {
+        property_land.image = {
           data: fs.readFileSync(
-            path.join(__dirname + "/uploads/" + req.files['img2'][0].filename)
+            path.join(__dirname + "/uploads/" + req.files['image'][0].filename)
           ),
-          contentType: req.files['img2'][0].mimetype,
+          contentType: req.files['image'][0].mimetype,
         };
       }
 
-    const filter = { _id: propertyId };
-    const update = { $set: property };
+    const filter = { _id: property_landId };
+    const update = { $set: property_land };
     const options = { returnOriginal: false };
 
     const result = await Land.findOneAndUpdate(filter, update, options);
 
     if (!result) {
-      return res.status(404).json({ error: "Property not found" });
+      return res.status(404).json({ error: "property_land not found" });
     }
     req.flash("success_msg", "Images Uploaded");
-    return res.redirect('/admin/edit-land?id=' + propertyId);
+    return res.redirect('/admin/edit-land?id=' + property_landId);
   } catch (error) {
     if (error.name === "CastError" || error.name === "TypeError") {
       return res.status(400).json({ error: error.message });
@@ -1600,6 +1601,115 @@ app.post('/send-single-email', uploading.single('attachment'), async (req, res) 
   }
   res.redirect('/admin/replying?id=' + id);
 });
+
+
+
+
+
+//------------------------Mission-------------------------------------//
+
+const uploadVisionImage = upload.single('img');
+app.post('/create-vision', uploadVisionImage, async(req, res, next) => {
+  try {
+  const { vision, heading} = req.body;
+  const errors = [];  
+  if(!vision || !heading) {
+    errors.push( { msg : "Please fill in all the fields."})
+  }
+  if(errors.length > 0) {
+    res.render('creat_vision', {
+      errors: errors,
+      vision: vision,
+      heading: heading,
+      user: req.user,
+    })
+  }else {
+    const vis = new Vision ({
+      vision: vision,
+      heading: heading,
+      img : img = {
+        data: fs.readFileSync(
+            path.join( __dirname + "/uploads/" + req.file.filename)
+        ),
+        contentType: "image/png",
+        },
+    });
+
+         vis
+            .save()
+            .then((value) => {
+              req.flash("success_msg", "Data updated !");
+              res.redirect('/admin/create-vision');
+            }).catch((err) =>{
+              console.log (err)
+              next(err)
+             })
+  }
+  } catch (error) {
+    console.log(err);
+    next(err);
+  }
+})
+
+
+
+
+//------------------------------End ----------------------------//
+
+
+//------------------------Vision-------------------------------------//
+
+
+
+const uploadMissionImage = upload.single('img');
+app.post('/create-mission',uploadMissionImage, async(req, res, next) => {
+  try {
+  const { mission, heading } = req.body;
+  const errors = [];  
+  if(!mission || !heading) {
+    errors.push( { msg : "Please fill in all the fields."})
+  }
+  if(errors.length > 0) {
+    res.render('creat_mission', {
+      errors: errors,
+      mission:  mission,
+      heading: heading,
+      user: req.user,
+    })
+  }else {
+    const mis = new Mission ({
+      mission:  mission,
+      heading: heading,
+      img : img = {
+        data: fs.readFileSync(
+            path.join( __dirname + "/uploads/" + req.file.filename)
+        ),
+        contentType: "image/png",
+        },
+    });
+
+       await  mis
+            .save()
+            .then((value) => {
+              req.flash("success_msg", "Data updated !");
+              res.redirect('/admin/create-mission');
+            }).catch((err) =>{
+              console.log (err)
+              next(err)
+             })
+  }
+  } catch (error) {
+    console.log(err);
+    next(err);
+  }
+})
+
+
+
+
+
+
+//------------------------------End ----------------------------//
 
 
 

@@ -52,8 +52,8 @@ router.post("/login", forwardAuthenticated, (req, res, next) => {
             return next(err);
           }
         
-          req.flash('success_msg', 'You are welcome'+ ' ' + req.user.first_name);
           res.redirect("/admin/dashboard");
+          req.flash('success_msg', 'You are welcome'+ ' ' + req.user.first_name);
           
         })
        
@@ -63,8 +63,9 @@ router.post("/login", forwardAuthenticated, (req, res, next) => {
           if (err) {
               return next(err);
           }
-          req.flash('error_msg', 'Login details not correct');
+         
           res.redirect('/admin/login')
+          req.flash('error_msg', 'Login details not correct');
       })
       }
    
@@ -110,11 +111,11 @@ router.get("/dashboard", ensureAuthenticated,  async(req, res) => {
     const contact = await Contact.countDocuments().exec();
     const lands = await Land.countDocuments({ status: "Sold"}).exec();
     const houses = await Property.countDocuments({ status: "Sold"}).exec();
-    const about = await About.find().sort({ createdAt: -1 }).limit(1).exec();
-    const service = await Service.find().sort({createdAt : -1}).limit(3)
-    const subscriber = await Subscriber.find().exec();
+    const about = await About.find().select("_id name address state mobile mobile2 mobile3 whatsapp email").sort({ createdAt: -1 }).limit(1).exec();
+    const service = await Service.find().select("message heading").sort({createdAt : -1}).limit(3)
+    const subscriber = await Subscriber.find().select("email").exec();
 
-    res.render("dashboard", {
+  await res.render("dashboard", {
       user: req.user,
       land,
       house,
@@ -202,7 +203,7 @@ router.get('/edit-property', ensureAuthenticated, async(req, res) => {
     if (req.query.id) {
         try {
             const id = req.query.id;
-            Property.findById(id)
+            await Property.findById(id)
                     .then((prop) => {
                         if (!prop) {
                             res
@@ -255,7 +256,7 @@ router.get('/view-detail-house', ensureAuthenticated, async(req, res) => {
   if (req.query.id) {
       try {
           const id = req.query.id;
-          Property.findById(id)
+        await Property.findById(id)
                   .then((land) => {
                       if (!land) {
                           res
@@ -334,7 +335,7 @@ router.get("/land/:page", ensureAuthenticated, async(req, res, next) => {
       var perPage = 10;
       var page = req.params.page || 1;
     
-      Land
+await Land
         .find()
         .skip((perPage * page) - perPage)
         .limit(perPage)
@@ -367,7 +368,7 @@ router.get('/edit-land', ensureAuthenticated, async(req, res) => {
     if (req.query.id) {
         try {
             const id = req.query.id;
-            Land.findById(id)
+           await Land.findById(id).select("land_id name status area period location")
                     .then((land) => {
                         if (!land) {
                             res
@@ -397,7 +398,9 @@ router.get('/edit-land', ensureAuthenticated, async(req, res) => {
 //Editting land Properties
 router.post("/edit-land/:id", async (req, res) => {
     try {
+
       const propertyId = req.params.id;
+
       if (!propertyId) {
         throw new TypeError("Invalid property ID");
       }
@@ -419,7 +422,7 @@ router.post("/edit-land/:id", async (req, res) => {
       const update = { $set: property };
       const options = { returnOriginal: false };
   
-      const result = await Land.findOneAndUpdate(filter, update, options);
+  const result = await Land.findOneAndUpdate(filter, update, options);
   
       if (!result) {
         return res.status(404).json({ error: "Property not found" });
@@ -439,7 +442,7 @@ router.get('/view-detail-land', ensureAuthenticated, async(req, res) => {
   if (req.query.id) {
       try {
           const id = req.query.id;
-          Land.findById(id)
+         await Land.findById(id)
                   .then((land) => {
                       if (!land) {
                           res
@@ -496,7 +499,7 @@ router.get("/blog/:page", ensureAuthenticated, async(req, res, next) => {
       var perPage = 10;
       var page = req.params.page || 1;
     
-      Blog
+    await Blog
         .find({})
         .skip((perPage * page) - perPage)
         .limit(perPage)
@@ -529,7 +532,7 @@ router.get('/edit-blog', ensureAuthenticated, async(req, res) => {
     if (req.query.id) {
         try {
             const id = req.query.id;
-            Blog.findById(id)
+           await Blog.findById(id)
                     .then((blog) => {
                         if (!blog) {
                             res
@@ -576,7 +579,7 @@ router.post("/edit-blog/:id", async(req, res, next) => {
      const update = { $set: blog };
      const options = { returnOriginal: false };
 
-     const result = await Blog.findOneAndUpdate(filter, update, options);
+  const result = await Blog.findOneAndUpdate(filter, update, options);
    
      if (!result) {
        return res.status(404).json({ error: "Blog not found" });
@@ -623,7 +626,7 @@ router.get("/admin/:page", ensureAuthenticated, async(req, res, next) => {
       var perPage = 10;
       var page = req.params.page || 1;
     
-      Admin
+     await Admin
         .find({})
         .skip((perPage * page) - perPage)
         .limit(perPage)
@@ -656,7 +659,7 @@ router.get('/edit-admin', ensureAuthenticated, async(req, res) => {
     if (req.query.id) {
         try {
             const id = req.query.id;
-            Admin.findById(id)
+         await Admin.findById(id)
                     .then((admin) => {
                         if (!admin) {
                             res
@@ -689,7 +692,7 @@ router.post("/edit-admin/:id", async(req, res, next) => {
       const id = req.params.id;
       const { first_name, second_name, position, password, email, role} = req.body;
 
-      Admin.findById(id)
+      await Admin.findById(id)
                 .then((user) => {
           user.first_name = first_name;
           user.second_name = second_name;
@@ -1662,6 +1665,21 @@ router.patch('/career-status/:id', async (req, res) => {
   }
 });
 
+
+//---------------------Vision-----------------------//
+router.get('/create-vision',  ensureAuthenticated, async(req, res) => {
+  await res.render('create_vision', { user : req.user})
+})
+
+//-------------------End--------------------------//
+
+
+//-----------------------Mission--------------------//
+router.get('/create-mission',  ensureAuthenticated, async(req, res) => {
+  await res.render('create_mission', { user : req.user} )
+})
+
+//------------------------End----------------------//
 
 module.exports = router;
 

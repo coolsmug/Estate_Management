@@ -3,7 +3,7 @@ const Schema = mongoose.Schema;
 
 
 const landSchema = new Schema ({
-    property_id : {
+    land_id : {
         type: String,
         required: true,
          trim: true
@@ -55,10 +55,10 @@ const landSchema = new Schema ({
     contentType: String,
     },
 
-    img2: { 
-    data: Buffer,
-    contentType: String,
-    },
+    image: { 
+        data: Buffer,
+        contentType: String,
+        },
     
 },
 { timestamps: true }
