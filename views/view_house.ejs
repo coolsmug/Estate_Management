@@ -28,15 +28,21 @@
         <div class="wrap_all_profile">
             <div class="staffprofile">
                 <div class="image_profile">
+                    <% if(land.img.contentType) {%>
                     <div class="img_staff_one">
                         <img src="data:Binary?<%= land.img.contentType %>;base64,<%= land.img.data.toString('base64')%>" alt="" srcset="">
                     </div>
+                    <% } %>
+                    <% if(land.img2.contentType) {%>
                     <div class="img_staff_one">
                         <img src="data:Binary?<%= land.img2.contentType %>;base64,<%= land.img2.data.toString('base64')%>" alt="" srcset="">
                     </div>
+                    <% } %>
+                    <% if(land.floor_plan.contentType) {%>
                     <div class="img_staff_one">
                         <img src="data:Binary?<%= land.floor_plan.contentType %>;base64,<%= land.floor_plan.data.toString('base64')%>" alt="" srcset="">
                     </div>
+                    <% } %>
     
                     <p><%= land.property_id %></p>
                     <p><%= land.name %></p>

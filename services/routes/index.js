@@ -60,7 +60,7 @@ router.get('/', async (req, res) => {
         const blog = await Blog.find().sort({ createdAt: -1 }).limit(4);
         
         const property = await Property.find({ status: { $in: ["Rent", "Sale"] } })
-            .select("name property_id area period status location _id img img2")
+            .select("name property_id area period status location _id img price img2")
             .sort({ createdAt: -1 })
             .limit(3);
         
@@ -75,7 +75,7 @@ router.get('/', async (req, res) => {
             .limit(4);
         
         const land = await Land.find()
-            .select("name area period location img image property_id _id period")
+            .select("name area period location img image property_id _id period price")
             .sort({ createdAt: -1 })
             .limit(4);
         
@@ -100,7 +100,7 @@ router.get('/', async (req, res) => {
         });
     } catch (err) {
         console.error(err);
-        res.status(500).send('Internal server error');
+        res.status(500).send(err + ':' +'Internal server error');
     }
 });
 
@@ -273,22 +273,16 @@ router.get("/property_single", async(req, res, next) => {
     try {
         if(req.query) {
             const id = req.query.id
-            await Property.findById(id)
-                            .then((prop) => {
-                                console.log(prop.name)
-                                Staff.find({ propid: prop.name.trim() })
-                                    .then((staff) => {
-                                        
-                                        res.render("property-single", {
-                                            prop: prop,
-                                            staff: staff[0],
-                                        })
-                                    })
+
+            const prop =  await Property.findById(id).exec()
+            const staff = await Staff.find({ propid: prop.name.trim() })
+                              
+            res.render("property-single", {
+              prop: prop,
+              staff: staff[0],
+          })
+                                
                            
-                            }).catch((err) => {
-                                console.log(err)
-                                next(err)
-                            })
         }
     } catch (error) {
         console.log(error)
