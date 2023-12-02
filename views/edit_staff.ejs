@@ -42,6 +42,8 @@
                 <label>Position:</label>
                 <select name="position" class="form-control">
                     <option value="<%= staff.position %>"><%= staff.position %></option>
+                    <option>Select Option</option>
+                    <option>Other</option>
                     <option value="Managing Director">Managing Director</option>
                     <option value="CEO">CEO</option>
                     <option value="General Manager">General Manager</option>
@@ -51,6 +53,10 @@
                     <option value="Staff">Staff</option>
                     <option value="Driver">Driver</option>
                 </select>
+            </div>
+            <div class="form-group">
+                <label>Other Positions: <span>*</span></label>
+                <input class="form-control" type="text" value="<%= staff.other_position %>" name="other_position">
             </div>
             <div class="form-group custom-select">
                 <label>Performance:</label>

@@ -37,6 +37,7 @@
                     <th>Email</th>
                     <th>Mobile</th> 
                     <th>Status</th>
+                    <th>Management Status</th>
                     <th class="actionstaff">Action</th>
                 </tr>
             </thead>
@@ -47,12 +48,29 @@
                         <td class="numberings"><%= count %></td>
                         <td><div class="imageadmin"><img src="data:Binary?<%= staff.img.contentType %>;base64,<%= staff.img.data.toString('base64') %>" alt="" width="50"</div></td>
                         <td><%= staff.first_name %> <%= staff.second_name %></td>
-                        <td><%= staff.position %></td>
+                        <td>
+                            <% if (staff) { %>
+                                <% let post = '' %>
+                                <% if (staff.position == 'other') { %>
+                                    <% post = staff.other_position %>
+                                <% } else if (staff.other_position == '') { %>
+                                    <% post = staff.position %>
+                                <% } %>
+                                <%= post %>
+                            <% } %>
+                        </td>
+                        
                         <td><%= staff.performance %></td>
                         <td><%= staff.email %></td>
                         <td><a href="tel:<%= staff.phone %>"><%= staff.phone %></a></td>
                         <td><label class="staff_swith switch">
-                            <input type="checkbox" id="mySwitch" data-user-id="<%= staff._id %> " <%= staff.status == true ? 'checked' : '' %> >
+                            <input type="checkbox"  data-user-id="<%= staff._id %> " <%= staff.status == true ? 'checked' : '' %> >
+                            <span class="slider">
+                            </span>
+                            </label>
+                        </td>
+                        <td><label class="staff_management switch">
+                            <input type="checkbox" data-user-id="<%= staff._id %> " <%= staff.managingStatus == true ? 'checked' : '' %> >
                             <span class="slider">
                             </span>
                             </label>

@@ -588,69 +588,209 @@ $(function() {
   });
 });
 
+
+
 //Switch Button
 
-$(document).ready(function() {
-  $('.switch').click(function() {
-    const switchId = $(this).find('input').data('user-id');
-    const updatedStatus = $(this).find('input').is(':checked');
 
-    $.ajax({
-      url: `/admin/admin-status/${switchId}`,
-      type: 'PATCH',
-      data: { status: updatedStatus },
-      success: function(data) {
-        alert('Status changed successfully')
-        location.reload()
-      },
-      error: function(error) {
-        console.error(error);
-      }
-    });
-  });
-});
+//------------------------------staffSwitch------------------------//
 
 $(document).ready(function() {
-  $('.staff_swith').click(function() {
-    const switchId = $(this).find('input').data('user-id');
-    const updatedStatus = $(this).find('input').is(':checked');
+  let isProcessing = false;
 
-    $.ajax({
-      url: `/admin/staff-status/${switchId}`,
-      type: 'PATCH',
-      data: { status: updatedStatus },
-      success: function(data) {
-        alert('Status changed successfully')
-        location.reload()
-      },
-      error: function(error) {
-        console.error(error);
-      }
-    });
-  });
-});
+  function debounce(func, wait) {
+    let timeout;
+    return function() {
+      const context = this;
+      const args = arguments;
+      clearTimeout(timeout);
+      timeout = setTimeout(function() {
+        func.apply(context, args);
+      }, wait);
+    };
+  }
 
-$(document).ready(function() {
-  $('.career_swith').click(function() {
-    const switchId = $(this).find('input').data('user-id');
-    const updatedStatus = $(this).find('input').is(':checked');
+  const debouncedClickHandler = debounce(function() {
+    if (!isProcessing) {
+      const switchId = $(this).find('input').data('user-id');
+      const updatedStatus = $(this).find('input').is(':checked');
 
-    $.ajax({
-      url: `/admin/career-status/${switchId}`,
-      type: 'PATCH',
-      data: { status: updatedStatus },
-      success: function(data) {
-        alert('Status changed successfully')
-        location.reload()
-      },
-      error: function(error) {
-        console.error(error);
-      }
-    });
-  });
+      isProcessing = true;
+
+      $.ajax({
+        url: `/admin/staff-status/${switchId}`,
+        type: 'PATCH',
+        data: { status: updatedStatus },
+        success: function(data) {
+          // Update the switch status immediately without a page reload
+          $(this).find('input').prop('checked', updatedStatus);
+          alert('Status changed successfully');
+        },
+        error: function(error) {
+          console.error(error);
+        },
+        complete: function() {
+          isProcessing = false;
+        }
+      });
+    }
+  }, 500); // Adjust the debounce time as needed
+
+  $('.staff_swith').click(debouncedClickHandler);
 });
 
 
 
+//------------------------------end staffSwitch------------------------//
 
+
+//------------------------------AdminSwitch------------------------//
+$(document).ready(function() {
+  let isProcessing = false;
+
+  function debounce(func, wait) {
+    let timeout;
+    return function() {
+      const context = this;
+      const args = arguments;
+      clearTimeout(timeout);
+      timeout = setTimeout(function() {
+        func.apply(context, args);
+      }, wait);
+    };
+  }
+
+  const debouncedClickHandler = debounce(function() {
+    if (!isProcessing) {
+      const switchId = $(this).find('input').data('user-id');
+      const updatedStatus = $(this).find('input').is(':checked');
+
+      isProcessing = true;
+
+      $.ajax({
+        url: `/admin/admin-status/${switchId}`,
+        type: 'PATCH',
+        data: { status: updatedStatus },
+        success: function(data) {
+          // Update the switch status immediately without a page reload
+          $(this).find('input').prop('checked', updatedStatus);
+          alert('Status changed successfully');
+        },
+        error: function(error) {
+          console.error(error);
+        },
+        complete: function() {
+          isProcessing = false;
+        }
+      });
+    }
+  }, 500); // Adjust the debounce time as needed
+
+  $('.switch').click(debouncedClickHandler);
+});
+
+
+//------------------------end Admin switch----------------------//
+
+
+
+//------------------------------careerSwitch------------------------//
+$(document).ready(function() {
+  let isProcessing = false;
+
+  function debounce(func, wait) {
+    let timeout;
+    return function() {
+      const context = this;
+      const args = arguments;
+      clearTimeout(timeout);
+      timeout = setTimeout(function() {
+        func.apply(context, args);
+      }, wait);
+    };
+  }
+
+  const debouncedClickHandler = debounce(function() {
+    if (!isProcessing) {
+      const switchId = $(this).find('input').data('user-id');
+      const updatedStatus = $(this).find('input').is(':checked');
+
+      isProcessing = true;
+
+      $.ajax({
+        url: `/admin/career-status/${switchId}`,
+        type: 'PATCH',
+        data: { status: updatedStatus },
+        success: function(data) {
+          // Update the switch status immediately without a page reload
+          $(this).find('input').prop('checked', updatedStatus);
+          alert('Status changed successfully');
+        },
+        error: function(error) {
+          console.error(error);
+        },
+        complete: function() {
+          isProcessing = false;
+        }
+      });
+    }
+  }, 500); // Adjust the debounce time as needed
+
+  $('.career_swith').click(debouncedClickHandler);
+});
+
+
+//------------------------end carer switch----------------------//
+
+
+
+//------------------------------ManagementSwitch------------------------//
+
+$(document).ready(function() {
+  let isProcessing = false;
+
+  function debounce(func, wait) {
+    let timeout;
+    return function() {
+      const context = this;
+      const args = arguments;
+      clearTimeout(timeout);
+      timeout = setTimeout(function() {
+        func.apply(context, args);
+      }, wait);
+    };
+  }
+
+  const debouncedClickHandlers = debounce(function() {
+    if (!isProcessing) {
+      const switchId = $(this).find('input').data('user-id');
+      const updatedStatus = $(this).find('input').is(':checked');
+
+      isProcessing = true;
+
+      $.ajax({
+        url: `/admin/managing-status/${switchId}`,
+        type: 'PATCH',
+        data: { managingStatus: updatedStatus },
+        success: function(data) {
+          // Update the switch status immediately without a page reload
+          $(this).find('input').prop('checked', updatedStatus);
+          alert('Status changed successfully');
+        },
+        error: function(error) {
+          console.error(error);
+        },
+        complete: function() {
+          isProcessing = false;
+        }
+      });
+    }
+  }, 500); // Adjust the debounce time as needed
+
+  $('.staff_management').click(debouncedClickHandlers);
+});
+
+
+
+//------------------------------end ManangementSwitch------------------------//
 

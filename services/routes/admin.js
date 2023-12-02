@@ -827,6 +827,7 @@ router.post("/edit-staff/:id", async(req, res, next) => {
         first_name, 
         second_name,
         position,
+        other_position,
         email,
         performance,
         about,
@@ -842,6 +843,7 @@ router.post("/edit-staff/:id", async(req, res, next) => {
               user.first_name = first_name;
               user.second_name = second_name;
               user.position = position;
+              user.other_position = other_position;
               user.email  = email;
               user.performance  = performance;
               user.about =  about;
@@ -908,6 +910,8 @@ router.get("/staff-detail", ensureAuthenticated, async (req, res, next) => {
 })
 
 
+
+// -------------Staff Statusm---------------------//
 router.patch('/staff-status/:id', async (req, res) => {
   const id = req.params.id;
   const { status } = req.body;
@@ -916,6 +920,21 @@ router.patch('/staff-status/:id', async (req, res) => {
     const switchDoc = await Staff.findByIdAndUpdate(id, { status }, { new: true });
     if (!switchDoc) return res.status(404).send('switch not found');
     res.send(switchDoc);
+  } catch (err) {
+    res.status(500).send(err.message);
+  }
+});
+
+
+// ------------managing team --------------------//
+router.patch('/managing-status/:id', async (req, res) => {
+  const id = req.params.id;
+  const { managingStatus } = req.body;
+
+  try {
+    const switchManaging = await Staff.findByIdAndUpdate(id, { managingStatus }, { new: true });
+    if (!switchManaging) return res.status(404).send('switch not found');
+    res.send(switchManaging);
   } catch (err) {
     res.status(500).send(err.message);
   }

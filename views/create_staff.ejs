@@ -30,17 +30,18 @@
 
         <form action="/create-staff" method="POST" enctype="multipart/form-data" class="formings">
             <div class="form-group">
-                <label>First Name:  <span>*</span></label>
+                <label>First Name:  <span style="color: red;">*</span></label>
                 <input class="form-control" type="text" placeholder="" name="first_name">
             </div>
             <div class="form-group">
-                <label>Second Name: <span>*</span></label>
+                <label>Second Name: <span style="color: red;">*</span></label>
                 <input class="form-control" type="text" name="second_name">
             </div>
             <div class="form-group custom-select">
-                <label>Position: <span>*</span></label>
+                <label>Position: <span style="color: red;">*</span> <span style="color: red; font-size: 10px;">if you select other make sure you fill Other Position field</span></label>
                 <select name="position" class="form-control">
                     <option>Select Option</option>
+                    <option>Other</option>
                     <option value="Managing Director">Managing Director</option>
                     <option value="CEO">CEO</option>
                     <option value="General Manager">General Manager</option>
@@ -51,8 +52,12 @@
                     <option value="Driver">Driver</option>
                 </select>
             </div>
+            <div class="form-group">
+                <label>Other Positions: <span style="color: red;">*</span></label>
+                <input class="form-control" type="text" name="other_position">
+            </div>
             <div class="form-group custom-select">
-                <label>Performance: <span>*</span></label>
+                <label>Performance: <span style="color: red;">*</span></label>
                 <select name="performance" class="form-control">
                     <option>Select Option</option>
                     <option value="Mid Level">Mid Level</option>
@@ -60,27 +65,27 @@
                 </select>
             </div>
             <div class="form-group">
-                <label>Email: <span>*</span></label>
+                <label>Email: <span style="color: red;">*</span></label>
                 <input class="form-control" type="email" name="email">
             </div>
             <div class="form-group">
-                <label>Mobile Number: <span>*</span></label>
+                <label>Mobile Number: <span style="color: red;">*</span></label>
                 <input class="form-control" type="text" name="phone">
             </div>
             <div class="form-group">
-                <label>WhatsApp Number: <span>*</span></label>
+                <label>WhatsApp Number: <span style="color: red;">*</span></label>
                 <input class="form-control" type="text" name="whatsapp">
             </div>
             <div class="form-group">
-                <label>Facebook: <span>*</span></label>
+                <label>Facebook: <span style="color: red;">*</span></label>
                 <input class="form-control" type="text" name="facebook">
             </div>
             <div class="form-group">
-                <label>Instagram: <span>*</span></label>
+                <label>Instagram: <span style="color: red;">*</span></label>
                 <input class="form-control" type="text" name="instagram">
             </div>
             <div class="form-group">
-                <label>Twitter: <span>*</span></label>
+                <label>Twitter: <span style="color: red;">*</span></label>
                 <input class="form-control" type="text" name="twitter">
             </div>
             <div class="form-group">
@@ -88,11 +93,11 @@
                 <input class="form-control" type="text" name="linkedin">
             </div>
             <div class="form-group">
-                <label>About: <span>*</span></label>
+                <label>About: <span style="color: red;">*</span></label>
                 <textarea class="form-control" name="about" id="myInput"></textarea>
             </div>
             <div class="form-group">
-                <label for="img">Upload image: <span>*</span></label>
+                <label for="img">Upload image: <span style="color: red;">*</span></label>
                 <input type="file" name="img" id="img" class="form-control-file form-control height-auto" >
             </div>
             <div class="form-group">

@@ -684,7 +684,7 @@ a:hover {
 
 .nimage img {
   position: absolute;
-  background-color: #ffffff;
+  /* background-color: #ffffff; */
   top: 10px;
 }
 

@@ -14,7 +14,10 @@ const staffSchema = new Schema ({
     },
     position: {
         type: String,
-        required: true,
+        trim: true
+    },
+    other_position: {
+        type: String,
         trim: true
     },
 
@@ -31,6 +34,10 @@ const staffSchema = new Schema ({
         required: true
     },
     status: {
+        type: Boolean,
+        default: false,
+    },
+    managingStatus: {
         type: Boolean,
         default: false,
     },

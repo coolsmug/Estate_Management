@@ -21,9 +21,10 @@ const Mission = require('../models/mission');
 router.get("/about", async(req, res) => {
     try {
         const aboutsss = await About.find().select("about company_name heading img img2" ).sort({createdAt: -1}).limit(1).exec();
-        const staff = await Staff.find({ position: { $in: ["Managing Director", "General Manager"]}}).sort({ name: -1 }).limit(3);
+        const staff = await Staff.find({ managingStatus : true });
+        // const staff = await Staff.find({ position: { $in: ["Managing Director", "General Manager"]}}).sort({ name: -1 }).limit(3);
 
-res.render("about", {
+await res.render("about", {
         aboutsss: aboutsss[0],
         staff
     })
@@ -40,7 +41,7 @@ router.get("/single-service", async(req, res) => {
             const service = await Service.findById(id)
             const  about= await Staff.find().sort({ createdAt: -1 }).limit(1);
     
-    res.render("service_single", {
+    await res.render("service_single", {
 
             service: service,
             about: about[0],
@@ -88,7 +89,7 @@ router.get('/', async (req, res) => {
         
 
 
-        res.render('index', {
+       await res.render('index', {
             blog,
             property,
             propertyAll, // Use a more descriptive variable name for clarity
@@ -116,12 +117,12 @@ router.get("/agents", async(req, res, next) => {
     try {
       
 
-        await Staff.find({ position: { $in: ["Staff", true, "Agent"] } })
+        await Staff.find({ managingStatus: false } )
                    
                     .then((staff) => {
                         Staff.countDocuments()
                                 .then((count) => {
-                                    res.render('agents-grid', {
+                                   res.render('agents-grid', {
                                         staff: staff,                           
                                     })
                                 }).catch((err) => {
@@ -153,7 +154,7 @@ router.get("/blogs/:page", async(req, res, next) => {
                         Blog
                         .countDocuments()
                         .then((count) => {
-                            res.render("blog-grid", {
+                         res.render("blog-grid", {
                                 blog: blog,
                                 current: page,
                                 pages: Math.ceil(count / perPage), 
@@ -181,7 +182,7 @@ router.get("/blog_single", async(req, res, next) => {
             const id = req.query.id
             await Blog.findById(id)
                             .then((blog) => {
-                            res.render("blog-single", {
+                         res.render("blog-single", {
                                 blog: blog,
                             })
                             }).catch((err) => {
@@ -206,12 +207,12 @@ router.get("/contact", async (req, res) => {
       const contact = await ImageContact.find().sort({ createdAt: -1 }).limit(1).exec();
 
       if (contact && contact.length > 0) {
-          res.render("contact", {
+         await res.render("contact", {
               contact: contact[0], // Access the first element of the contact array
           });
       } else {
           // If no contact found, pass an empty object to the view
-          res.render("contact", {
+         await res.render("contact", {
               contact: {}, // You might want to pass an empty object or handle it differently
           });
       }
@@ -256,7 +257,7 @@ router.get('/property/:page', async (req, res, next) => {
       const result = await query.skip((perPage * page) - perPage).limit(perPage).exec();
       const count = await Property.countDocuments(filter).exec();
   
-      res.render("property-grid", {
+     await res.render("property-grid", {
         result: result,
         current: page,
         pages: Math.ceil(count / perPage),
@@ -277,7 +278,7 @@ router.get("/property_single", async(req, res, next) => {
             const prop =  await Property.findById(id).exec()
             const staff = await Staff.find({ propid: prop.name.trim() })
                               
-            res.render("property-single", {
+          await  res.render("property-single", {
               prop: prop,
               staff: staff[0],
           })
@@ -325,7 +326,7 @@ router.get('/lands/:page', async (req, res, next) => {
       const result = await query.skip((perPage * page) - perPage).limit(perPage).exec();
       const count = await Land.countDocuments(filter).exec();
   
-      res.render("land_property", {
+     await res.render("land_property", {
         result: result,
         current: page,
         pages: Math.ceil(count / perPage),
@@ -387,7 +388,7 @@ router.post('/search', async (req, res) => {
         const matchPercentage = (matchingDocs / totalDocs) * 100;
         if (matchPercentage >= 20) {
           prop = await Property.find({ $text: { $search: query } });
-          res.render('homings', { prop });
+         await res.render('homings', { prop });
         } else {
           res.send('Search query did not match enough documents in the collection.');
         }
@@ -406,7 +407,7 @@ router.post('/search', async (req, res) => {
     const { name, email, subject, message } = req.body;
     if (!name || !email || !subject || !message) {
       req.flash('error', 'Please fill all fields');
-      res.redirect('/contact');
+    res.redirect('/contact');
       return;
     }
   
@@ -461,7 +462,7 @@ router.get('/career', async(req, res) => {
 
     const career =  await CareerCreation.find({ status : true }).exec();
 
-    res.render('carearFrontPage', {
+   await res.render('carearFrontPage', {
       career,
     });
   } catch (error) {

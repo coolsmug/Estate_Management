@@ -90,6 +90,7 @@
                 </ul>
               </div>
             </div>
+        <button onclick="shareContent()">Share on Social Media</button>
           </div>
           <!-- <div class="col-md-10 offset-md-1 col-lg-10 offset-lg-1">
             <div class="title-box-d">
@@ -192,21 +193,53 @@
 
 
   <script>
+
+    function shareOnTwitter() {
+      const newsTitle = '<%=blog.topic%>';
+      const newsUrl = window.location.href;
+      const twitterUrl = `https://twitter.com/intent/tweet?text=${encodeURIComponent(newsTitle)}&url=${encodeURIComponent(newsUrl)}`;
+      window.open(twitterUrl, '_blank');
+    }
+
     function shareOnFacebook() {
-      const navUrl = 'https://www.facebook.com/sharer/sharer.php?u=' + window.location.href;
-      window.open(navUrl, '_blank');
+      const newsTitle = '<%=blog.topic%>';
+      const newsUrl = window.location.href;
+      const facebookUrl = `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(newsUrl)}`;
+      window.open(facebookUrl, '_blank');
     }
 
     function shareOnLinkedIn() {
-      const navUrl = 'https://www.linkedin.com/sharing/share-offsite/?url=' + window.location.href;
-      window.open(navUrl , '_blank');
+      const newsTitle = '<%=blog.topic%>';
+      const newsUrl = window.location.href;
+    const linkedInUrl = `https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent(newsUrl)}`;
+    window.open(linkedInUrl, '_blank');
+  }
+
+
+  function shareOnInstagram() {
+    // Provide instructions to users to share content manually on Instagram.
+    alert('To share on Instagram, open the Instagram app and upload your content. or USE SECOND SHARE BUTTON');
+  }
+
+
+
+    async function shareContent() {
+      const content = {
+        title: '<%=blog.topic%>',
+        text: '<%=blog.category%>',
+        url: window.location.href,
+      };
+
+      try {
+        if (navigator.share) {
+          await navigator.share(content);
+        } else {
+          alert('Web Share API not supported on this browser.');
+        }
+      } catch (error) {
+        console.error('Error sharing content:', error);
+      }
     }
-
-    function shareOnTwitter() {
-  const navUrl = 'https://twitter.com/intent/tweet?url=' + window.location.href;
-  window.open(navUrl , '_blank');
-}
-
   </script>
 
 

@@ -1032,11 +1032,11 @@ app.post('/create-staff', ensureAuthenticated,
 uploadSingleStaffImage, 
 async (req, res, next) => {
   try {
-   const {first_name, second_name, position, email, performance, phone, about,
+   const {first_name, second_name, position, other_position, email, performance, phone, about,
     linkedin, facebook, instagram, twitter, whatsapp} = req.body;
    const errors = [];
 
-   if (!first_name || !second_name || !position || !email || !performance || !about || !phone || !whatsapp) {
+   if (!first_name || !second_name || !email || !performance || !about || !phone || !whatsapp) {
        errors.push( { msg : "Please fill in all the fields."})
    }
    if (errors.length > 0) {
@@ -1045,6 +1045,7 @@ async (req, res, next) => {
            first_name: first_name,
            second_name: second_name,
            position: position,
+           other_position: other_position,
            email : email,
            performance : performance,
            about:  about,
@@ -1066,6 +1067,7 @@ async (req, res, next) => {
                 first_name: first_name,
                 second_name: second_name,
                 position: position,
+                other_position: other_position,
                 email : email,
                 performance : performance,
                 about:  about,
@@ -1082,6 +1084,7 @@ async (req, res, next) => {
                 first_name: first_name,
                 second_name: second_name,
                 position: position,
+                other_position: other_position,
                 email : email,
                 performance : performance,
                 about:  about,
