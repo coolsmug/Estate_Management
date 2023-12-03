@@ -1558,7 +1558,7 @@ router.post('/create-job', async(req, res) => {
     } else {
       const JobName =  {
         jobName: jobName,
-        jobDescription: jobDescription.split('.').map(jobDescription => jobDescription.trim()),
+        jobDescription: jobDescription.split('  ').map(jobDescription => jobDescription.trim()),
       };
 
       CareerCreation.create(JobName)
@@ -1663,7 +1663,7 @@ router.post("/edit-career/:id", async (req, res) => {
   const {jobName, jobDescription} = req.body;
   
   try {
-    await CareerCreation.updateOne({ _id: id}, {$set: {jobName: jobName, jobDescription: jobDescription.split('.').map(jobDescription => jobDescription.trim()), }})
+    await CareerCreation.updateOne({ _id: id}, {$set: {jobName: jobName, jobDescription: jobDescription.split('  ').map(jobDescription => jobDescription.trim()), }})
     res.redirect(`/admin/edit-career?id=${id}`);
   } catch (error) {
     console.error(error);

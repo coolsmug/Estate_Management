@@ -432,20 +432,22 @@ $("#career").submit(function (param) {
   });
 });
 
-//deleting
+//-----------------------------delete--------------------------------
 $(function() {
   $('a.delete_contact').click(function(e) {
     e.preventDefault(); // Prevent the default behavior of the anchor tag
     var url = $(this).attr('href'); // Get the URL to send the DELETE request to
     var id = $(this).data('id'); // Get the ID of the resource to be deleted from a data-* attribute
-    if (confirm('Are you sure you want to delete this house?')) {
+    var row = $(this).closest('tr'); // Assuming you are working with a table row, adjust this based on your HTML structure
+
+    if (confirm('Are you sure you want to delete this contact?')) {
       $.ajax({
         url: url,
         type: 'DELETE',
         data: { id: id },
         success: function(result) {
           alert('Data deleted successfully!');
-          location.reload(); // Reload the page to reflect the updated state
+          row.remove(); // Remove the deleted row from the DOM
         },
         error: function(xhr, status, error) {
           alert('Error deleting Data: ' + error);
@@ -455,19 +457,22 @@ $(function() {
   });
 });
 
+
 $(function() {
   $('a.deleted_one').click(function(e) {
     e.preventDefault(); // Prevent the default behavior of the anchor tag
     var url = $(this).attr('href'); // Get the URL to send the DELETE request to
     var id = $(this).data('id'); // Get the ID of the resource to be deleted from a data-* attribute
-    if (confirm('Are you sure you want to delete this house?')) {
+    var row = $(this).closest('tr'); // Assuming you are working with a table row, adjust this based on your HTML structure
+
+    if (confirm('Are you sure you want to delete this data?')) {
       $.ajax({
         url: url,
         type: 'DELETE',
         data: { id: id },
         success: function(result) {
           alert('Data deleted successfully!');
-          location.reload(); // Reload the page to reflect the updated state
+          row.remove(); // Remove the deleted row from the DOM
         },
         error: function(xhr, status, error) {
           alert('Error deleting Data: ' + error);
@@ -482,14 +487,16 @@ $(function() {
     e.preventDefault(); // Prevent the default behavior of the anchor tag
     var url = $(this).attr('href'); // Get the URL to send the DELETE request to
     var id = $(this).data('id'); // Get the ID of the resource to be deleted from a data-* attribute
-    if (confirm('Are you sure you want to delete this land?')) {
+    var row = $(this).closest('tr'); // Assuming you are working with a table row, adjust this based on your HTML structure
+
+    if (confirm('Are you sure you want to delete this data?')) {
       $.ajax({
         url: url,
         type: 'DELETE',
         data: { id: id },
         success: function(result) {
           alert('Data deleted successfully!');
-          location.reload(); // Reload the page to reflect the updated state
+          row.remove(); // Remove the deleted row from the DOM
         },
         error: function(xhr, status, error) {
           alert('Error deleting Data: ' + error);
@@ -498,20 +505,24 @@ $(function() {
     }
   });
 });
+
+
 
 $(function() {
   $('a.delete_blog').click(function(e) {
     e.preventDefault(); // Prevent the default behavior of the anchor tag
     var url = $(this).attr('href'); // Get the URL to send the DELETE request to
     var id = $(this).data('id'); // Get the ID of the resource to be deleted from a data-* attribute
-    if (confirm('Are you sure you want to delete this blog?')) {
+    var row = $(this).closest('tr'); // Assuming you are working with a table row, adjust this based on your HTML structure
+
+    if (confirm('Are you sure you want to delete this data?')) {
       $.ajax({
         url: url,
         type: 'DELETE',
         data: { id: id },
         success: function(result) {
           alert('Data deleted successfully!');
-          location.reload(); // Reload the page to reflect the updated state
+          row.remove(); // Remove the deleted row from the DOM
         },
         error: function(xhr, status, error) {
           alert('Error deleting Data: ' + error);
@@ -520,20 +531,23 @@ $(function() {
     }
   });
 });
+
 
 $(function() {
   $('a.delete_admin').click(function(e) {
     e.preventDefault(); // Prevent the default behavior of the anchor tag
     var url = $(this).attr('href'); // Get the URL to send the DELETE request to
     var id = $(this).data('id'); // Get the ID of the resource to be deleted from a data-* attribute
-    if (confirm('Are you sure you want to delete this user?')) {
+    var row = $(this).closest('tr'); // Assuming you are working with a table row, adjust this based on your HTML structure
+
+    if (confirm('Are you sure you want to delete this data?')) {
       $.ajax({
         url: url,
         type: 'DELETE',
         data: { id: id },
         success: function(result) {
           alert('Data deleted successfully!');
-          location.reload(); // Reload the page to reflect the updated state
+          row.remove(); // Remove the deleted row from the DOM
         },
         error: function(xhr, status, error) {
           alert('Error deleting Data: ' + error);
@@ -543,20 +557,21 @@ $(function() {
   });
 });
 
-
 $(function() {
   $('a.delete_staff').click(function(e) {
     e.preventDefault(); // Prevent the default behavior of the anchor tag
     var url = $(this).attr('href'); // Get the URL to send the DELETE request to
     var id = $(this).data('id'); // Get the ID of the resource to be deleted from a data-* attribute
-    if (confirm('Are you sure you want to delete this user?')) {
+    var row = $(this).closest('tr'); // Assuming you are working with a table row, adjust this based on your HTML structure
+
+    if (confirm('Are you sure you want to delete this data?')) {
       $.ajax({
         url: url,
         type: 'DELETE',
         data: { id: id },
         success: function(result) {
           alert('Data deleted successfully!');
-          location.reload(); // Reload the page to reflect the updated state
+          row.remove(); // Remove the deleted row from the DOM
         },
         error: function(xhr, status, error) {
           alert('Error deleting Data: ' + error);
@@ -571,14 +586,16 @@ $(function() {
     e.preventDefault(); // Prevent the default behavior of the anchor tag
     var url = $(this).attr('href'); // Get the URL to send the DELETE request to
     var id = $(this).data('id'); // Get the ID of the resource to be deleted from a data-* attribute
-    if (confirm('Are you sure you want to delete this job?')) {
+    var row = $(this).closest('tr'); // Assuming you are working with a table row, adjust this based on your HTML structure
+
+    if (confirm('Are you sure you want to delete this data?')) {
       $.ajax({
         url: url,
         type: 'DELETE',
         data: { id: id },
         success: function(result) {
-          alert('Job deleted successfully!');
-          location.reload(); // Reload the page to reflect the updated state
+          alert('Data deleted successfully!');
+          row.remove(); // Remove the deleted row from the DOM
         },
         error: function(xhr, status, error) {
           alert('Error deleting Data: ' + error);
@@ -590,7 +607,8 @@ $(function() {
 
 
 
-//Switch Button
+
+//Switch Button------------------------------------------//
 
 
 //------------------------------staffSwitch------------------------//
