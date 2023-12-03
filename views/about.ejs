@@ -131,7 +131,15 @@
                       <strong>Email: </strong> <%= staff.email %>
                     </p>
                     <p>
-                      <strong>Position: </strong> <%= staff.position %>
+                      <strong>Position: </strong>   <% if (staff) { %>
+                        <% let post = '' %>
+                        <% if (staff.position == 'Other' || staff.position == 'Select-option') { %>
+                            <% post = staff.other_position %>
+                        <% } else if (staff.other_position == '') { %>
+                            <% post = staff.position %>
+                        <% } %>
+                        <%= post %>
+                    <% } %>
                     </p>
                   </div>
                 </div>
