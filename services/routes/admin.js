@@ -6,7 +6,7 @@ const express = require('express');
 const router = express.Router();
 const Property = require("../models/properties");
 const Land = require("../models/land");
-const Blog = require("../models/blog")
+const Blog = require("../models/blog");
 const Admin = require("../models/admin.js");
 const Staff = require('../models/staff');
 const Contact = require('../models/contact');
@@ -20,9 +20,10 @@ const bcrypt = require('bcrypt');
 const Recovery = require('../models/recovery.js');
 const nodemailer = require('nodemailer');
 const smtpPool = require('nodemailer-smtp-pool');
-const CareerCreation = require('../models/newJob')
+const CareerCreation = require('../models/newJob');
 
 const PASSWORD_EMAIL = process.env.PASSWORD_EMAIL;
+
 const ensureAuthenticated = function(req, res, next) {
   if (req.isAuthenticated()) {
     return next()
@@ -69,7 +70,7 @@ router.post("/login", forwardAuthenticated, (req, res, next) => {
       })
       }
    
-    req.flash('success_msg', 'You are welcome');
+  
   })(req, res, next);
 });
 
@@ -300,7 +301,7 @@ router.get('/view-detail-house', ensureAuthenticated, async(req, res) => {
         baths: req.body.baths,
         garage: req.body.garage,
         price: req.body.price,
-        amenities: req.body.amenities.split(",").map(function (amenity) {
+        amenities: req.body.amenities.split("  ").map(function (amenity) {
           return amenity.trim();
         }),
         description: req.body.description,
@@ -411,7 +412,7 @@ router.post("/edit-land/:id", async (req, res) => {
         status: req.body.status,
         area: req.body.area,
         price: req.body.price,
-        amenities: req.body.amenities.split(",").map(function (amenity) {
+        amenities: req.body.amenities.split("  ").map(function (amenity) {
           return amenity.trim();
         }),
         description: req.body.description,

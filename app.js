@@ -207,7 +207,7 @@ app.use('/swiper', express.static(path.resolve(__dirname, "assets/vendor/swiper"
                         bed: bed,
                         baths: baths,
                         garage: garage,
-                        amenities: amenities.split(',').map(armenity => armenity.trim()),
+                        amenities: amenities.split('  ').map(armenity => armenity.trim()),
                         description: description,
                         price: price,
                         period: period,
@@ -276,7 +276,7 @@ app.use('/swiper', express.static(path.resolve(__dirname, "assets/vendor/swiper"
                             bed: bed,
                             baths: baths,
                             garage: garage,
-                            amenities: amenities.split(',').map(armenity => armenity.trim()),
+                            amenities: amenities.split('  ').map(armenity => armenity.trim()),
                             description: description,
                             price: price,
                             period: period,
@@ -628,7 +628,7 @@ app.post('/create-admins',ensureAuthenticated, uploadSingleAdminImage , async(re
         
                               newAdmin.save()
                                   .then((value) => {
-                                      console.log(value)
+                                     
                                       req.flash(
                                         "success_msg",
                                         "An Admin Registered Successfully!"
@@ -1204,7 +1204,7 @@ app.post("/edit-staff-image/:id", uploadSingleStaffImages, async(req, res, next)
                         location: location,
                         status: status,
                         area: area,
-                        amenities: amenities.split(',').map(armenity => armenity.trim()),
+                        amenities: amenities.split('  ').map(armenity => armenity.trim()),
                         description: description,
                         price: price,
                         period: period,
@@ -1253,7 +1253,7 @@ app.post("/edit-staff-image/:id", uploadSingleStaffImages, async(req, res, next)
                             location: location,
                             status: status,
                             area: area,
-                            amenities: amenities.split(',').map(armenity => armenity.trim()),
+                            amenities: amenities.split('  ').map(armenity => armenity.trim()),
                             description: description,
                             price: price,
                             period: period,
