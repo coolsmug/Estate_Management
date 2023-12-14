@@ -52,9 +52,10 @@ router.post("/login", forwardAuthenticated, (req, res, next) => {
           if (err) {
             return next(err);
           }
-        
+          req.flash('success_msg', `You are welcome ${req.user.first_name}`);
           res.redirect("/admin/dashboard");
-          req.flash('success_msg', 'You are welcome'+ ' ' + req.user.first_name);
+          req.flash('success_msg', `You are welcome ${req.user.first_name}`);
+          
           
         })
        
@@ -64,9 +65,9 @@ router.post("/login", forwardAuthenticated, (req, res, next) => {
           if (err) {
               return next(err);
           }
-         
-          res.redirect('/admin/login')
           req.flash('error_msg', 'Login details not correct');
+          res.redirect('/admin/login')
+          
       })
       }
    

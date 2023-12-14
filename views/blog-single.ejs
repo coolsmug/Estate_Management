@@ -85,12 +85,15 @@
                   <li class="list-inline-item">
                   
                       <i class="bi bi-linkedin hoverOver" aria-hidden="true" onclick="shareOnLinkedIn()"></i>
-                   
+                     
                   </li>
                 </ul>
               </div>
             </div>
-        <button onclick="shareContent()">Share on Social Media</button>
+        <button onclick="shareContent()" class="button">Share on Social Media</button>
+        <div id="blogData" data-category="<%=blog.category%>" data-topic="<%=blog.topic%>"></div>
+       
+
           </div>
           <!-- <div class="col-md-10 offset-md-1 col-lg-10 offset-lg-1">
             <div class="title-box-d">
@@ -194,7 +197,9 @@
 
   <script>
 
-    function shareOnTwitter() {
+
+
+function shareOnTwitter() {
       const newsTitle = '<%=blog.topic%>';
       const newsUrl = window.location.href;
       const twitterUrl = `https://twitter.com/intent/tweet?text=${encodeURIComponent(newsTitle)}&url=${encodeURIComponent(newsUrl)}`;
@@ -223,24 +228,38 @@
 
 
 
-    async function shareContent() {
-      const content = {
-        title: '<%=blog.topic%>',
-        text: '<%=blog.category%>',
-        url: window.location.href,
-      };
+  async function shareContent() {
+  const blogDataElement = document.getElementById('blogData');
+  const category = blogDataElement.getAttribute('data-category');
+  const topic = blogDataElement.getAttribute('data-topic');
 
-      try {
-        if (navigator.share) {
-          await navigator.share(content);
-        } else {
-          alert('Web Share API not supported on this browser.');
-        }
-      } catch (error) {
-        console.error('Error sharing content:', error);
-      }
+  const content = {
+    title: category,
+    text: topic,
+    url: window.location.href,
+  };
+
+  try {
+    if (navigator.share) {
+      await navigator.share(content);
+    } else {
+      alert('Web Share API not supported on this browser.');
     }
+  } catch (error) {
+    console.error('Error sharing content:', error);
+  }
+}
+
   </script>
 
 
-  
+<style>
+  button { 
+    outline : none;
+    border : none;
+    background-color: rgb(245, 130, 88);
+    padding: 4px 8px;
+    border-radius: 3px;
+    color: #fff;
+  }
+</style>
