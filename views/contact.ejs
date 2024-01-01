@@ -37,7 +37,7 @@
           <div class="col-sm-12 position-relative">
             <div class="about-img-box">
               <% if (contact.img) {%>
-              <img src="data:Binary?<%= contact.img.contentType %>;base64,<%= contact.img.data.toString('base64') %>" alt="" class="img-fluid">
+              <img src="<%= contact.img.url %>" alt="" class="img-fluid">
               <% } else { %>
                 <p>No contact information available.</p>
                 <% } %>
@@ -95,12 +95,12 @@
                     </div>
                     <div class="icon-box-content">
                       <p class="mb-1">Email.
-                        <span class="color-a">Valiantfoot@gmail.com</span>
+                        <span class="color-a"><%= companyInfo.email %></span>
                       </p>
                       <p class="mb-1">Mobile.
-                        <br><span class="color-a">+2349086560370</span>
-                        <br><span class="color-a">+2349086560371</span>
-                        <br><span class="color-a">+2349086560372</span>
+                        <br><span class="color-a"><%= companyInfo.mobile %></span>
+                        <br><span class="color-a"><%= companyInfo.mobile2 %></span>
+                        <br><span class="color-a"><%= companyInfo.mobile3 %></span>
                       </p>
                     </div>
                   </div>
@@ -114,12 +114,16 @@
                       <h4 class="icon-title">Find us in</h4>
                     </div>
                     <div class="icon-box-content">
+                      <% if (companyInfo && companyInfo.address )  {%>
+                        <% const addresLines = companyInfo.address.split(',');%>
+                        <% addresLines.forEach(line => { %>
                       <p class="mb-1">
-                       Threshold Business Suite,
-                        <br>Plot 976, Block 2f4.
-                        <br>Olusegun Obasanjo Way,
-                        <br>FCT, Abuja.
+                       
+                       <%= line.trim() %>
+                      
                       </p>
+                      <% }) %>
+                      <% } %>
                     </div>
                   </div>
                 </div>
@@ -135,23 +139,28 @@
                       <div class="socials-footer">
                         <ul class="list-inline">
                           <li class="list-inline-item">
-                            <a href="#" class="link-one">
+                            <a href="<%= companyInfo.facebook %>" class="link-one">
                               <i class="bi bi-facebook" aria-hidden="true"></i>
                             </a>
                           </li>
                           <li class="list-inline-item">
-                            <a href="#" class="link-one">
+                            <a href="<%= companyInfo.twitter %>" class="link-one">
                               <i class="bi bi-twitter" aria-hidden="true"></i>
                             </a>
                           </li>
                           <li class="list-inline-item">
-                            <a href="#" class="link-one">
+                            <a href="<%= companyInfo.instagram %>" class="link-one">
                               <i class="bi bi-instagram" aria-hidden="true"></i>
                             </a>
                           </li>
                           <li class="list-inline-item">
-                            <a href="#" class="link-one">
+                            <a href="<%= companyInfo.linkedin %>" class="link-one">
                               <i class="bi bi-linkedin" aria-hidden="true"></i>
+                            </a>
+                          </li>
+                          <li class="list-inline-item">
+                            <a href="<%= companyInfo.whatsapp %>" class="link-one">
+                              <i class="bi bi-whatsapp" aria-hidden="true"></i>
                             </a>
                           </li>
                         </ul>

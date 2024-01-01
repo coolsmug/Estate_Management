@@ -37,15 +37,16 @@
     <section class="property-single nav-arrow-b">
       <div class="container">
         <div class="row justify-content-center">
-          <div class="col-lg-8"> <img src="data:Binary?<%= prop.img.contentType %>;base64,<%= prop.img.data.toString('base64') %>" alt="" class="img-fluid">
+          <div class="col-lg-8"> 
+            <img src="<%= prop.img.url%>" alt="" class="img-fluid">
             <div id="property-single-carousel" class="swiper">
               <div class="swiper-wrapper">
                 <div class="carousel-item-b swiper-slide">
-                  <img src="data:Binary?<%= prop.img.contentType %>;base64,<%= prop.img.data.toString('base64') %>" alt="">
+                  <img src="<%= prop.img.url%>" alt="">
                 </div>
                 <div class="carousel-item-b swiper-slide">
                   <% if(prop.img2) {%>
-                  <img src="data:Binary?<%= prop.img2.contentType %>;base64,<%= prop.img2.data.toString('base64') %>" alt="">
+                  <img src="<%= prop.img2.url %>" alt="">
                 <% } %>
                 </div>
               </div>
@@ -171,16 +172,19 @@
             <div class="tab-content" id="pills-tabContent">
               <div class="tab-pane fade show active" id="pills-video" role="tabpanel" aria-labelledby="pills-video-tab">
                 <div class="dhead">
-                  <% if(prop.video.contentType) {%> 
-                      <video controls>
-                          <source src="data:Binary?<%= prop.video.contentType %>;base64,<%= prop.video.data.toString('base64') %> " type="<%= prop.video.contentType %>">
-                      </video>
+                  <% if(prop.video.videoUrl) {%> 
+                    <video controls>
+                      <source src="<%= prop.video.videoUrl %>" type="video/mp4">
+                      <!-- Add additional source elements for other video formats if needed -->
+                      Your browser does not support the video tag.
+                    </video>
+                    
                   <% } %>
               </div>
               </div>
             <% if (prop.floor_plan.contentType) {%>
               <div class="tab-pane fade" id="pills-plans" role="tabpanel" aria-labelledby="pills-plans-tab">
-                <img src="data:Binary?<%= prop.floor_plan.contentType %>;base64,<%= prop.floor_plan.data.toString('base64') %>" alt="" class="img-fluid">
+                <img src="<%= prop.floor_plan.url %>" alt="" class="img-fluid">
               </div>
               <% } %>
               <div class="tab-pane fade" id="pills-map" role="tabpanel" aria-labelledby="pills-map-tab">
@@ -200,7 +204,7 @@
             <% if(staff) {%>
             <div class="row">
               <div class="col-md-6 col-lg-4">
-                <img src="data:Binary?<%= staff.img.contentType %>;base64,<%= staff.img.data.toString('base64') %>"  alt="" class="img-fluid">
+                <img src="<%= staff.img.url %>"  alt="" class="img-fluid">
               </div>
               <div class="col-md-6 col-lg-4">
                 <div class="property-agent">

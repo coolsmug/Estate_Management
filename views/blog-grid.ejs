@@ -41,22 +41,24 @@
           <div class="col-md-4">
             <div class="card-box-b card-shadow news-box">
               <div class="img-box-b">
-                <img src="data:Binary?<%= blog.img2.contentType %>;base64,<%= blog.img2.data.toString('base64') %>" alt="" class="img-b img-fluid">
+                <img src="<%= blog.img2.url %>" alt="" class="img-b img-fluid">
               </div>
               <div class="card-overlay">
                 <div class="card-header-b">
                   <div class="card-category-b">
-                    <a href="#" class="category-b"><%= blog.category %></a>
+                    <a href="/blog_single?id=<%= blog._id %>" class="category-b"><%= blog.category %></a>
                   </div>
                   <div class="card-title-b">
                     <h2 class="title-2">
-                      <a href="/blog_single?id=<%= blog._id %>"><%= blog.topic %>
-                        <br> new</a>
+                      <a href="/blog_single?id=<%= blog._id %>"><%= blog.topic %></a>
                     </h2>
                   </div>
                   <div class="card-date">
                 
-                    <span class="date-b"><%= theDate %></span>
+                    <span class="date-b" style="font-size: 10px;" ><%= theDate %></span>
+                    <h4> <span class="date-b" style="font-size: 10px;"><i class="bi bi-eye" style="font-size: 1.3em; color: #007bff;"></i><%= blog.views %></span>
+                      <span class="date-b" style="font-size: 10px;"><i class="bi bi-heart" style="font-size: 1.3em; color: #007bff;"></i><%= blog.likes %></span></h4>
+                   
                   </div>
                 </div>
               </div>

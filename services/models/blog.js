@@ -22,17 +22,26 @@ const BlogSchema = new Schema ({
       required: true,
       trim: true
   },
+  likes: {
+    type: Number,
+    default: 0,
+},
+views: {
+    type: Number,
+    default: 0,
+},
+  
   date: {
       type: Date,
       default: Date.now,
   },
-  img:{
-      data: Buffer,
-      contentType: String,
-  },
-  img2:{
-    data: Buffer,
-    contentType: String,
+  img: { 
+    url: String,       // Cloudinary URL
+    publicId: String,
+},
+img2: { 
+  url: String,       // Cloudinary URL
+  publicId: String,
 },
 },
 { timestamps: true }

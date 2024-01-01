@@ -28,7 +28,7 @@
             <p>Use this from to Add new House property</p>
         </div>
 
-        <form action="/create-property" method="POST" enctype="multipart/form-data" class="formings">
+        <form action="/admin/create-property" method="POST" enctype="multipart/form-data" class="formings">
             <div class="form-group">
                 <label>Property's Name:</label>
                 <input class="form-control" type="text" placeholder="e.g Apple City Estate" name="name">
@@ -85,23 +85,24 @@
             </div>
             <div class="form-group">
                 <label for="img">Upload House Front view Image</label>
-                <input type="file" name="img" id="img" class="form-control-file form-control height-auto" >
+                <input type="file" name="img"  id="img" accept="image/* class="form-control-file form-control height-auto" >
             </div>
             <div class="form-group">
                 <label for="img1">Second Image</label>
-                <input type="file" name="img2" id="img2" class="form-control-file form-control height-auto">
+                <input type="file" name="img2" id="img2" accept="image/* class="form-control-file form-control height-auto">
             </div>
             <div class="form-group">
                 <label for="floor_plan">Floor plan</label>
-                <input type="file" name="floor_plan" id="floor_plan" class="form-control-file form-control height-auto" >
+                <input type="file" name="floor_plan" id="floor_plan" accept="image/* class="form-control-file form-control height-auto" >
             </div>
-            <div class="form-group">
+            <!-- <div class="form-group">
                 <label for="video">House view clip</label>
                 <div class="custom-file">
-                    <input type="file" name="video" id="video" class="custom-file-input" >
+                    <input type="file" name="video" id="video" accept="video/*" class="custom-file-input" >
                     <label class="custom-file-label">Choose file</label>
                 </div>
-            </div>
+            </div> -->
+            
             <div class="form-group">
                 <div class="custom-file">
                     <input type="submit">

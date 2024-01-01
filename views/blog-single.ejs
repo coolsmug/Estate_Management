@@ -20,7 +20,7 @@
                   <a href="/homing">Home</a>
                 </li>
                 <li class="breadcrumb-item active" aria-current="page">
-                  Book Cover Deisgn
+                  <%= blog.topic %>
                 </li>
               </ol>
             </nav>
@@ -35,7 +35,7 @@
         <div class="row">
           <div class="col-sm-12">
             <div class="news-img-box">
-              <img  src="data:Binary?<%= blog.img.contentType %>;base64,<%= blog.img.data.toString('base64') %>" alt="" class="img-fluid">
+              <img  src="<%= blog.img.url%>" alt="" class="img-fluid">
             </div>
           </div>
           <div class="col-md-10 offset-md-1 col-lg-8 offset-lg-2">
@@ -63,7 +63,14 @@
                 <%= blog.article %>
               </p>
             </div>
+            <div class="view" style="margin-top: -50px; font-size: 12px; color: #e87511;"> <p id="view-count">Views: <%= blog.views %></p></div>
+          
+            <button class="like-button" data-blog-id="<%= blog._id %>">Like</button>
+            <p id="like-count">Likes: <%= blog.likes %></p>
+           
+          
             <div class="post-footer">
+             
               <div class="post-share">
                 <span>Share: </span>
                 <ul class="list-inline socials">
@@ -194,9 +201,31 @@
   <%- include ("./dash_include/FOOTER_GEN.ejs") %>
   <%- include ("./dash_include/main_footer.ejs") %>
 
-
+  <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
   <script>
+ 
+    console.log("Script loaded");
+    $(".like-button").on("click", function () {
+    const blogId = $(this).data("blog-id");
 
+    // Send an Ajax request to the server to handle the like
+    $.ajax({
+        type: "POST",
+        url: "/like",
+        data: { blogId: blogId },
+        success: function (response) {
+            if (response.success) {
+                // Update the like count on the page
+                $("#like-count").text("Likes: " + response.likes);
+            } else {
+                console.error("Failed to like the blog post.");
+            }
+        },
+        error: function (error) {
+            console.error("Error during the Ajax request:", error);
+        },
+    });
+});
 
 
 function shareOnTwitter() {
@@ -250,7 +279,13 @@ function shareOnTwitter() {
   }
 }
 
+// Assuming you have included jQuery in your project
+// You can add this script at the end of your HTML file or in a separate JavaScript file
+
   </script>
+
+
+
 
 
 <style>

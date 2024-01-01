@@ -81,8 +81,8 @@ const staffSchema = new Schema ({
         
     },
     img:{
-        data: Buffer,
-        contentType: String,
+        url: String,       // Cloudinary URL
+        publicId: String,
     },
 },
 { timestamps: true }

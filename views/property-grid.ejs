@@ -7,8 +7,8 @@
         <div class="row">
           <div class="col-md-12 col-lg-8">
             <div class="title-single-box">
-              <h1 class="title-single">Our Amazing Properties(Housing)</h1>
-              <span class="color-text-a">Grid Properties</span>
+              <h1 class="title-single">Our Amazing Properties(Homes)</h1>
+              <span class="color-text-a">All are your Homes</span>
             </div>
           </div>
           <div class="col-md-12 col-lg-4">
@@ -50,13 +50,13 @@
           <div class="col-md-4">
             <div class="card-box-a card-shadow">
               <div class="img-box-a">
-                <img src="data:Binary?<%= props.img2.contentType %>;base64,<%= props.img2.data.toString('base64') %>" alt="" class="img-a img-fluid">
+                <img src="<%= props.img2.url %>" alt="" class="img-a img-fluid">
               </div>
               <div class="card-overlay">
                 <div class="card-overlay-a-content">
                   <div class="card-header-a">
                     <h2 class="card-title-a">
-                      <a href="#"><%= props.area %> <%= props.name %>
+                      <a href="/property_single?id=<%= props._id %>"><%= props.area %> <%= props.name %>
                         <br /> <%= props.location %> </a>
                     </h2>
                   </div>

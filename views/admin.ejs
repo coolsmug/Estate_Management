@@ -44,7 +44,7 @@
                 <% admin.forEach(function(admin){ %>
                     <tr>
                         <td><%= count %></td>
-                        <td><div class="imageadmin"><img src="data:Binary?<%= admin.img.contentType %>;base64,<%= admin.img.data.toString('base64') %>" alt="" width="50"</div></td>
+                        <td><div class="imageadmin"><img src="<%= admin.img.url %>" alt="" width="50"</div></td>
                         <td><%= admin.first_name %> <%= admin.second_name %></td>
                         <td><%= admin.position %></td>
                         <td><%= admin.role%></td>

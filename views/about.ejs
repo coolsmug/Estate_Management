@@ -41,7 +41,7 @@
           <div class="col-sm-12 position-relative">
             <div class="about-img-box">
               <% if (aboutsss.img) {%>
-              <img src="data:Binary?<%= aboutsss.img.contentType %>;base64,<%= aboutsss.img.data.toString('base64') %>" alt="" class="img-fluid">
+              <img src="<%= aboutsss.img.url %>" alt="" class="img-fluid">
               <% } else { %>
                 <p>No About information available.</p>
                 <% } %>
@@ -58,7 +58,7 @@
             <div class="row">
               <div class="col-md-6 col-lg-5">
                 <% if (aboutsss.img) {%>
-                  <img src="data:Binary?<%= aboutsss.img2.contentType %>;base64,<%= aboutsss.img2.data.toString('base64') %>" alt="" class="img-fluid">
+                  <img src="<%= aboutsss.img2.url %>" alt="" class="img-fluid">
                   <% } else { %>
                     <p>No About information available.</p>
                     <% } %>
@@ -108,7 +108,7 @@
           <div class="col-md-4">
             <div class="card-box-d">
               <div class="card-img-d">
-               <img src="data:Binary?<%= staff.img.contentType %>;base64,<%= staff.img.data.toString('base64') %>" alt="" class="img-a img-fluid">
+               <img src="<%= staff.img.url %>" alt="" class="img-a img-fluid">
               </div>
               <div class="card-overlay card-overlay-hover">
                 <div class="card-header-d">

@@ -63,20 +63,20 @@ const propertySchema = new Schema ({
          trim: true
     },
     img: { 
-    data: Buffer,
-    contentType: String,
+      url: String,       // Cloudinary URL
+      publicId: String,
   },
   img2: { 
-    data: Buffer,
-    contentType: String,
+    url: String,       // Cloudinary URL
+    publicId: String,
   },
   floor_plan: { 
-    data: Buffer,
-    contentType: String,
+    url: String,       // Cloudinary URL
+    publicId: String,
   },
   video: { 
-    data: Buffer,
-    contentType: String,
+    cloudinaryId: String,
+    videoUrl: String,
   },
     
 },

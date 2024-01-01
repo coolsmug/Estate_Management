@@ -238,6 +238,8 @@ $("#propertyOnly").submit(function (param) {
   });
 });
 
+
+
 $("#landOnly").submit(function (param) {
   param.preventDefault();
 
@@ -262,6 +264,8 @@ $("#landOnly").submit(function (param) {
   });
 });
 
+
+
 $("#Blog").submit(function (param) {
   param.preventDefault();
 
@@ -285,6 +289,7 @@ $("#Blog").submit(function (param) {
     console.log("Data Updated Successfully!")
   });
 });
+
 
 $("#Admin").submit(function (param) {
   param.preventDefault();
@@ -334,6 +339,7 @@ $("#Staff").submit(function (param) {
     console.log("Data Updated Successfully!")
   });
 });
+
 
 $("#Service").submit(function (param) {
   param.preventDefault();
@@ -431,6 +437,7 @@ $("#career").submit(function (param) {
     console.log("Data Updated Successfully!")
   });
 });
+
 
 //-----------------------------delete--------------------------------
 $(function() {
@@ -811,4 +818,26 @@ $(document).ready(function() {
 
 
 //------------------------------end ManangementSwitch------------------------//
+// $(document).ready(function () {
+//   $(".like-button").on("click", function () {
+//       const blogId = $(this).data("blog-id");
 
+//       // Send an Ajax request to the server to handle the like
+//       $.ajax({
+//           type: "POST",
+//           url: "/like",
+//           data: { blogId: blogId },
+//           success: function (response) {
+//               if (response.success) {
+//                   // Update the like count on the page
+//                   $("#like-count").text("Likes: " + response.likes);
+//               } else {
+//                   console.error("Failed to like the blog post.");
+//               }
+//           },
+//           error: function (error) {
+//               console.error("Error during the Ajax request:", error);
+//           },
+//       });
+//   });
+// })

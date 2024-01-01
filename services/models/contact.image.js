@@ -7,8 +7,8 @@ const ContactImage = new Schema ({
         required: true,
     },
     img:{
-        data: Buffer,
-        contentType: String,
+        url: String,       // Cloudinary URL
+        publicId: String,
     },
     createdAt: {
         type: Date,

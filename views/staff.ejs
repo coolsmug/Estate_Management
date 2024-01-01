@@ -46,7 +46,7 @@
                 <% staff.forEach(function(staff){ %>
                     <tr>
                         <td class="numberings"><%= count %></td>
-                        <td><div class="imageadmin"><img src="data:Binary?<%= staff.img.contentType %>;base64,<%= staff.img.data.toString('base64') %>" alt="" width="50"</div></td>
+                        <td><div class="imageadmin"><img <%= staff.imgurl %>" alt="" width="50"</div></td>
                         <td><%= staff.first_name %> <%= staff.second_name %></td>
                         <td>
                             <% if (staff) { %>

@@ -3,12 +3,12 @@ const Schema = mongoose.Schema;
 
 const ServiceSchema = ({
     img:{
-        data: Buffer,
-        contentType: String,
+        url: String,       // Cloudinary URL
+        publicId: String,
     },
     img2:{
-        data: Buffer,
-        contentType: String,
+        url: String,       // Cloudinary URL
+        publicId: String,
     },
     heading: {
         type: String,

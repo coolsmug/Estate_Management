@@ -51,13 +51,13 @@ const landSchema = new Schema ({
     },
 
     img: { 
-    data: Buffer,
-    contentType: String,
+        url: String,       // Cloudinary URL
+        publicId: String,
     },
 
     image: { 
-        data: Buffer,
-        contentType: String,
+        url: String,       // Cloudinary URL
+        publicId: String,
         },
     
 },

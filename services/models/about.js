@@ -44,12 +44,12 @@ const AboutSchema = new Schema ({
     },
     
     img:{
-        data: Buffer,
-        contentType: String,
+        url: String,       // Cloudinary URL
+        publicId: String,
     },
     img2:{
-        data: Buffer,
-        contentType: String,
+        url: String,       // Cloudinary URL
+        publicId: String,
     },
     heading: {
         type: String,

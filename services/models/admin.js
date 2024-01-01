@@ -37,8 +37,8 @@ const adminSchema = new Schema ({
         required: true,
     },
     img:{
-        data: Buffer,
-        contentType: String,
+        url: String,       // Cloudinary URL
+        publicId: String,
     },
 },
 { timestamps: true }

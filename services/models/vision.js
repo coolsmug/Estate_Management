@@ -3,8 +3,8 @@ const Schema = mongoose.Schema;
 
 const VisionSchema = ({
     img:{
-        data: Buffer,
-        contentType: String,
+        url: String,       // Cloudinary URL
+        publicId: String,
     },
 
     heading: {

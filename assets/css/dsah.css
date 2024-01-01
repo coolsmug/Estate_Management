@@ -47,6 +47,14 @@
     box-sizing: border-box;
 }
 
+@font-face {
+    font-family: 'Poppins';
+    src: url('https://fonts.gstatic.com/s/poppins/v20/pxiByp8kv8JHgFVrLEj6Z1xlFd2JQEk.woff2') format('woff2');
+    font-weight: 400;
+    font-style: normal;
+    font-display: swap;
+}
+
 body {
     margin: 0px;
     padding: 0px;
@@ -1680,8 +1688,7 @@ input:checked +.slider:before {
 
 /* login */
 .headings {
-    position: relative;
-    width: 100%;
+    min-height: 100vh;
     display: flex;
     flex-direction: column;
     gap: 80px;
@@ -1811,11 +1818,13 @@ input:checked +.slider:before {
 }
 
 .headings .footeringing {
+    margin-top: auto;
     width: 100%;
     background: var(--orange2);
     text-align: center;
     font-weight: 100px;
 }
+
 
 .headings .footeringing p {
     font-family: 'PT sans';

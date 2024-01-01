@@ -29,7 +29,7 @@
             <div class="staffprofile">
                 <div class="image_profile">
                     <div class="img_staff_one">
-                        <img src="data:Binary?<%= staff.img.contentType %>;base64,<%= staff.img.data.toString('base64')%>" alt="" srcset="">
+                        <img src="<%= staff.img.url %>" alt="" srcset="">
                     </div>
                     <% let fullname = staff.first_name +" " + staff.second_name %>
                     <p><%= fullname %></p>

@@ -4,7 +4,10 @@
   <script src="/php-email-form/validate.js"></script>
 
   <!-- Template Main JS File -->
-  <script src="/js/main.js"></script>
+  <script src="/js/main.js">
+       var currentUrl = window.location.href;
+    document.getElementById('og-url').content = currentUrl;
+  </script>
 
 </body>
 

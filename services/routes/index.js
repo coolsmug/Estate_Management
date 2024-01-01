@@ -1,5 +1,6 @@
 const express = require("express");
 const router = express.Router();
+const session = require('express-session');
 const Blog = require('../models/blog');
 const Admin = require("../models/admin");
 const Staff = require("../models/staff");
@@ -14,6 +15,10 @@ const ImageContact = require('../models/contact.image');
 const CareerCreation = require('../models/newJob');
 const Vision = require('../models/vision');
 const Mission = require('../models/mission');
+const cloudinary = require('cloudinary').v2;
+const multer = require('multer');
+const fs = require('fs');
+const path = require('path');
 
 
 
@@ -176,51 +181,96 @@ router.get("/blogs/:page", async(req, res, next) => {
 })
 
 //blog single
-router.get("/blog_single", async(req, res, next) => {
-    try {
-        if(req.query) {
-            const id = req.query.id
-            await Blog.findById(id)
-                            .then((blog) => {
-                         res.render("blog-single", {
-                                blog: blog,
-                            })
-                            }).catch((err) => {
-                                console.log(err)
-                                next(err)
-                            })
-        }
-    } catch (error) {
-        console.log(error)
-        next(error)
+router.get("/blog_single", async (req, res, next) => {
+  try {
+      if (req.query && req.query.id) {
+          const id = req.query.id;
+
+          // Retrieve the blog post by ID
+          const blog = await Blog.findById(id);
+
+          if (!blog) {
+              return res.status(404).json({ error: 'Blog post not found' });
+          }
+
+          // Increment views when the page is visited
+          blog.views += 1;
+          await blog.save();
+
+          res.render("blog-single", {
+              blog: blog,
+          });
+      } else {
+          return res.status(400).json({ error: 'Invalid request' });
+      }
+  } catch (error) {
+      console.error(error);
+      next(error);
+  }
+});
+
+//likes
+// Assuming you have user authentication with req.session.userId available
+
+router.post("/like", async (req, res) => {
+  try {
+    const blogId = req.body.blogId;
+
+    // Check if the user has already liked this post
+    if (req.session.likedBlogPosts.includes(blogId)) {
+      return res.status(400).json({ error: 'You have already liked this post during this session' });
     }
-})
+
+    // Find the blog post by ID
+    const blog = await Blog.findById(blogId);
+
+    if (!blog) {
+      return res.status(404).json({ error: 'Blog post not found' });
+    }
+
+    // Increment the like count in the database
+    blog.likes += 1;
+    await blog.save();
+
+    // Store the liked blog post ID in the session
+    req.session.likedBlogPosts.push(blogId);
+
+    // Send a response, indicating success and the updated like count
+    res.json({ success: true, likes: blog.likes });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: 'Internal server error' });
+  }
+});
 
 
-router.get("/blog_single", async(req, res) => {
-    await res.render("blog-single")
-})
+
+
+
+
 
 // contact_image
 router.get("/contact", async (req, res) => {
   try {
       const contact = await ImageContact.find().sort({ createdAt: -1 }).limit(1).exec();
+      const companyInfo = await About.find().select("company_name email address state mobile mobile3 mobile2 phone linkedin facebook instagram twitter whatsapp ").exec()
 
       if (contact && contact.length > 0) {
          await res.render("contact", {
-              contact: contact[0], // Access the first element of the contact array
+              contact: contact[0],
+              companyInfo: companyInfo[0], // Access the first element of the contact array
           });
       } else {
           // If no contact found, pass an empty object to the view
          await res.render("contact", {
-              contact: {}, // You might want to pass an empty object or handle it differently
+              contact: {},
+              companyInfo:{},// You might want to pass an empty object or handle it differently
           });
       }
   } catch (error) {
       res.status(500).json({ error: "Technical error" });
   }
 });
-
 
 
 
@@ -445,6 +495,57 @@ router.post('/search', async (req, res) => {
   });
   
 //testimony
+//Creating testimony
+const uploads = multer({ dest: 'uploads/' });
+const uploadAdminImage = uploads.single('img');
+
+router.post('/create-testimony', uploadAdminImage, async(req, res, next) => {
+  try {
+      const { full_name, testimony} = req.body;
+      const errors = [];
+
+      const result = await cloudinary.uploader.upload(req.file.path);
+      console.log(result);
+      if (!result || !result.secure_url) {
+       return res.status(500).json({ error: 'Error uploading image to Cloudinary' });
+     }
+
+      if (!full_name || !testimony ) {
+          errors.push( { msg : "Please fill in all fields." } );
+      };
+  
+      if(errors.length > 0){
+          res.render('create_feedback', {
+              errors: errors,
+              full_name: full_name,
+              testimony: testimony,
+          } )
+      } else {
+          const newTestimony = new Testimony({
+            full_name: full_name,
+            testimony: testimony,
+            img: {
+                          url: result.secure_url,
+                          publicId: result.public_id 
+                            },
+          })
+
+          newTestimony
+                .save()
+                .then((value) => {
+                  console.log(value)
+                  req.flash("success_msg", "Testimony sent Successfully!, thank you for doing business with us.");
+                  res.redirect("/feedback")
+                })
+                .catch((err) => console.log(err))
+      }
+  } catch (error) {
+      console.log(error)
+      next(error)
+  }
+});
+//Ending Testimony
+
 router.get('/feedback', async (req, res) => {
   try {
   

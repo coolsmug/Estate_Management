@@ -7,7 +7,7 @@
     <% if(property) {%>
     <div class="swiper-wrapper">
       <% property.forEach(prop => { %>
-      <div class="swiper-slide carousel-item-a intro-item bg-image" style="background-image: url(data:<%= prop.img.contentType %>;base64,<%= prop.img.data.toString('base64') %>)">
+      <div class="swiper-slide carousel-item-a intro-item bg-image" style="background-image: url(<%= prop.img.url %>)">
         <div class="overlay overlay-a"></div>
         <div class="intro-content display-table">
           <div class="table-cell">
@@ -108,7 +108,7 @@
 
               <div class="col-md-6 col-lg-5">
               
-                  <img src="data:Binary?<%= mission.img.contentType %>;base64,<%= mission.img.data.toString('base64') %>" alt="" class="img-fluid">
+                  <img src="<%= mission.img.url %>" alt="" class="img-fluid">
                   
               </div>
              
@@ -143,7 +143,7 @@
 
               <div class="col-md-6 col-lg-5">
                 <% if (vision.img) {%>
-                  <img src="data:Binary?<%= vision.img.contentType %>;base64,<%= vision.img.data.toString('base64') %>" alt="" class="img-fluid">
+                  <img src="<%= vision.img.url %>" alt="" class="img-fluid">
                   <% } else { %>
                     <p>No vision information available.</p>
                     <% } %>
@@ -263,7 +263,7 @@
             <div class="carousel-item-b swiper-slide">
               <div class="card-box-a card-shadow">
                 <div class="img-box-a">
-                  <img src="data:Binary?<%= props.img2.contentType %>;base64,<%= props.img2.data.toString('base64') %>" alt="" class="img-a img-fluid">
+                  <img src="<%= props.img2.url %>" alt="" class="img-a img-fluid">
                 </div>
                 <div class="card-overlay">
                   <div class="card-overlay-a-content">
@@ -344,7 +344,7 @@
               <div class="card-box-a card-shadow">
                 <div class="img-box-a">
                  
-                    <img src="data:Binary?<%= landing.image.contentType %>;base64,<%= landing.image.data.toString('base64') %>" alt="" class="img-a img-fluid">
+                    <img src="<%= landing.image.url %>" alt="" class="img-a img-fluid">
                  
                 </div>
                 <div class="card-overlay">
@@ -420,7 +420,7 @@
           <div class="col-md-4">
             <div class="card-box-d">
               <div class="card-img-d">
-                <img src="data:Binary?;base64," alt="" class="img-d img-fluid">
+                <img src="?;base64," alt="" class="img-d img-fluid">
               </div>
               <div class="card-overlay card-overlay-hover">
                 <div class="card-header-d">
@@ -505,24 +505,27 @@
         <div id="news-carousel" class="swiper">
           <div class="swiper-wrapper">
               <% blog.forEach((blogs) => { %>
+                <% let date = blogs.date %>
+                <% let theDate = date.toDateString() %>
             <div class="carousel-item-c swiper-slide">
               <div class="card-box-b card-shadow news-box">
                 <div class="img-box-b">
-                  <img src="data:Binary?<%= blogs.img2.contentType %>;base64,<%= blogs.img2.data.toString('base64') %>" alt="" class="img-b img-fluid">
+                  <img src="<%= blogs.img2.url %>" alt="" class="img-b img-fluid">
                 </div>
                 <div class="card-overlay">
                   <div class="card-header-b">
                     <div class="card-category-b">
-                      <a href="#" class="category-b"><%= blogs.category %></a>
+                      <a href="/blog_single?id=<%= blogs._id %>" class="category-b"><%= blogs.category %></a>
                     </div>
                     <div class="card-title-b">
                       <h2 class="title-2">
-                        <a href="/blog_single?id=<%= blogs._id %>"><%= blogs.topic %>
-                          <br> new</a>
+                        <a href="/blog_single?id=<%= blogs._id %>"><%= blogs.topic %></a>
                       </h2>
                     </div>
                     <div class="card-date">
-                      <span class="date-b"><%= blogs.date %></span>
+                      <span class="date-b" style="font-size: 10px;" ><%= theDate %></span>
+                      <h4> <span class="date-b" style="font-size: 10px;"><i class="bi bi-eye" style="font-size: 1.3em; color: #007bff;"></i><%= blogs.views %></span>
+                        <span class="date-b" style="font-size: 10px;"><i class="bi bi-heart" style="font-size: 1.3em; color: #007bff;"></i><%= blogs.likes %></span></h4>
                     </div>
                   </div>
                 </div>
@@ -562,7 +565,7 @@
                 <div class="row">
                   <div class="col-sm-12 col-md-6">
                     <div class="testimonial-img">
-                      <img src="data:Binary?<%= test.img.contentType %>;base64,<%= test.img.data.toString('base64') %>" alt="" class="img-fluid">
+                      <img src="<%= test.img.url%>" alt="" class="img-fluid">
                     </div>
                   </div>
                   <div class="col-sm-12 col-md-6">
@@ -575,7 +578,7 @@
                       </p>
                     </div>
                     <div class="testimonial-author-box">
-                      <img src="data:Binary?<%= test.img.contentType %>;base64,<%= test.img.data.toString('base64') %>" alt="" class="testimonial-avatar">
+                      <img src="<%= test.img.url %>" alt="" class="testimonial-avatar">
                       <h5 class="testimonial-author"><%= test.full_name %></h5>
                     </div>
                   </div>

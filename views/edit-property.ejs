@@ -103,7 +103,7 @@
             <p>Use this form to Update House property</p>
         </div>
 
-        <form action="/edit-property-image/<%= prop._id %>" method="POST" enctype="multipart/form-data" class="formings">
+        <form action="/admin/edit-property-image/<%= prop._id %>" method="POST" enctype="multipart/form-data" class="formings">
             <div class="form-group">
                 <input type="hidden" name="id" value="<%= prop._id %>">
                 <label for="img">Upload House Front view Image</label>
@@ -117,11 +117,20 @@
                 <label for="floor_plan">Floor plan</label>
                 <input type="file" name="floor_plan" id="floor_plan" class="form-control-file form-control height-auto" >
             </div>
+           
+            <div class="form-group">
+                <div class="custom-file">
+                    <input type="submit">
+                </div>
+            </div>
+        </form>
+
+        <form action="/admin/upload/<%= prop._id %>" method="POST" enctype="multipart/form-data" class="formings">
             <div class="form-group">
                 <label for="video">House view clip</label>
                 <div class="custom-file">
-                    <input type="file" name="video" id="video" class="custom-file-input" >
-                    <label class="custom-file-label">Choose file</label>
+                    <input type="file" name="video" id="video" accept="video/*" class="custom-file-input" >
+                   
                 </div>
             </div>
             <div class="form-group">
