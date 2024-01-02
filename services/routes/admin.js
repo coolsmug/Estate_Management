@@ -277,20 +277,31 @@ router.post("/create-property", ensureAuthenticated, upload.fields([
         description : description,
         period : period,
         price : price,
-        img: {
-          url: imgResult.secure_url,
-          publicId: imgResult.public_id,
-        },
-        img2: {
-          url: img2Result.secure_url,
-          publicId: img2Result.public_id,
-        },
-        floor_plan: {
-          url: floorPlanResult.secure_url,
-          publicId: floorPlanResult.public_id,
-        },
+        img: {},
+        img2: {},
+        floor_plan: {},
      
       };
+
+      if (req.files['img']) {
+        blog.img = {
+          url: imgResult.secure_url,
+          publicId: imgResult.public_id,
+        }
+      }
+      if (req.files['img2']) {
+        blog.img2 = {
+          url: img2Result.secure_url,
+          publicId: img2Result.public_id,
+        }
+      }
+
+      if (req.files['floor_plan']) {
+        blog.floor_plan = {
+          url: floorPlanResult.secure_url,
+          publicId: floorPlanResult.public_id,
+        }
+      }
 
       // Save the property to MongoDB
       await Property.create(property);
@@ -333,14 +344,14 @@ router.post("/edit-property-image/:id",  upload.fields([
       }
       if (req.files['img2']) {
         property.img2 = {
-          url: imgResult.secure_url,
-          publicId: imgResult.public_id,
+          url: img2Result.secure_url,
+          publicId: img2Result.public_id,
         }
       }
       if (req.files['floor_plan']) {
         property.floor_plan = {
-          url: imgResult.secure_url,
-          publicId: imgResult.public_id,
+          url: floorPlanResult.secure_url,
+          publicId: floorPlanResult.public_id,
         }
       }
     const filter = { _id: propertyId };
@@ -517,8 +528,8 @@ router.post("/create-land",ensureAuthenticated, upload.fields([
                       }
                       if (req.files['image']) {
                         lands.image = {
-                          url: imgResult.secure_url,
-                          publicId: imgResult.public_id,
+                          url:  img2Result.secure_url,
+                          publicId:  img2Result.public_id,
                         };
                       }
                      
@@ -569,8 +580,8 @@ try {
     }
     if (req.files['image']) {
       property_land.image = {
-        url: imgResult.secure_url,
-        publicId: imgResult.public_id,
+        url: img2Result.secure_url,
+        publicId: img2Result.public_id,
       };
     }
 

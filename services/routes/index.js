@@ -66,14 +66,14 @@ router.get('/', async (req, res) => {
         const blog = await Blog.find().sort({ createdAt: -1 }).limit(4);
         
         const property = await Property.find({ status: { $in: ["Rent", "Sale"] } })
-            .select("name property_id area period status location _id img price")
+            .select("name property_id area period status location _id img img2 price")
             .sort({ createdAt: -1 })
-            .limit(3);
+            .limit(5);
         
         const propertyAll = await Property.find()
-            .select("name area location status bed garage baths area price img2")
+            .select("name area location status bed img garage baths area price img2")
             .sort({ createdAt: -1 })
-            .limit(4);
+            .limit(7);
         
         const service = await Service.find()
             .select("heading about")
