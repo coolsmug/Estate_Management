@@ -199,7 +199,7 @@ const uploadMultiple = async (req, res, next) => {
     const imgResult = await cloudinary.uploader.upload(req.files['img'][0].path);
     const img2Result = await cloudinary.uploader.upload(req.files['img2'][0].path);
     const floorPlanResult = await cloudinary.uploader.upload(req.files['floor_plan'][0].path);
-    console.log('Cloudinary Upload Response:', imgResult);
+   
     req.uploadResults = {
       imgResult,
       img2Result,
@@ -221,7 +221,7 @@ router.post("/create-property", ensureAuthenticated, upload.fields([
 
 ]), uploadMultiple, async (req, res) => {
   try {
-    console.log(req.files);
+  
 
     const {
       imgResult,
