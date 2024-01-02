@@ -107,9 +107,11 @@
               </div>
 
               <div class="col-md-6 col-lg-5">
-              
+              <% if (mission && mission.img && mission.img.url) {%>
                   <img src="<%= mission.img.url %>" alt="" class="img-fluid">
-                  
+                  <% } else { %>
+                    <p>No mission information available.</p>
+                    <% } %>
               </div>
              
              
@@ -142,7 +144,7 @@
               </div>
 
               <div class="col-md-6 col-lg-5">
-                <% if (vision.img) {%>
+                <% if (vision && vision.img && vision.img.url) {%>
                   <img src="<%= vision.img.url %>" alt="" class="img-fluid">
                   <% } else { %>
                     <p>No vision information available.</p>
@@ -217,7 +219,7 @@
 
               <div class="col-md-6 col-lg-5">
               
-                 
+                <img src="https://res.cloudinary.com/dj6xdawqc/image/upload/v1704170291/360_F_99357862_oeSLDEyJ3fmsq8bi83BZUxmt2xp0WqfA_ji3a3t.jpg" alt="" class="img-fluid">
                   
               </div>
              

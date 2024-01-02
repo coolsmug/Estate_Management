@@ -87,9 +87,9 @@ router.get('/', async (req, res) => {
         
         const testimony = await Testimony.find().sort({ createdAt: -1 }).exec();
 
-        const vision = await Vision.find().sort({ createdAt: -1 }).limit(1);
+        const vision = await Vision.find().sort({ createdAt: -1 }).limit(1).exec();
 
-        const mission = await Mission.find().sort({ createdAt: -1 }).limit(1);
+        const mission = await Mission.find().sort({ createdAt: -1 }).limit(1).exec();
 
         
 
