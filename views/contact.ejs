@@ -36,8 +36,8 @@
          
           <div class="col-sm-12 position-relative">
             <div class="about-img-box">
-              <% if (contact.img) {%>
-              <img src="<%= contact.img.url %>" alt="" class="img-fluid">
+              <% if (contact.img.url) {%>
+              <img src="<%= contact.img.url %>" alt="no image" class="img-fluid">
               <% } else { %>
                 <p>No contact information available.</p>
                 <% } %>
